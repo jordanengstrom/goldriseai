@@ -43,12 +43,9 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6"
           >
-            {/* The main CTA is just the dialog trigger styled larger */}
-            <div className="scale-125 origin-center">
-               <ContactFormDialog />
-            </div>
+            <ContactFormDialog />
             
-            <span className="text-sm font-medium text-muted-foreground uppercase tracking-widest px-4">or</span>
+            <span className="text-sm font-medium text-muted-foreground uppercase tracking-widest">or</span>
             
             <a href="#process" className="text-sm font-medium text-white hover:text-primary transition-colors border-b border-white/20 hover:border-primary pb-1 uppercase tracking-wider">
               Explore Methodology
