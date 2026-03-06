@@ -113,6 +113,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               >
                 Privacy Policy
               </a>
+              <Link href="/services" className="hover:text-primary transition-colors duration-200">
+                Services
+              </Link>
               <Link href="/values" className="hover:text-primary transition-colors duration-200">
                 Values
               </Link>
