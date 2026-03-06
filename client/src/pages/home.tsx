@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout";
 import { ProcessDiagram } from "@/components/process-diagram";
 import { ContactFormDialog } from "@/components/contact-form-dialog";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 
 export default function Home() {
   return (
@@ -23,8 +24,8 @@ export default function Home() {
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.1] mb-8 tracking-tight text-white drop-shadow-2xl">
-              Elevate Your <br/>
-              <span className="text-gradient-gold">Business</span> with AI.
+              <span className="text-gradient-gold">Elevate</span> Your <br/>
+              <span>Business with</span><br/>  <span className="text-gradient-gold">elite AI</span>
             </h1>
           </motion.div>
 
@@ -47,9 +48,9 @@ export default function Home() {
             
             <span className="text-sm font-medium text-muted-foreground uppercase tracking-widest">or</span>
             
-            <a href="#process" className="text-sm font-medium text-white hover:text-primary transition-colors border-b border-white/20 hover:border-primary pb-1 uppercase tracking-wider">
-              Explore Methodology
-            </a>
+            <Link href="/services" className="text-sm font-medium text-white hover:text-primary transition-colors border-b border-white/20 hover:border-primary pb-1 uppercase tracking-wider">
+              Explore Services
+            </Link>
           </motion.div>
         </div>
 
