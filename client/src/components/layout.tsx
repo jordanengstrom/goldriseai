@@ -1,5 +1,7 @@
 import { Link } from "wouter";
 import { ContactFormDialog } from "./contact-form-dialog";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -20,21 +22,52 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </span>
           </Link>
 
-          <nav className="flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8">
             <Link 
               href="/services" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 hidden sm:block uppercase tracking-wider"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 uppercase tracking-wider"
             >
               Services
             </Link>
             <Link 
               href="/payments" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 hidden sm:block uppercase tracking-wider"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 uppercase tracking-wider"
             >
               Payments
             </Link>
             <ContactFormDialog />
           </nav>
+
+          {/* Mobile Menu */}
+          <div className="flex md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <button aria-label="Menu" className="p-2 text-foreground">
+                  <Menu className="w-6 h-6" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="glass-panel border-white/10 bg-background/95 backdrop-blur-xl">
+                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                <div className="flex flex-col gap-6 mt-12">
+                  <Link 
+                    href="/services" 
+                    className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-200 uppercase tracking-widest"
+                  >
+                    Services
+                  </Link>
+                  <Link 
+                    href="/payments" 
+                    className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-200 uppercase tracking-widest"
+                  >
+                    Payments
+                  </Link>
+                  <div className="pt-4 border-t border-white/10">
+                    <ContactFormDialog />
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </header>
 
