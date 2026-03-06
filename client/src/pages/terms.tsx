@@ -78,10 +78,15 @@ export default function Terms() {
           <h3 className="text-2xl font-display font-bold text-white pt-6">13. Contact Us</h3>
           <p>
             For any questions about these Terms, please contact us using the following information:<br />
-            Email address: info@goldrise.ai
+            Email address:               <a 
+                href="mailto:info@goldrise.ai" 
+                className="text-primary"
+              >
+                info@goldrise.ai
+              </a>
           </p>
 
-          <p className="text-lg text-foreground font-medium border-t border-white/10 pt-4 mt-8">
+          <p className="text-lg text-foreground font-medium border-t border-white/10 pt-4 mt-8" style={{ paddingTop: '2em' }}>
             Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
           </p>
         </div>
