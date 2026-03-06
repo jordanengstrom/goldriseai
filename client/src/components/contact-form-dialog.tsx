@@ -90,7 +90,7 @@ export function ContactFormDialog() {
             Initiate <span className="text-primary">Contact</span>
           </DialogTitle>
           <DialogDescription className="text-muted-foreground text-sm">
-            Enter your details below. Our AI specialists will review your information and reach out.
+            Enter your details below. Our team will review your information and reach out.
           </DialogDescription>
         </DialogHeader>
 
