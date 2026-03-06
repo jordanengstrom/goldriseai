@@ -30,6 +30,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
               Services
             </Link>
             <Link 
+              href="/values" 
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 uppercase tracking-wider"
+            >
+              Values
+            </Link>
+            <Link 
               href="/payments" 
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 uppercase tracking-wider"
             >
@@ -54,6 +60,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-200 uppercase tracking-widest"
                   >
                     Services
+                  </Link>
+                  <Link 
+                    href="/values" 
+                    className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-200 uppercase tracking-widest"
+                  >
+                    Values
                   </Link>
                   <Link 
                     href="/payments" 
@@ -101,6 +113,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               >
                 Privacy Policy
               </a>
+              <Link href="/values" className="hover:text-primary transition-colors duration-200">
+                Values
+              </Link>
               <Link href="/payments" className="hover:text-primary transition-colors duration-200">
                 Payments
               </Link>

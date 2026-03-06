@@ -10,12 +10,14 @@ import Home from "@/pages/home";
 import Payments from "@/pages/payments";
 import Terms from "@/pages/terms";
 import Services from "@/pages/services";
+import Values from "@/pages/values";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/services" component={Services} />
+      <Route path="/values" component={Values} />
       <Route path="/payments" component={Payments} />
       <Route path="/terms" component={Terms} />
       <Route component={NotFound} />
