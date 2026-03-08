@@ -104,25 +104,13 @@ export default function Payments() {
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <p className="text-center text-white/80">
-                    To maintain strict PCI compliance, we do not process credit cards directly on our server. 
-                    Please select your preferred secure payment processor below:
-                  </p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Button 
-                      variant="outline" 
-                      className="h-16 text-lg border-white/20 hover:bg-white/5"
-                      onClick={() => toast({ title: "Coming soon", description: "Stripe integration is pending." })}
-                    >
-                      Pay with Stripe
-                    </Button>
+                  <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     <Button 
                       variant="outline" 
                       className="h-16 text-lg border-white/20 hover:bg-white/5"
                       onClick={() => toast({ title: "Coming soon", description: "PayPal integration is pending." })}
                     >
-                      Pay with PayPal
+                      Make a Payment
                     </Button>
                   </div>
                 </div>

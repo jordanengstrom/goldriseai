@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
+import { ENABLE_PAYMENTS_FEATURE } from "@/lib/features";
 
 // Pages
 import Home from "@/pages/home";
@@ -18,7 +19,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/services" component={Services} />
       <Route path="/values" component={Values} />
-      <Route path="/payments" component={Payments} />
+      {ENABLE_PAYMENTS_FEATURE && <Route path="/payments" component={Payments} />}
       <Route path="/terms" component={Terms} />
       <Route component={NotFound} />
     </Switch>

@@ -2,6 +2,7 @@ import { Link, useLocation } from "wouter";
 import { ContactFormDialog } from "./contact-form-dialog";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { ENABLE_PAYMENTS_FEATURE } from "@/lib/features";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -37,12 +38,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
             >
               Values
             </Link>
-            <Link 
-              href="/payments" 
-              className={`text-sm font-medium hover:text-foreground transition-colors duration-200 uppercase tracking-wider ${location === "/payments" ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}
-            >
-              Payments
-            </Link>
+            {ENABLE_PAYMENTS_FEATURE && (
+              <Link 
+                href="/payments" 
+                className={`text-sm font-medium hover:text-foreground transition-colors duration-200 uppercase tracking-wider ${location === "/payments" ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}
+              >
+                Payments
+              </Link>
+            )}
             <ContactFormDialog />
           </nav>
 
@@ -69,12 +72,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   >
                     Values
                   </Link>
-                  <Link 
-                    href="/payments" 
-                    className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/payments" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
-                  >
-                    Payments
-                  </Link>
+                  {ENABLE_PAYMENTS_FEATURE && (
+                    <Link 
+                      href="/payments" 
+                      className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/payments" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
+                    >
+                      Payments
+                    </Link>
+                  )}
                   <div className="pt-4 border-t border-white/10">
                     <ContactFormDialog />
                   </div>
@@ -121,9 +126,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <Link href="/values" className="hover:text-primary transition-colors duration-200">
                 Values
               </Link>
-              <Link href="/payments" className="hover:text-primary transition-colors duration-200">
-                Payments
-              </Link>
+              {ENABLE_PAYMENTS_FEATURE && (
+                <Link href="/payments" className="hover:text-primary transition-colors duration-200">
+                  Payments
+                </Link>
+              )}
               <a 
                 href="mailto:info@goldrise.ai" 
                 className="hover:text-primary transition-colors duration-200"
