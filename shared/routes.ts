@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { insertContactSchema, contacts } from './schema';
+import { insertContactSchema, contacts, invoices } from './schema';
 
 export const errorSchemas = {
   validation: z.object({
@@ -7,6 +7,9 @@ export const errorSchemas = {
     field: z.string().optional(),
   }),
   internal: z.object({
+    message: z.string(),
+  }),
+  notFound: z.object({
     message: z.string(),
   }),
 };
@@ -24,6 +27,17 @@ export const api = {
       },
     },
   },
+  invoices: {
+    getByNumber: {
+      method: 'GET' as const,
+      path: '/api/invoices/:number' as const,
+      responses: {
+        200: z.custom<typeof invoices.$inferSelect>(),
+        404: errorSchemas.notFound,
+        500: errorSchemas.internal,
+      },
+    }
+  }
 };
 
 export function buildUrl(path: string, params?: Record<string, string | number>): string {
