@@ -87,7 +87,7 @@ export default function Terms() {
           </p>
 
           <p className="text-lg text-foreground font-medium border-t border-white/10 pt-4 mt-8" style={{ paddingTop: '2em' }}>
-            Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            Last Updated: March 7, 2026
           </p>
         </div>
       </div>
