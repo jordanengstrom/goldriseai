@@ -35,7 +35,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
           >
-            We empower independent creators and SMBs to harness the power of artificial intelligence. Streamline operations, multiply creative output, and scale without limits.
+            We empower businesses and creators to harness the power of artificial intelligence, streamline operations, multiply creative output, and scale without limits.
           </motion.p>
 
           <motion.div
