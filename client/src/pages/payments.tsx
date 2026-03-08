@@ -108,7 +108,7 @@ export default function Payments() {
                     <Button 
                       variant="outline" 
                       className="h-16 text-lg border-white/20 hover:bg-white/5"
-                      onClick={() => toast({ title: "Coming soon", description: "PayPal integration is pending." })}
+                      onClick={() => toast({ title: "Coming soon", description: "Payment integration is pending." })}
                     >
                       Make a Payment
                     </Button>

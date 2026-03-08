@@ -3,6 +3,7 @@ import { ContactFormDialog } from "./contact-form-dialog";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { ENABLE_PAYMENTS_FEATURE } from "@/lib/features";
+import { ModeToggle } from "./mode-toggle";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -108,35 +109,36 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </span>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-muted-foreground">
-              <Link href="/terms" className="hover:text-primary transition-colors duration-200">
+            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-sm font-medium text-muted-foreground">
+              <Link href="/terms" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                 Terms & Conditions
               </Link>
               <a 
                 href="https://www.quo.com/policies/ORkUEC2Zst" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-primary transition-colors duration-200"
+                className="hover:text-primary transition-colors duration-200 flex items-center h-9"
               >
                 Privacy Policy
               </a>
-              <Link href="/services" className="hover:text-primary transition-colors duration-200">
+              <Link href="/services" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                 Services
               </Link>
-              <Link href="/values" className="hover:text-primary transition-colors duration-200">
+              <Link href="/values" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                 Values
               </Link>
               {ENABLE_PAYMENTS_FEATURE && (
-                <Link href="/payments" className="hover:text-primary transition-colors duration-200">
+                <Link href="/payments" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                   Payments
                 </Link>
               )}
               <a 
                 href="mailto:info@goldrise.ai" 
-                className="hover:text-primary transition-colors duration-200"
+                className="hover:text-primary transition-colors duration-200 flex items-center h-9"
               >
                 Contact
               </a>
+              <ModeToggle />
             </div>
           </div>
         </div>
