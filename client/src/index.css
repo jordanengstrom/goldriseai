@@ -82,7 +82,6 @@
     --popover-foreground: 210 40% 98%;
     --popover-border: 220 15% 15%;
   }
-}
 
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary;
