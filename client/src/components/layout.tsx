@@ -1,9 +1,11 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { ContactFormDialog } from "./contact-form-dialog";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const [location] = useLocation();
+
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">
       {/* Abstract Background Elements */}
@@ -17,7 +19,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <div className="w-8 h-8 rounded bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center glow-gold group-hover:glow-gold-hover transition-all duration-300">
               <span className="font-display font-bold text-background text-xl leading-none pt-0.5">G</span>
             </div>
-            <span className="font-display font-bold text-2xl tracking-widest text-foreground group-hover:text-primary transition-colors duration-300">
+            <span className={`font-display font-bold text-2xl tracking-widest text-foreground group-hover:text-primary transition-colors duration-300 ${location === "/" ? "border-b-2 border-primary" : ""}`}>
               GOLDRISE<span className="text-primary/70">.AI</span>
             </span>
           </Link>
@@ -25,19 +27,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <nav className="hidden md:flex items-center gap-8">
             <Link 
               href="/services" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 uppercase tracking-wider"
+              className={`text-sm font-medium hover:text-foreground transition-colors duration-200 uppercase tracking-wider ${location === "/services" ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}
             >
               Services
             </Link>
             <Link 
               href="/values" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 uppercase tracking-wider"
+              className={`text-sm font-medium hover:text-foreground transition-colors duration-200 uppercase tracking-wider ${location === "/values" ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}
             >
               Values
             </Link>
             <Link 
               href="/payments" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 uppercase tracking-wider"
+              className={`text-sm font-medium hover:text-foreground transition-colors duration-200 uppercase tracking-wider ${location === "/payments" ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}
             >
               Payments
             </Link>
@@ -57,19 +59,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <div className="flex flex-col gap-6 mt-12">
                   <Link 
                     href="/services" 
-                    className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-200 uppercase tracking-widest"
+                    className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
                   >
                     Services
                   </Link>
                   <Link 
                     href="/values" 
-                    className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-200 uppercase tracking-widest"
+                    className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/values" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
                   >
                     Values
                   </Link>
                   <Link 
                     href="/payments" 
-                    className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-200 uppercase tracking-widest"
+                    className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/payments" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
                   >
                     Payments
                   </Link>
