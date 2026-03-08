@@ -14,8 +14,12 @@ function parseWithLogging<T>(schema: z.ZodSchema<T>, data: unknown, label: strin
 export function useCreateContact() {
   return useMutation({
     mutationFn: async (data: ContactInput): Promise<ContactResponse> => {
+      console.log("data:", data);
+
       // Validate input before sending
       const validatedInput = api.contacts.create.input.parse(data);
+
+      console.log("validatedInput:", validatedInput);
 
       const res = await fetch(api.contacts.create.path, {
         method: api.contacts.create.method,
@@ -24,7 +28,12 @@ export function useCreateContact() {
         credentials: "include",
       });
 
+
+
+
       const responseData = await res.json();
+
+      console.log("responseData:", responseData);
 
       if (!res.ok) {
         if (res.status === 400) {
