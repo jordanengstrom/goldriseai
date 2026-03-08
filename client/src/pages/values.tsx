@@ -60,7 +60,7 @@ export default function Values() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: index * 0.15 }}
-                className="glass-panel p-8 rounded-2xl border-white/5 hover:border-primary/30 transition-all duration-500 group flex flex-col items-center text-center"
+                className="glass-panel p-8 rounded-2xl border-foreground/5 hover:border-primary/30 transition-all duration-500 group flex flex-col items-center text-center"
               >
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <value.icon className="w-8 h-8 text-primary" />

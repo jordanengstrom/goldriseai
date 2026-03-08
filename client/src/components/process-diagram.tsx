@@ -46,7 +46,7 @@ function AtomicOrbit({ delay, color, stepId }: { delay: number, color: string, s
         <motion.div
           animate={{ rotateZ: 360, rotateX: [60, 120, 60] }}
           transition={{ duration: t1, repeat: Infinity, ease: "linear", delay }}
-          className="absolute inset-[-20%] rounded-[50%] border-[2px] border-white/5 opacity-50 z-0 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+          className="absolute inset-[-20%] rounded-[50%] border-[2px] border-foreground/5 opacity-50 z-0 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.div 
@@ -57,7 +57,7 @@ function AtomicOrbit({ delay, color, stepId }: { delay: number, color: string, s
         <motion.div
           animate={{ rotateZ: -360, rotateY: [40, 80, 40] }}
           transition={{ duration: t2, repeat: Infinity, ease: "linear", delay: delay + 2 }}
-          className="absolute inset-[-40%] rounded-[50%] border-[1px] border-white/10 opacity-40 z-0"
+          className="absolute inset-[-40%] rounded-[50%] border-[1px] border-foreground/10 opacity-40 z-0"
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.div 
@@ -68,7 +68,7 @@ function AtomicOrbit({ delay, color, stepId }: { delay: number, color: string, s
         <motion.div
           animate={{ rotateZ: 360, rotateX: -60 }}
           transition={{ duration: t3, repeat: Infinity, ease: "linear", delay: delay + 1 }}
-          className="absolute inset-[-10%] rounded-[50%] border-[1.5px] border-white/5 opacity-60 z-0"
+          className="absolute inset-[-10%] rounded-[50%] border-[1.5px] border-foreground/5 opacity-60 z-0"
           style={{ transformStyle: "preserve-3d" }}
         />
       </div>
@@ -80,7 +80,7 @@ function AtomicOrbit({ delay, color, stepId }: { delay: number, color: string, s
         <motion.div
           animate={{ rotateZ: -360, rotateX: [80, 10, 80], rotateY: [20, 80, 20] }}
           transition={{ duration: t1, repeat: Infinity, ease: "linear", delay }}
-          className="absolute inset-[-30%] rounded-[40%] border-[2px] border-white/10 opacity-60 z-0 shadow-[0_0_25px_rgba(255,255,255,0.15)]"
+          className="absolute inset-[-30%] rounded-[40%] border-[2px] border-foreground/10 opacity-60 z-0 shadow-[0_0_25px_rgba(255,255,255,0.15)]"
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.div 
@@ -91,7 +91,7 @@ function AtomicOrbit({ delay, color, stepId }: { delay: number, color: string, s
         <motion.div
           animate={{ rotateZ: 360, rotateX: [30, 90, 30], rotateY: [-40, -90, -40] }}
           transition={{ duration: t2, repeat: Infinity, ease: "linear", delay: delay + 1.5 }}
-          className="absolute inset-[-20%] rounded-[60%] border-[1px] border-white/20 opacity-30 z-0"
+          className="absolute inset-[-20%] rounded-[60%] border-[1px] border-foreground/20 opacity-30 z-0"
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.div 
@@ -102,7 +102,7 @@ function AtomicOrbit({ delay, color, stepId }: { delay: number, color: string, s
         <motion.div
           animate={{ rotateZ: -360, rotateY: 120 }}
           transition={{ duration: t3, repeat: Infinity, ease: "linear", delay: delay + 0.5 }}
-          className="absolute inset-[-45%] rounded-[50%] border-[1px] border-dashed border-white/10 opacity-50 z-0"
+          className="absolute inset-[-45%] rounded-[50%] border-[1px] border-dashed border-foreground/10 opacity-50 z-0"
           style={{ transformStyle: "preserve-3d" }}
         />
       </div>
@@ -114,7 +114,7 @@ function AtomicOrbit({ delay, color, stepId }: { delay: number, color: string, s
         <motion.div
           animate={{ rotateZ: 360, rotateX: [90, 90, 90], rotateY: [0, 360, 720] }}
           transition={{ duration: t1, repeat: Infinity, ease: "linear", delay }}
-          className="absolute inset-[-25%] rounded-[50%] border-[2.5px] border-white/15 opacity-80 z-0 shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+          className="absolute inset-[-25%] rounded-[50%] border-[2.5px] border-foreground/15 opacity-80 z-0 shadow-[0_0_15px_rgba(255,255,255,0.2)]"
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.div 
@@ -129,7 +129,7 @@ function AtomicOrbit({ delay, color, stepId }: { delay: number, color: string, s
         <motion.div
           animate={{ rotateZ: -360, rotateX: [45, 90, 45], rotateY: [45, -45, 45] }}
           transition={{ duration: t2, repeat: Infinity, ease: "linear", delay: delay + 1 }}
-          className="absolute inset-[-35%] rounded-[50%] border-[1px] border-white/10 opacity-50 z-0"
+          className="absolute inset-[-35%] rounded-[50%] border-[1px] border-foreground/10 opacity-50 z-0"
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.div 
@@ -140,7 +140,7 @@ function AtomicOrbit({ delay, color, stepId }: { delay: number, color: string, s
         <motion.div
           animate={{ rotateZ: 360, rotateY: -90, rotateX: [0, 180, 360] }}
           transition={{ duration: t3, repeat: Infinity, ease: "linear", delay: delay + 2 }}
-          className="absolute inset-[-15%] rounded-[50%] border-[2px] border-white/5 opacity-70 z-0"
+          className="absolute inset-[-15%] rounded-[50%] border-[2px] border-foreground/5 opacity-70 z-0"
           style={{ transformStyle: "preserve-3d" }}
         />
       </div>
@@ -224,7 +224,7 @@ export function ProcessDiagram() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2 className="text-5xl md:text-8xl font-display font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-black/20 tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+            <h2 className="text-5xl md:text-8xl font-display font-bold mb-6 text-gradient tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_0_20px_rgba(255,255,255,0.05)]">
               The GoldRise <span className="text-primary italic font-light drop-shadow-[0_0_35px_rgba(255,140,0,0.8)]">Methodology</span>
             </h2>
           </motion.div>
@@ -233,7 +233,7 @@ export function ProcessDiagram() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="text-white/70 max-w-3xl mx-auto text-xl md:text-2xl font-light tracking-wide drop-shadow-md"
+            className="text-foreground/70 max-w-3xl mx-auto text-xl md:text-2xl font-light tracking-wide drop-shadow-md"
           >
             Harness the primordial forces of creation. We synthesize your raw potential into an infinite loop of AI-driven optimization and growth, orchestrating chaos into alignment.
           </motion.p>
@@ -245,15 +245,15 @@ export function ProcessDiagram() {
           {/* Animated SVG connecting line representing an energy beam (desktop only) */}
           <div className="hidden lg:block absolute top-[120px] left-[15%] right-[15%] h-[4px] z-0 rounded-full">
             {/* Base dim conduit */}
-            <div className="absolute inset-0 bg-white/5 rounded-full blur-[1px]" />
+            <div className="absolute inset-0 bg-foreground/5 rounded-full blur-[1px]" />
             {/* Glowing plasma line */}
             <motion.div 
               className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-400 via-orange-500 to-pink-500 rounded-full blur-[2px] opacity-80"
               style={{ scaleX: lineScaleX, transformOrigin: "left center" }}
             />
             <motion.div 
-              className="absolute inset-y-0 left-0 bg-white shadow-[0_0_20px_#fff,0_0_40px_currentColor] rounded-full mix-blend-overlay"
-              style={{ scaleX: lineScaleX, transformOrigin: "left center", backgroundColor: "white" }}
+              className="absolute inset-y-0 left-0 bg-foreground shadow-[0_0_20px_theme(colors.foreground),0_0_40px_currentColor] rounded-full mix-blend-overlay"
+              style={{ scaleX: lineScaleX, transformOrigin: "left center", backgroundColor: "currentColor" }}
             />
           </div>
           
@@ -302,13 +302,13 @@ function StepCard({ step, index, progress }: { step: any, index: number, progres
         {/* Central Black Hole / Icon container */}
         <motion.div 
           whileHover={{ scale: 1.15, rotate: [0, -5, 5, 0] }}
-          className="relative z-10 w-28 h-28 bg-[#050010]/80 backdrop-blur-2xl border-[1.5px] border-white/20 rounded-full flex items-center justify-center shadow-[inset_0_0_30px_rgba(255,255,255,0.1),0_0_50px_rgba(0,0,0,0.8)] overflow-hidden pointer-events-auto"
+          className="relative z-10 w-28 h-28 bg-[#050010]/80 backdrop-blur-2xl border-[1.5px] border-foreground/20 rounded-full flex items-center justify-center shadow-[inset_0_0_30px_rgba(255,255,255,0.1),0_0_50px_rgba(0,0,0,0.8)] overflow-hidden pointer-events-auto"
         >
           {/* Internal event horizon wrap */}
           <div className={`absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,currentColor_120%)] opacity-30 ${step.color.includes('orange') ? 'text-orange-500' : step.color.includes('cyan') ? 'text-cyan-500' : 'text-purple-500'}`} />
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-foreground/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
           
-          <step.icon className={`w-12 h-12 text-white drop-shadow-[0_0_15px_rgba(255,255,255,1)] relative z-10 filter-none ${step.id === 2 ? 'group-hover:animate-pulse group-hover:text-primary transition-colors' : ''}`} />
+          <step.icon className={`w-12 h-12 text-foreground drop-shadow-[0_0_15px_rgba(255,255,255,1)] relative z-10 filter-none ${step.id === 2 ? 'group-hover:animate-pulse group-hover:text-primary transition-colors' : ''}`} />
         </motion.div>
       </div>
 
@@ -326,11 +326,11 @@ function StepCard({ step, index, progress }: { step: any, index: number, progres
           <div className={`h-[2px] w-full bg-gradient-to-r ${step.color} opacity-80 mt-2 blur-[1px]`} />
         </div>
         
-        <h3 className="text-4xl font-display font-medium mb-5 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/50 transition-all duration-500 drop-shadow-lg">
+        <h3 className="text-4xl font-display font-medium mb-5 text-foreground group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-foreground group-hover:to-foreground/50 transition-all duration-500 drop-shadow-lg">
           {step.title}
         </h3>
         
-        <p className="text-white/60 leading-relaxed font-light text-lg">
+        <p className="text-foreground/60 leading-relaxed font-light text-lg">
           {step.description}
         </p>
       </motion.div>

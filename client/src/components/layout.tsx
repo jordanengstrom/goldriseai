@@ -15,7 +15,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] pointer-events-none -z-10" />
 
       {/* Navigation */}
-      <header className="w-full border-b border-white/5 bg-background/50 backdrop-blur-md sticky top-0 z-50">
+      <header className="w-full border-b border-foreground/5 bg-background/50 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group cursor-pointer">
             <div className="w-8 h-8 rounded bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center glow-gold group-hover:glow-gold-hover transition-all duration-300">
@@ -58,7 +58,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <Menu className="w-6 h-6" />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="glass-panel border-white/10 bg-background/95 backdrop-blur-xl">
+              <SheetContent side="right" className="glass-panel border-foreground/10 bg-background/95 backdrop-blur-xl">
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                 <div className="flex flex-col gap-6 mt-12">
                   <Link 
@@ -81,7 +81,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       Payments
                     </Link>
                   )}
-                  <div className="pt-4 border-t border-white/10">
+                  <div className="pt-4 border-t border-foreground/10">
                     <ContactFormDialog />
                   </div>
                 </div>
@@ -97,7 +97,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 bg-background/80 backdrop-blur-sm mt-auto py-12">
+      <footer className="border-t border-foreground/5 bg-background/80 backdrop-blur-sm mt-auto py-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">

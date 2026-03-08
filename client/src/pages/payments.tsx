@@ -41,7 +41,7 @@ export default function Payments() {
           <ArrowLeft className="w-4 h-4" /> Back to Home
         </Link>
         
-        <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-8">
+        <h1 className="text-4xl md:text-6xl font-display font-bold text-foreground mb-8">
           Payments & <span className="text-primary">Billing</span>
         </h1>
         
@@ -51,22 +51,22 @@ export default function Payments() {
             <div className="space-y-8">
               <div className="text-center">
                 <ShieldCheck className="w-12 h-12 text-primary mx-auto mb-4" />
-                <h3 className="text-2xl font-display font-bold text-white mb-2">Secure Payment Portal</h3>
+                <h3 className="text-2xl font-display font-bold text-foreground mb-2">Secure Payment Portal</h3>
                 <p>Enter your invoice number below to view details and make a secure, PCI-compliant payment.</p>
               </div>
 
               <form onSubmit={handleSearch} className="max-w-md mx-auto space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="invoice-search" className="text-white">Invoice Number</Label>
+                  <Label htmlFor="invoice-search" className="text-foreground">Invoice Number</Label>
                   <div className="relative">
                     <Input 
                       id="invoice-search" 
                       value={invoiceNumber}
                       onChange={(e) => setInvoiceNumber(e.target.value)}
                       placeholder="e.g. INV-TEST-001" 
-                      className="bg-white/5 border-white/10 text-white pl-10 h-12" 
+                      className="bg-foreground/5 border-foreground/10 text-foreground pl-10 h-12" 
                     />
-                    <Search className="absolute left-3 top-3 h-5 w-5 text-white/50" />
+                    <Search className="absolute left-3 top-3 h-5 w-5 text-foreground/50" />
                   </div>
                 </div>
                 
@@ -83,13 +83,13 @@ export default function Payments() {
             </div>
           ) : (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="flex justify-between items-start pb-6 border-b border-white/10">
+              <div className="flex justify-between items-start pb-6 border-b border-foreground/10">
                 <div>
-                  <h3 className="text-3xl font-display font-bold text-white">Invoice {invoice.invoiceNumber}</h3>
-                  <p className="text-white/70 mt-1">Billed to: {invoice.customerName}</p>
+                  <h3 className="text-3xl font-display font-bold text-foreground">Invoice {invoice.invoiceNumber}</h3>
+                  <p className="text-foreground/70 mt-1">Billed to: {invoice.customerName}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-white/50 uppercase tracking-wider mb-1">Total Due</p>
+                  <p className="text-sm text-foreground/50 uppercase tracking-wider mb-1">Total Due</p>
                   <p className="text-4xl font-display font-bold text-primary">
                     ${(invoice.amount / 100).toFixed(2)}
                   </p>
@@ -107,7 +107,7 @@ export default function Payments() {
                   <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     <Button 
                       variant="outline" 
-                      className="h-16 text-lg border-white/20 hover:bg-white/5"
+                      className="h-16 text-lg border-foreground/20 hover:bg-foreground/5"
                       onClick={() => toast({ title: "Coming soon", description: "Payment integration is pending." })}
                     >
                       Make a Payment
@@ -117,7 +117,7 @@ export default function Payments() {
               )}
 
               <div className="pt-6 text-center">
-                <Button variant="ghost" className="text-white/60 hover:text-white" onClick={() => {
+                <Button variant="ghost" className="text-foreground/60 hover:text-foreground" onClick={() => {
                   setSearchNumber("");
                   setInvoiceNumber("");
                 }}>
@@ -128,7 +128,7 @@ export default function Payments() {
           )}
 
           <div className="mt-12 p-6 bg-primary/5 border border-primary/20 rounded-xl text-center">
-            <p className="text-white font-medium mb-2">Need billing support?</p>
+            <p className="text-foreground font-medium mb-2">Need billing support?</p>
             <a href="mailto:billing@goldrise.ai" className="text-primary hover:underline">billing@goldrise.ai</a>
           </div>
         </div>

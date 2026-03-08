@@ -103,7 +103,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="First Name *" className="bg-black/20 border-white/10 focus-visible:ring-primary/50" {...field} />
+                      <Input placeholder="First Name *" className="bg-black/5 dark:bg-black/20 border-foreground/10 focus-visible:ring-primary/50" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -115,7 +115,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Last Name *" className="bg-black/20 border-white/10 focus-visible:ring-primary/50" {...field} />
+                      <Input placeholder="Last Name *" className="bg-black/5 dark:bg-black/20 border-foreground/10 focus-visible:ring-primary/50" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -130,7 +130,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input type="email" placeholder="Email *" className="bg-black/20 border-white/10 focus-visible:ring-primary/50" {...field} />
+                      <Input type="email" placeholder="Email *" className="bg-black/5 dark:bg-black/20 border-foreground/10 focus-visible:ring-primary/50" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -142,7 +142,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input type="tel" placeholder="Phone Number *" className="bg-black/20 border-white/10 focus-visible:ring-primary/50" {...field} />
+                      <Input type="tel" placeholder="Phone Number *" className="bg-black/5 dark:bg-black/20 border-foreground/10 focus-visible:ring-primary/50" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -157,7 +157,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Company" className="bg-black/20 border-white/10 focus-visible:ring-primary/50" {...field} value={field.value || ''} />
+                      <Input placeholder="Company" className="bg-black/5 dark:bg-black/20 border-foreground/10 focus-visible:ring-primary/50" {...field} value={field.value || ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -169,7 +169,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Role" className="bg-black/20 border-white/10 focus-visible:ring-primary/50" {...field} value={field.value || ''} />
+                      <Input placeholder="Role" className="bg-black/5 dark:bg-black/20 border-foreground/10 focus-visible:ring-primary/50" {...field} value={field.value || ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -183,7 +183,7 @@ export function ContactFormDialog() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input type="url" placeholder="Company Website" className="bg-black/20 border-white/10 focus-visible:ring-primary/50" {...field} value={field.value || ''} />
+                    <Input type="url" placeholder="Company Website" className="bg-black/5 dark:bg-black/20 border-foreground/10 focus-visible:ring-primary/50" {...field} value={field.value || ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -197,11 +197,11 @@ export function ContactFormDialog() {
                 <FormItem>
                   <Select onValueChange={field.onChange} defaultValue={field.value || undefined}>
                     <FormControl>
-                      <SelectTrigger className="bg-black/20 border-white/10 focus:ring-primary/50">
+                      <SelectTrigger className="bg-black/5 dark:bg-black/20 border-foreground/10 focus:ring-primary/50">
                         <SelectValue placeholder="What services are you interested in?" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="bg-background border-white/10">
+                    <SelectContent className="bg-background border-foreground/10">
                       <SelectItem value="Identifying AI Opportunities">Identifying AI Opportunities</SelectItem>
                       <SelectItem value="Educating your team on AI">Educating your team on AI</SelectItem>
                       <SelectItem value="Developing custom AI solutions">Developing custom AI solutions</SelectItem>
@@ -220,7 +220,7 @@ export function ContactFormDialog() {
                   <FormControl>
                     <Textarea 
                       placeholder="Additional Info (Current challenges...)" 
-                      className="resize-none min-h-[100px] bg-black/20 border-white/10 focus-visible:ring-primary/50" 
+                      className="resize-none min-h-[100px] bg-black/5 dark:bg-black/20 border-foreground/10 focus-visible:ring-primary/50" 
                       {...field}
                       value={field.value || ''}
                     />
@@ -232,7 +232,7 @@ export function ContactFormDialog() {
 
             <Button 
               type="submit" 
-              className="w-full font-display font-bold uppercase tracking-wider bg-primary hover:bg-primary/90 text-background glow-gold transition-all duration-300"
+              className="w-full font-display font-bold uppercase tracking-wider bg-primary hover:bg-primary/90 text-primary-foreground glow-gold transition-all duration-300"
               disabled={createContact.isPending}
             >
               {createContact.isPending ? (

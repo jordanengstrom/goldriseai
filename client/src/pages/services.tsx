@@ -77,7 +77,7 @@ export default function Services() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: index * 0.15 }}
-                className="glass-panel p-8 rounded-2xl border-white/5 hover:border-primary/30 transition-all duration-500 group"
+                className="glass-panel p-8 rounded-2xl border-foreground/5 hover:border-primary/30 transition-all duration-500 group"
               >
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <service.icon className="w-7 h-7 text-primary" />
@@ -94,7 +94,7 @@ export default function Services() {
                   {service.description}
                 </p>
 
-                <ul className="space-y-3 border-t border-white/5 pt-8">
+                <ul className="space-y-3 border-t border-foreground/5 pt-8">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-3 text-sm text-muted-foreground">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary/50" />

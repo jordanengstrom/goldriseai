@@ -22,7 +22,7 @@ export default function Home() {
               Next-Gen AI Consultancy
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.1] mb-8 tracking-tight text-white drop-shadow-2xl">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.1] mb-8 tracking-tight text-foreground drop-shadow-2xl">
               <span className="text-gradient-gold">Elevate</span> Your <br/>
               <span>Business with</span><br/>  <span className="text-gradient-gold">elite AI</span>
             </h1>
@@ -47,7 +47,7 @@ export default function Home() {
             
             <span className="text-sm font-medium text-muted-foreground uppercase tracking-widest">or</span>
             
-            <Link href="/services" className="text-sm font-medium text-white hover:text-primary transition-colors border-b border-white/20 hover:border-primary pb-1 uppercase tracking-wider">
+            <Link href="/services" className="text-sm font-medium text-foreground hover:text-primary transition-colors border-b border-foreground/20 hover:border-primary pb-1 uppercase tracking-wider">
               Explore Services
             </Link>
           </motion.div>
@@ -63,7 +63,7 @@ export default function Home() {
       <section className="py-32 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 pointer-events-none" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
             Ready to <span className="text-primary">Evolve?</span>
           </h2>
           <p className="text-muted-foreground text-lg mb-10">
