@@ -1,5 +1,4 @@
 import { Layout } from "@/components/layout";
-import { ProcessDiagram } from "@/components/process-diagram";
 import { ContactFormDialog } from "@/components/contact-form-dialog";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
@@ -58,11 +57,6 @@ export default function Home() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] max-w-[1200px] max-h-[1200px] opacity-20 pointer-events-none z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/30 via-transparent to-transparent blur-3xl" />
         </div>
-      </section>
-
-      {/* Process Section */}
-      <section id="process" className="bg-black/20 border-y border-white/5 relative z-10">
-        <ProcessDiagram />
       </section>
 
       {/* Final CTA Section */}
