@@ -1,0 +1,18 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GoldRise mark">
+  <defs>
+    <linearGradient id="goldrise-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="goldrise-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#eab308" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect x="8" y="8" width="48" height="48" rx="8" fill="url(#goldrise-grad)" filter="url(#goldrise-glow)"/>
+
+  <!-- Replace with outlined G path from your actual brand font for final version -->
+  <text x="32" y="32" text-anchor="middle" dominant-baseline="central"
+        font-family="Rajdhani, sans-serif" font-size="34" font-weight="700"
+        fill="#0b1220">G</text>
+</svg>
