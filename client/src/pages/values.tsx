@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Layout } from "@/components/layout";
 import { Shield, Users, Lightbulb, Target } from "lucide-react";
+import { LiquidGradient } from "@/components/liquid-gradient";
 
 const values = [
   {
@@ -29,11 +30,10 @@ export default function Values() {
   return (
     <Layout>
       <section className="relative py-24 px-6 overflow-hidden min-h-screen flex flex-col justify-center">
-        {/* Background Accents */}
-        <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full -z-10" />
-        <div className="absolute bottom-0 left-0 w-[40%] h-[40%] bg-primary/5 blur-[120px] rounded-full -z-10" />
+        <LiquidGradient interactive={false} className="z-0" />
+        <div className="absolute inset-0 bg-white/55 dark:bg-black/45 z-[1] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto w-full">
+        <div className="max-w-7xl mx-auto w-full relative z-10">
           <div className="text-center mb-20">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
