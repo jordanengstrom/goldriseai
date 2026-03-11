@@ -1,10 +1,26 @@
+import { useEffect, useState } from "react";
 import { Layout } from "@/components/layout";
 import { ContactFormDialog } from "@/components/contact-form-dialog";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "wouter";
 import { LiquidGradient } from "@/components/liquid-gradient";
 
 export default function Home() {
+  const rotatingPhrases = [
+    "Top AI Transformation Partner",
+    "Premium AI Consultancy",
+    "Strategic AI Advisory",
+  ];
+  const [activePhraseIndex, setActivePhraseIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setActivePhraseIndex((current) => (current + 1) % rotatingPhrases.length);
+    }, 2400);
+
+    return () => window.clearInterval(intervalId);
+  }, [rotatingPhrases.length]);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -22,12 +38,30 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
               </span>
-              Next-Gen AI Consultancy
+              <span className="inline-flex min-w-[18rem] sm:min-w-[22rem] justify-center">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={rotatingPhrases[activePhraseIndex]}
+                    initial={{ opacity: 0, y: 8, filter: "blur(3px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -8, filter: "blur(3px)" }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                    className="inline-block"
+                  >
+                    {rotatingPhrases[activePhraseIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.1] mb-8 tracking-tight text-foreground drop-shadow-2xl">
               <span className="text-gradient-gold">Elevate</span> Your <br/>
-              <span>Business with</span><br/>  <span className="text-gradient-gold">elite AI</span>
+              <span>Business with</span>
+              <span className="mt-2 inline-flex items-center justify-center gap-3 md:gap-6 w-full">
+                <span className="h-[2px] w-10 md:w-20 bg-gradient-to-r from-transparent via-amber-400 to-amber-500 rounded-full" />
+                <span className="text-gradient-gold">elite AI</span>
+                <span className="h-[2px] w-10 md:w-20 bg-gradient-to-l from-transparent via-amber-400 to-amber-500 rounded-full" />
+              </span>
             </h1>
           </motion.div>
 
