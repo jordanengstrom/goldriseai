@@ -113,7 +113,7 @@ export default function Terms() {
               </a>
           </p>
 
-          <p className="text-lg text-foreground font-medium border-t border-foreground/10 pt-4 mt-8" style={{ paddingTop: '2em' }}>
+          <p className="text-lg text-muted-foreground border-t border-foreground/10 pt-4 mt-8" style={{ paddingTop: '2em' }}>
             Last Updated: March 7, 2026
           </p>
         </div>
