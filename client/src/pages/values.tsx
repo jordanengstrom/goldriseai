@@ -60,19 +60,25 @@ export default function Values() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: index * 0.15 }}
-                className="glass-panel p-8 rounded-2xl border-foreground/5 hover:border-primary/30 transition-all duration-500 group flex flex-col items-center text-center"
+                className="group relative overflow-hidden p-8 rounded-[2.5rem] bg-white/20 dark:bg-black/28 backdrop-blur-2xl border border-white/55 dark:border-white/20 hover:border-primary/30 shadow-[0_24px_64px_-20px_rgba(0,0,0,0.24),inset_0_3px_4px_rgba(255,255,255,0.6),inset_0_-3px_4px_rgba(0,0,0,0.3)] dark:shadow-[0_24px_64px_-20px_rgba(0,0,0,0.6),inset_0_3px_4px_rgba(255,255,255,0.2),inset_0_-3px_4px_rgba(0,0,0,0.7)] transition-all duration-500 flex flex-col items-center text-center"
               >
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <value.icon className="w-8 h-8 text-primary" />
+                <div className="pointer-events-none absolute inset-[10px] rounded-[2rem] bg-white/90 dark:bg-black/88 shadow-[inset_0_4px_8px_rgba(0,0,0,0.2),inset_0_-4px_8px_rgba(255,255,255,0.7)] dark:shadow-[inset_0_4px_8px_rgba(0,0,0,0.6),inset_0_-4px_8px_rgba(255,255,255,0.2)] transition-colors duration-300 group-hover:bg-white/95 dark:group-hover:bg-black/80" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_18%,rgba(255,255,255,0.42)_0%,rgba(255,255,255,0.24)_34%,rgba(255,255,255,0.06)_64%,rgba(255,255,255,0)_100%)] dark:bg-[radial-gradient(120%_90%_at_50%_18%,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0.08)_34%,rgba(255,255,255,0.02)_64%,rgba(255,255,255,0)_100%)]" />
+                <div className="pointer-events-none absolute inset-[12%] rounded-[2rem] bg-[radial-gradient(circle_at_50%_38%,rgba(255,255,255,0.34),rgba(255,255,255,0.04)_68%,rgba(255,255,255,0)_100%)] dark:bg-[radial-gradient(circle_at_50%_38%,rgba(255,255,255,0.12),rgba(255,255,255,0.03)_68%,rgba(255,255,255,0)_100%)] blur-xl" />
+
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <value.icon className="w-8 h-8 text-primary" />
+                  </div>
+                  
+                  <h3 className="text-2xl font-display font-bold mb-4 text-foreground lowercase tracking-wide group-hover:text-primary transition-colors">
+                    {value.title}
+                  </h3>
+                  
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {value.description}
+                  </p>
                 </div>
-                
-                <h3 className="text-2xl font-display font-bold mb-4 text-foreground lowercase tracking-wide group-hover:text-primary transition-colors">
-                  {value.title}
-                </h3>
-                
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {value.description}
-                </p>
               </motion.div>
             ))}
           </div>

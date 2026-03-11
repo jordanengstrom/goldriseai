@@ -17,12 +17,12 @@ export default function Terms() {
         <div className="glass-panel p-8 md:p-12 rounded-2xl space-y-6 text-muted-foreground leading-relaxed prose prose-invert max-w-none">
           <h3 className="text-2xl font-display font-bold text-foreground pt-6">1. Introduction</h3>
           <p>
-            Welcome to GoldRise AI. These Terms of Service ("Terms") govern your access to and use of our website and services. By accessing or using the service, you agree to be bound by these Terms.
+            These Terms of Service ("Terms") govern your access to and use of our website and services. By accessing or using the service, you agree to be bound by these Terms.
           </p>
           
           <h3 className="text-2xl font-display font-bold text-foreground pt-6">2. Services Provided</h3>
           <p>
-            GoldRise AI provides AI strategy, Autonomous Agent Development, AI consulting services, Chatbot Development, among many other services. These services are subject to the terms and conditions outlined in this document.
+            GoldRise AI provides AI consulting and strategy services, Autonomous Agent Development, Chatbot Development, among many other services. These services are subject to the terms and conditions outlined in this document.
           </p>
           
           <h3 className="text-2xl font-display font-bold text-foreground pt-6">3. Fees and Payment Terms</h3>
@@ -113,7 +113,7 @@ export default function Terms() {
               </a>
           </p>
 
-          <p className="text-lg text-foreground font-medium border-t border-foreground/10 pt-4 mt-8" style={{ paddingTop: '2em' }}>
+          <p className="text-lg text-muted-foreground border-t border-foreground/10 pt-4 mt-8" style={{ paddingTop: '2em' }}>
             Last Updated: March 7, 2026
           </p>
         </div>
