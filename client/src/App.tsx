@@ -31,7 +31,7 @@ function Router() {
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="goldrise-theme">
+    <ThemeProvider defaultTheme="light" storageKey="goldrise-theme">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Toaster />

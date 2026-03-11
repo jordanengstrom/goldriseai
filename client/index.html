@@ -6,14 +6,14 @@
     <link id="app-favicon" rel="icon" type="image/svg+xml" href="/logo_dark.svg" />
     <script>
       (function () {
-        var STORAGE_KEY = "vite-ui-theme";
+        var STORAGE_KEY = "goldrise-theme";
         var DARK_ICON = "/logo_dark.svg";
         var LIGHT_ICON = "/logo_light.svg";
 
         function getResolvedTheme() {
           var saved = localStorage.getItem(STORAGE_KEY);
           if (saved === "dark" || saved === "light") return saved;
-          return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          return "light";
         }
 
         function setFavicon(theme) {
