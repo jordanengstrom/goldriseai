@@ -332,9 +332,10 @@ export function LiquidGradient({ interactive = true, className = "" }: LiquidGra
 
     let animationFrameId: number;
     let time = 0;
-    const clock = new THREE.Clock();
+     const clock = new THREE.Timer();
 
     const render = () => {
+      clock.update();
       const delta = clock.getDelta();
       time += delta;
       

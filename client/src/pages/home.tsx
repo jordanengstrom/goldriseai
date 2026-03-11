@@ -4,6 +4,7 @@ import { ContactFormDialog } from "@/components/contact-form-dialog";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "wouter";
 import { LiquidGradient } from "@/components/liquid-gradient";
+import { MethodologySection } from "@/components/methodology-section";
 
 export default function Home() {
   const rotatingPhrases = [
@@ -101,6 +102,8 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/30 via-transparent to-transparent blur-3xl" />
         </div>
       </section>
+
+      <MethodologySection />
 
       {/* Final CTA Section */}
       <section className="py-32 px-4 relative overflow-hidden">
