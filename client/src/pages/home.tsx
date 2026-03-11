@@ -2,15 +2,18 @@ import { Layout } from "@/components/layout";
 import { ContactFormDialog } from "@/components/contact-form-dialog";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import { LiquidGradient } from "@/components/liquid-gradient";
 
 export default function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex flex-col items-center justify-center min-h-[80vh]">
-        <div className="max-w-4xl mx-auto text-center z-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex flex-col items-center justify-center min-h-[80vh] overflow-hidden">
+        <LiquidGradient />
+        <div className="max-w-4xl mx-auto text-center z-10 w-full">
+          <div className="p-8 md:p-16 rounded-[2.5rem] bg-background/30 dark:bg-background/20 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] transition-all duration-500">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
@@ -51,6 +54,7 @@ export default function Home() {
               Explore Services
             </Link>
           </motion.div>
+          </div>
         </div>
 
         {/* Abstract hero background elements */}
