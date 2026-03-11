@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex flex-col items-center justify-center min-h-[80vh] overflow-hidden">
+      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex flex-col items-center justify-center min-h-[100svh] overflow-hidden">
         <LiquidGradient />
         <div className="max-w-4xl mx-auto text-center z-10 w-full">
           <div className="relative overflow-hidden p-8 md:p-16 rounded-[2.5rem] bg-white/20 dark:bg-black/28 backdrop-blur-2xl border border-white/55 dark:border-white/20 shadow-[0_24px_64px_-20px_rgba(0,0,0,0.24),inset_0_3px_4px_rgba(255,255,255,0.6),inset_0_-3px_4px_rgba(0,0,0,0.3)] dark:shadow-[0_24px_64px_-20px_rgba(0,0,0,0.6),inset_0_3px_4px_rgba(255,255,255,0.2),inset_0_-3px_4px_rgba(0,0,0,0.7)] transition-all duration-500">
@@ -106,9 +106,15 @@ export default function Home() {
       <MethodologySection />
 
       {/* Final CTA Section */}
-      <section className="py-32 px-4 relative overflow-hidden">
+      <section className="relative z-0 h-[400px] flex flex-col items-center justify-center px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 pointer-events-none" />
-        <div className="max-w-3xl mx-auto text-center relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-20%" }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl mx-auto text-center relative z-10 w-full"
+        >
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
             Ready to <span className="text-primary">Evolve?</span>
           </h2>
@@ -119,7 +125,7 @@ export default function Home() {
           <div className="inline-block scale-110">
              <ContactFormDialog />
           </div>
-        </div>
+        </motion.div>
       </section>
     </Layout>
   );
