@@ -149,7 +149,7 @@ export function LiquidGradient() {
       uTouchTexture: { value: touchTexture.texture },
       uGrainIntensity: { value: 0.04 },
       uZoom: { value: 1.0 },
-      uDarkNavy: { value: color5 },
+      uDarkNavy: { value: color2 }, // Using the cream color as the base/vignette background instead of dark bronze
       uGradientSize: { value: 1.0 },
       uGradientCount: { value: 6.0 },
       uColor1Weight: { value: 1.0 },
@@ -288,6 +288,8 @@ export function LiquidGradient() {
           // Normalize to prevent blowing out entirely
           if(totalWeight > 0.0) {
             color = color / totalWeight;
+          } else {
+            color = uColor2; // Fallback to cream if weight is somehow zero
           }
           
           // Subtle contrast enhancement instead of heavy multiplication
@@ -298,17 +300,17 @@ export function LiquidGradient() {
           // Since it's normalized, there are fewer 'empty' spaces, but we can darken edges
           float distToCenter = length(uv - 0.5);
           float vignette = smoothstep(0.3, 1.2, distToCenter);
-          color = mix(color, uDarkNavy, vignette * 0.3); // Gentle vignette
+          color = mix(color, uDarkNavy, vignette * 0.3); // Gentle vignette into cream
           
           // Enhanced interaction highlight based on touch force/intensity
           if (touchData.a > 0.0) {
             float interactionGlow = touchData.z * 1.0;
-            // The glow will be a bright mix of white and color2
-            vec3 glowColor = mix(uColor1, uColor2, 0.5);
+            // The glow will be a bright mix of white and color3
+            vec3 glowColor = mix(uColor1, uColor3, 0.5);
             color = mix(color, glowColor, interactionGlow * 0.5);
             
-            // Edge of touch ripple gets darker contrast
-            vec3 edgeHighlight = uColor5 * touchData.x;
+            // Edge of touch ripple gets the cream color instead of darkening to grey
+            vec3 edgeHighlight = uColor2; // Changed from uColor5 * touchData.x which caused dark grey
             color = mix(color, edgeHighlight, touchData.z * 0.4);
           }
           
