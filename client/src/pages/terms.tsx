@@ -22,7 +22,7 @@ export default function Terms() {
           
           <h3 className="text-2xl font-display font-bold text-foreground pt-6">2. Services Provided</h3>
           <p>
-            GoldRise AI provides AI strategy, Autonomous Agent Development, AI consulting services, Chatbot Development, and these services are subject to the terms and conditions outlined in this document.
+            GoldRise AI provides AI strategy, Autonomous Agent Development, AI consulting services, Chatbot Development, among many other services. These services are subject to the terms and conditions outlined in this document.
           </p>
           
           <h3 className="text-2xl font-display font-bold text-foreground pt-6">3. Fees and Payment Terms</h3>
@@ -59,7 +59,7 @@ export default function Terms() {
           
           <h3 className="text-2xl font-display font-bold text-foreground pt-6">9. Acceptable Use Policy</h3>
           <p>
-            You agree not to: a) use the services for any illegal purpose or in violation of any local, state, national, or international law; b) violate, or encourage others to violate, any right of a third party, including by infringing or misappropriating any third-party intellectual property right; c) attempt to bypass or break any security or rate-limiting mechanism on the services.
+            You agree not to: i) use the services for any illegal purpose or in violation of any local, state, national, or international law; ii) violate, or encourage others to violate, any right of a third party, including by infringing or misappropriating any third-party intellectual property right; iii) attempt to bypass or break any security or rate-limiting mechanism on the services.
           </p>
           
           <h3 className="text-2xl font-display font-bold text-foreground pt-6">10. Third-Party Services</h3>
@@ -84,7 +84,7 @@ export default function Terms() {
 
           <h3 className="text-2xl font-display font-bold text-foreground pt-6">14. Indemnification</h3>
           <p>
-            You agree to defend, indemnify, and hold harmless GoldRise AI and its licensee and licensors, and their employees, contractors, agents, officers, and directors, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney's fees), resulting from or arising out of a) your use and access of the Service, by you or any person using your account and password, or b) a breach of these Terms.
+            You agree to defend, indemnify, and hold harmless GoldRise AI and its licensee and licensors, and their employees, contractors, agents, officers, and directors, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including but not limited to attorney's fees), resulting from or arising out of i) your use and access of the Service, by you or any person using your account and password, or ii) a breach of these Terms.
           </p>
 
           <h3 className="text-2xl font-display font-bold text-foreground pt-6">15. Dispute Resolution and Arbitration</h3>
