@@ -110,7 +110,12 @@ class TouchTexture {
   }
 }
 
-export function LiquidGradient() {
+type LiquidGradientProps = {
+  interactive?: boolean;
+  className?: string;
+};
+
+export function LiquidGradient({ interactive = true, className = "" }: LiquidGradientProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -372,5 +377,11 @@ export function LiquidGradient() {
     };
   }, []);
 
-  return <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-auto" style={{ zIndex: 0 }} />;
+  return (
+    <div
+      ref={containerRef}
+      className={`absolute inset-0 w-full h-full ${interactive ? "pointer-events-auto" : "pointer-events-none"} ${className}`}
+      style={{ zIndex: 0 }}
+    />
+  );
 }
