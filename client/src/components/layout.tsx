@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { ContactFormDialog } from "./contact-form-dialog";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import { ENABLE_PAYMENTS_FEATURE } from "@/lib/features";
+import { ENABLE_DARK_MODE_TOGGLE, ENABLE_PAYMENTS_FEATURE } from "@/lib/features";
 import { ModeToggle } from "./mode-toggle";
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -138,7 +138,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               >
                 Contact
               </a>
-              <ModeToggle />
+              {ENABLE_DARK_MODE_TOGGLE && <ModeToggle />}
             </div>
           </div>
         </div>

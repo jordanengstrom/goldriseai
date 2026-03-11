@@ -27,7 +27,11 @@ export default function Home() {
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex flex-col items-center justify-center min-h-[80vh] overflow-hidden">
         <LiquidGradient />
         <div className="max-w-4xl mx-auto text-center z-10 w-full">
-          <div className="p-8 md:p-16 rounded-[2.5rem] bg-white dark:bg-black backdrop-blur-xl border border-black/10 dark:border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] transition-all duration-500">
+          <div className="relative overflow-hidden p-8 md:p-16 rounded-[2.5rem] bg-white/20 dark:bg-black/28 backdrop-blur-2xl border border-white/55 dark:border-white/20 shadow-[0_24px_64px_-20px_rgba(0,0,0,0.24)] transition-all duration-500">
+            <div className="pointer-events-none absolute inset-[20px] rounded-[2rem] bg-white/90 dark:bg-black/88" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_18%,rgba(255,255,255,0.42)_0%,rgba(255,255,255,0.24)_34%,rgba(255,255,255,0.06)_64%,rgba(255,255,255,0)_100%)] dark:bg-[radial-gradient(120%_90%_at_50%_18%,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0.08)_34%,rgba(255,255,255,0.02)_64%,rgba(255,255,255,0)_100%)]" />
+            <div className="pointer-events-none absolute inset-[12%] rounded-[2rem] bg-[radial-gradient(circle_at_50%_38%,rgba(255,255,255,0.34),rgba(255,255,255,0.04)_68%,rgba(255,255,255,0)_100%)] dark:bg-[radial-gradient(circle_at_50%_38%,rgba(255,255,255,0.12),rgba(255,255,255,0.03)_68%,rgba(255,255,255,0)_100%)] blur-xl" />
+            <div className="relative z-10">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -88,6 +92,7 @@ export default function Home() {
               Explore Services
             </Link>
           </motion.div>
+          </div>
           </div>
         </div>
 
