@@ -13,6 +13,7 @@ import Payments from "@/pages/payments";
 import Terms from "@/pages/terms";
 import Services from "@/pages/services";
 import Values from "@/pages/values";
+import Contact from "@/pages/contact";
 
 function Router() {
   return (
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/services" component={Services} />
       <Route path="/values" component={Values} />
       {ENABLE_PAYMENTS_FEATURE && <Route path="/payments" component={Payments} />}
+      <Route path="/contact" component={Contact} />
       <Route path="/terms" component={Terms} />
       <Route component={NotFound} />
     </Switch>
