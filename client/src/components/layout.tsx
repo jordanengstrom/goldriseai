@@ -132,12 +132,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   Payments
                 </Link>
               )}
-              <a 
-                href="mailto:info@goldrise.ai" 
-                className="hover:text-primary transition-colors duration-200 flex items-center h-9"
-              >
+              <Link href="/contact" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                 Contact
-              </a>
+              </Link>
               {ENABLE_DARK_MODE_TOGGLE && <ModeToggle />}
             </div>
           </div>
