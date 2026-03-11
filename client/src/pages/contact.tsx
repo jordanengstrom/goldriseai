@@ -36,7 +36,7 @@ export default function Contact() {
 
   return (
     <Layout>
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex flex-col items-center justify-center min-h-[80vh] overflow-hidden">
+      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex-1 flex flex-col items-center justify-center overflow-hidden">
         <LiquidGradient />
         <div className="max-w-4xl mx-auto text-center z-10 w-full">
           <motion.div 
