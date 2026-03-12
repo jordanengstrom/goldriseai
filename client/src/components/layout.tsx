@@ -101,8 +101,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center">
-                <span className="font-display font-bold text-primary text-xs">G</span>
+              <div className="w-5 h-5 rounded bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center glow-gold transition-all duration-300">
+                <span className="font-display font-bold text-background text-xs leading-none pt-px">G</span>
               </div>
               <span className="font-display font-medium text-muted-foreground text-sm tracking-widest">
                 © {new Date().getFullYear()} GOLDRISE AI
@@ -132,7 +132,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   Payments
                 </Link>
               )}
-                <div className="flex items-center gap-8 h-9">
+              <div className="flex items-center gap-8 h-9">
                 <Link href="/contact" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                   Contact
                 </Link>
