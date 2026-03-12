@@ -132,10 +132,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   Payments
                 </Link>
               )}
-              <Link href="/contact" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
-                Contact
-              </Link>
-              {ENABLE_DARK_MODE_TOGGLE && <ModeToggle />}
+                <div className="flex items-center gap-8 h-9">
+                <Link href="/contact" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
+                  Contact
+                </Link>
+                {ENABLE_DARK_MODE_TOGGLE && <ModeToggle />}
+              </div>
             </div>
           </div>
         </div>
