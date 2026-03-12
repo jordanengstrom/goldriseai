@@ -52,13 +52,13 @@ export function MethodologySection() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background/60" />
       </motion.div>
-      <div id="methodology-content" className="relative z-10">
+      <div id="methodology-content" className="relative z-10 -mt-8 md:-mt-12">
         <motion.div
           initial={{ opacity: 0, y: 48 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-15%" }}
           transition={{ duration: 0.9, ease: "easeOut" }}
-          className="flex flex-col items-center justify-center text-center px-6 pt-32 pb-24"
+          className="flex flex-col items-center justify-center text-center px-6 pt-10 md:pt-14 pb-12"
         >
           <p className="text-xs font-semibold tracking-[0.25em] uppercase text-primary mb-6 opacity-80">
             How We Work
@@ -68,7 +68,7 @@ export function MethodologySection() {
             <span className="italic text-primary">Methodology</span>
           </h2>
           <p className="mt-8 max-w-xl text-lg md:text-xl text-muted-foreground font-light leading-relaxed">
-            A deliberate three-phase framework — refined across dozens of enterprise engagements — that
+            A deliberate three-phase framework that
             turns AI potential into measurable business outcomes.
           </p>
         </motion.div>

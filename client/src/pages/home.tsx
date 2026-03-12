@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Layout } from "@/components/layout";
 import { ContactFormDialog } from "@/components/contact-form-dialog";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
@@ -13,9 +13,13 @@ export default function Home() {
     "Strategic AI Advisory",
   ];
   const [activePhraseIndex, setActivePhraseIndex] = useState(0);
+  const heroRef = useRef<HTMLElement>(null);
 
-  const { scrollY } = useScroll();
-  const heroOpacity = useTransform(scrollY, [0, 200], [1, 0]);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
   useEffect(() => {
     const intervalId = window.setInterval(() => {
@@ -27,7 +31,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <motion.section style={{ opacity: heroOpacity }} className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex flex-col items-center justify-center min-h-[100svh] overflow-hidden">
+      <motion.section ref={heroRef} id="elite-business" style={{ opacity: heroOpacity }} className="relative pt-20 pb-10 md:pt-28 md:pb-16 px-4 flex flex-col items-center justify-center min-h-[100svh] overflow-hidden">
         <LiquidGradient />
         <div className="max-w-4xl mx-auto text-center z-10 w-full">
           <div className="relative overflow-hidden p-8 md:p-16 rounded-[2.5rem] bg-white/20 dark:bg-black/28 backdrop-blur-2xl border border-white/55 dark:border-white/20 shadow-[0_24px_64px_-20px_rgba(0,0,0,0.24),inset_0_3px_4px_rgba(255,255,255,0.6),inset_0_-3px_4px_rgba(0,0,0,0.3)] dark:shadow-[0_24px_64px_-20px_rgba(0,0,0,0.6),inset_0_3px_4px_rgba(255,255,255,0.2),inset_0_-3px_4px_rgba(0,0,0,0.7)] transition-all duration-500">
