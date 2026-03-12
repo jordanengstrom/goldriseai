@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export function MethodologySection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [bgWOpacity, setBgWOpacity] = useState(0);
-  const [animOpacity, setAnimOpacity] = useState(0);
+  const [animOpacity ] = useState(1);
   const [titleOpacity, setTitleOpacity] = useState(0);
   const [titleTransform, setTitleTransform] = useState(40);
 
@@ -43,7 +43,6 @@ export function MethodologySection() {
       }
 
       setBgWOpacity(1);
-      setAnimOpacity(clamp01(_animOp));
       setTitleOpacity(clamp01(_titleOp));
       setTitleTransform(_titleTx);
     };
@@ -65,11 +64,11 @@ export function MethodologySection() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-[600vh] z-[40] bg-white">
+    <section id="methodology" ref={containerRef} className="relative h-[100vh] z-[40] bg-white">
       <div 
         className={`sticky top-0 h-[100svh] w-full overflow-hidden ${bgWOpacity > 0 ? "pointer-events-auto" : "pointer-events-none"}`}
       >
-         <div className="absolute inset-0 bg-white" style={{ opacity: bgWOpacity, transition: "opacity 0.1s" }} />
+         {/* <div className="absolute inset-0 bg-white" style={{ opacity: bgWOpacity, transition: "opacity 0.1s" }} /> */}
 
          <iframe 
            src="/network.html" 
