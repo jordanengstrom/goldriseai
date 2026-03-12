@@ -30,37 +30,29 @@ const steps = [
 ];
 
 export function MethodologySection() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"],
+    offset: ["start start", "end end"],
   });
 
   // Network fades in as section enters, stays visible while user scrolls through content, fades out as section leaves
-  const networkOpacity = useTransform(scrollYProgress, [0, 0.06, 0.94, 1], [0, 1, 1, 0]);
+  const networkOpacity = useTransform(scrollYProgress, [0, 0.04, 0.96, 1], [0, 1, 1, 0]);
 
   return (
     <section id="methodology" ref={containerRef} className="relative z-[40] bg-background">
 
-      {/* Sticky frozen neural network — positioned absolutely so content scrolls over it */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="sticky top-0 h-[100svh] w-full">
-          <motion.iframe
-            src="/network.html"
-            title="Neural Network Background"
-            className="absolute inset-0 w-full h-full border-none"
-            style={{ opacity: networkOpacity }}
-          />
-          {/* Fade edges so content reads cleanly against the network */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background/60 pointer-events-none" />
-        </div>
-      </div>
-
-      {/* Scrollable content layer — sits above the frozen background */}
-      <div className="relative z-10">
-
-        {/* Section title */}
+      {/* Fixed layer guarantees the neural net remains visible for the full methodology scroll span */}
+      <motion.div id="neural-net" className="fixed inset-0 w-full h-[100dvh] pointer-events-none z-0" style={{ opacity: networkOpacity }}>
+        <iframe
+          src="/network.html"
+          title="Neural Network Background"
+          className="absolute inset-0 w-full h-full border-none"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background/60" />
+      </motion.div>
+      <div id="methodology-content" className="relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 48 }}
           whileInView={{ opacity: 1, y: 0 }}
