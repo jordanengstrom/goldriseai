@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Layout } from "@/components/layout";
 import { ContactFormDialog } from "@/components/contact-form-dialog";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { LiquidGradient } from "@/components/liquid-gradient";
 import { MethodologySection } from "@/components/methodology-section";
@@ -14,6 +14,9 @@ export default function Home() {
   ];
   const [activePhraseIndex, setActivePhraseIndex] = useState(0);
 
+  const { scrollY } = useScroll();
+  const heroOpacity = useTransform(scrollY, [0, 250], [1, 0]);
+
   useEffect(() => {
     const intervalId = window.setInterval(() => {
       setActivePhraseIndex((current) => (current + 1) % rotatingPhrases.length);
@@ -24,8 +27,7 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex flex-col items-center justify-center min-h-[100svh] overflow-hidden">
+      <motion.section style={{ opacity: heroOpacity }} className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex flex-col items-center justify-center min-h-[100svh] overflow-hidden">
         <LiquidGradient />
         <div className="max-w-4xl mx-auto text-center z-10 w-full">
           <div className="relative overflow-hidden p-8 md:p-16 rounded-[2.5rem] bg-white/20 dark:bg-black/28 backdrop-blur-2xl border border-white/55 dark:border-white/20 shadow-[0_24px_64px_-20px_rgba(0,0,0,0.24),inset_0_3px_4px_rgba(255,255,255,0.6),inset_0_-3px_4px_rgba(0,0,0,0.3)] dark:shadow-[0_24px_64px_-20px_rgba(0,0,0,0.6),inset_0_3px_4px_rgba(255,255,255,0.2),inset_0_-3px_4px_rgba(0,0,0,0.7)] transition-all duration-500">
@@ -96,16 +98,13 @@ export default function Home() {
           </div>
           </div>
         </div>
-
-        {/* Abstract hero background elements */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] max-w-[1200px] max-h-[1200px] opacity-20 pointer-events-none z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/30 via-transparent to-transparent blur-3xl" />
         </div>
-      </section>
+      </motion.section>
 
       <MethodologySection />
 
-      {/* Final CTA Section */}
       <section className="relative z-0 h-[400px] flex flex-col items-center justify-center px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 pointer-events-none" />
         <motion.div 
