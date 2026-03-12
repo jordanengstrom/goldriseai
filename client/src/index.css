@@ -129,6 +129,14 @@
   .glow-ocean {
     box-shadow: 0 14px 36px -18px rgba(37, 99, 235, 0.7);
   }
+
+  #initiate-contact {
+    background-color: antiquewhite !important;
+  }
+
+  .dark #initiate-contact {
+    background-color: rgb(2 6 23 / 0.9) !important;
+  }
 }
 
 /* Custom Scrollbar for a sleek look */
