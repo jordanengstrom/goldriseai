@@ -48,6 +48,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             )}
             <ContactFormDialog />
+            {ENABLE_DARK_MODE_TOGGLE && <ModeToggle />}
           </nav>
 
           {/* Mobile Menu */}
@@ -61,6 +62,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <SheetContent side="right" className="glass-panel border-foreground/10 bg-background/95 backdrop-blur-xl">
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                 <div className="flex flex-col gap-6 mt-12">
+                  {ENABLE_DARK_MODE_TOGGLE && (
+                    <div className="flex items-center justify-between pb-4 border-b border-foreground/10">
+                      <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+                        Theme
+                      </span>
+                      <ModeToggle />
+                    </div>
+                  )}
                   <Link 
                     href="/services" 
                     className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
