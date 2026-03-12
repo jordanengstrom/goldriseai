@@ -15,7 +15,7 @@ export default function Home() {
   const [activePhraseIndex, setActivePhraseIndex] = useState(0);
 
   const { scrollY } = useScroll();
-  const heroOpacity = useTransform(scrollY, [0, 250], [1, 0]);
+  const heroOpacity = useTransform(scrollY, [0, 200], [1, 0]);
 
   useEffect(() => {
     const intervalId = window.setInterval(() => {

@@ -1,97 +1,134 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Search, Cpu, TrendingUp } from "lucide-react";
+
+const steps = [
+  {
+    id: "01",
+    label: "Inspect",
+    icon: Search,
+    headline: "Understand before you build.",
+    body: "Every transformation starts with clarity. We embed ourselves in your operations — interviewing your team, auditing your tech stack, and mapping your data flows — to surface exactly where AI delivers outsized returns. Nothing generic, no cookie-cutter playbooks. You receive a focused diagnostic that identifies your three highest-leverage integration points and a prioritized roadmap to reach them.",
+    detail: "Workflow audits · Data readiness assessment · Opportunity scoring · KPI definition",
+  },
+  {
+    id: "02",
+    label: "Integrate",
+    icon: Cpu,
+    headline: "Engineering built around your reality.",
+    body: "We design and deploy AI solutions that slot directly into the tools your team already uses — whether that means embedding an LLM into your CRM, automating document pipelines, or standing up a custom fine-tuned model. Our engineers handle every layer of the stack: prompt architecture, API orchestration, security review, and production hardening. You get working software, not a prototype.",
+    detail: "Custom LLM pipelines · API & webhook orchestration · Fine-tuning & RAG · Secure deployment",
+  },
+  {
+    id: "03",
+    label: "Improve",
+    icon: TrendingUp,
+    headline: "Momentum compounds over time.",
+    body: "AI initiatives that aren't measured tend to drift. We establish automated evaluation loops that score output quality against your real business metrics — catching regressions early and flagging new opportunities as your usage grows. Monthly strategy reviews keep the roadmap aligned to where the business is heading, not where it was when we started.",
+    detail: "Quality monitoring · A/B evaluation · Feedback loop design · Quarterly roadmap reviews",
+  },
+];
 
 export function MethodologySection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [bgWOpacity, setBgWOpacity] = useState(0);
-  const [animOpacity, setAnimOpacity] = useState(0);
-  const [titleOpacity, setTitleOpacity] = useState(0);
-  const [titleTransform, setTitleTransform] = useState(40);
 
-  useEffect(() => {
-    let frameId = 0;
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
 
-    const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
-
-    const updateLayerOpacities = () => {
-      const el = containerRef.current;
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const viewportH = window.innerHeight;
-      
-      const totalRange = rect.height + viewportH;
-      const travelled = viewportH - rect.top;
-      
-      const p = clamp01(travelled / totalRange);
-
-      let _animOp = 0;
-      if (p >= 0.02 && p < 0.10) _animOp = (p - 0.02) / 0.08;
-      else if (p >= 0.10 && p < 0.70) _animOp = 1;
-      else if (p >= 0.70 && p < 0.85) _animOp = 1 - (p - 0.70) / 0.15;
-
-      let _titleOp = 0;
-      let _titleTx = 40;
-      if (p >= 0.06 && p < 0.16) {
-        _titleOp = (p - 0.06) / 0.10;
-        _titleTx = 40 * (1 - _titleOp);
-      } else if (p >= 0.16 && p < 0.55) {
-        _titleOp = 1;
-        _titleTx = 0;
-      } else if (p >= 0.55 && p < 0.65) {
-        _titleOp = 1 - (p - 0.55) / 0.10;
-        _titleTx = -30 * (1 - _titleOp);
-      } else if (p >= 0.65) {
-        _titleOp = 0;
-        _titleTx = -30;
-      }
-
-      setBgWOpacity(1);
-      setAnimOpacity(clamp01(_animOp));
-      setTitleOpacity(clamp01(_titleOp));
-      setTitleTransform(_titleTx);
-    };
-
-    const onScrollOrResize = () => {
-      cancelAnimationFrame(frameId);
-      frameId = requestAnimationFrame(updateLayerOpacities);
-    };
-
-    updateLayerOpacities();
-    window.addEventListener("scroll", onScrollOrResize, { passive: true });
-    window.addEventListener("resize", onScrollOrResize);
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener("scroll", onScrollOrResize);
-      window.removeEventListener("resize", onScrollOrResize);
-    };
-  }, []);
+  // Network fades in as section enters, stays visible while user scrolls through content, fades out as section leaves
+  const networkOpacity = useTransform(scrollYProgress, [0, 0.06, 0.94, 1], [0, 1, 1, 0]);
 
   return (
-    <section id="methodology" ref={containerRef} className="relative h-[220vh] z-[40] bg-white">
-      <div 
-        className={`sticky top-0 h-[100svh] w-full overflow-hidden ${bgWOpacity > 0 ? "pointer-events-auto" : "pointer-events-none"}`}
-      >
-         {/* <div className="absolute inset-0 bg-white" style={{ opacity: bgWOpacity, transition: "opacity 0.1s" }} /> */}
+    <section id="methodology" ref={containerRef} className="relative z-[40] bg-background">
 
-         <iframe 
-           src="/network.html" 
-           title="Neural Network Background"
-           className="absolute top-0 left-0 w-full h-full border-none outline-none object-cover pointer-events-auto"
-           style={{ opacity: animOpacity, zIndex: 10, transition: "opacity 0.1s" }}
-         />
+      {/* Sticky frozen neural network — positioned absolutely so content scrolls over it */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="sticky top-0 h-[100svh] w-full">
+          <motion.iframe
+            src="/network.html"
+            title="Neural Network Background"
+            className="absolute inset-0 w-full h-full border-none"
+            style={{ opacity: networkOpacity }}
+          />
+          {/* Fade edges so content reads cleanly against the network */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background/60 pointer-events-none" />
+        </div>
+      </div>
 
-         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
-              style={{ 
-                 zIndex: 20, 
-                 opacity: titleOpacity, 
-                 transform: `translateY(${titleTransform}px)`,
-                 transition: "opacity 0.1s, transform 0.1s ease-out"
-              }}>
-            <h2 className="text-6xl md:text-8xl lg:text-9xl font-display font-medium tracking-tight text-black drop-shadow-sm">
-             Our <span className="italic block tracking-tighter ml-6 md:ml-20">Methodology</span>
-           </h2>
-         </div>
+      {/* Scrollable content layer — sits above the frozen background */}
+      <div className="relative z-10">
+
+        {/* Section title */}
+        <motion.div
+          initial={{ opacity: 0, y: 48 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-15%" }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="flex flex-col items-center justify-center text-center px-6 pt-32 pb-24"
+        >
+          <p className="text-xs font-semibold tracking-[0.25em] uppercase text-primary mb-6 opacity-80">
+            How We Work
+          </p>
+          <h2 className="text-6xl md:text-8xl lg:text-9xl font-display font-medium tracking-tight text-foreground drop-shadow-sm">
+            Our{" "}
+            <span className="italic text-primary">Methodology</span>
+          </h2>
+          <p className="mt-8 max-w-xl text-lg md:text-xl text-muted-foreground font-light leading-relaxed">
+            A deliberate three-phase framework — refined across dozens of enterprise engagements — that
+            turns AI potential into measurable business outcomes.
+          </p>
+        </motion.div>
+
+        {/* Three steps */}
+        <div className="max-w-5xl mx-auto px-6 pb-36 flex flex-col gap-6">
+          {steps.map((step, idx) => {
+            const Icon = step.icon;
+            return (
+              <motion.div
+                key={step.id}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.05 * idx }}
+                className="group relative rounded-3xl border border-white/10 bg-background/70 backdrop-blur-2xl p-10 md:p-14 overflow-hidden shadow-2xl"
+              >
+                {/* Subtle gradient accent per card */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.07] via-transparent to-transparent pointer-events-none rounded-3xl" />
+
+                <div className="relative flex flex-col md:flex-row gap-10 md:gap-16 items-start">
+
+                  {/* Left: number + icon */}
+                  <div className="flex-shrink-0 flex flex-col items-center md:items-start gap-4">
+                    <span className="text-7xl md:text-8xl font-black text-primary/[0.12] leading-none select-none tracking-tighter">
+                      {step.id}
+                    </span>
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl border border-primary/20 bg-primary/5 flex items-center justify-center">
+                      <Icon className="w-8 h-8 md:w-10 md:h-10 text-primary" strokeWidth={1.5} />
+                    </div>
+                  </div>
+
+                  {/* Right: text */}
+                  <div className="flex-1 space-y-4">
+                    <h3 className="text-4xl md:text-5xl font-display font-bold text-foreground tracking-tight">
+                      {step.label}
+                    </h3>
+                    <p className="text-base md:text-lg font-medium text-primary/80 italic">
+                      {step.headline}
+                    </p>
+                    <p className="text-base md:text-lg text-muted-foreground leading-relaxed font-light">
+                      {step.body}
+                    </p>
+                    <p className="pt-2 text-xs font-semibold tracking-widest uppercase text-primary/50">
+                      {step.detail}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
