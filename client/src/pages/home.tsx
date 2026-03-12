@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex flex-col items-center justify-center min-h-[80vh] overflow-hidden">
+      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4 flex flex-col items-center justify-center min-h-dvh overflow-hidden">
         <LiquidGradient />
         <div className="max-w-4xl mx-auto text-center z-10 w-full">
           <div className="relative overflow-hidden p-8 md:p-16 rounded-[2.5rem] bg-white/20 dark:bg-slate-950/72 backdrop-blur-2xl border border-white/55 dark:border-slate-200/20 shadow-[0_24px_64px_-20px_rgba(0,0,0,0.24),inset_0_3px_4px_rgba(255,255,255,0.6),inset_0_-3px_4px_rgba(0,0,0,0.3)] dark:shadow-[0_30px_70px_-24px_rgba(2,6,23,0.85),inset_0_3px_4px_rgba(148,163,184,0.12),inset_0_-3px_4px_rgba(2,6,23,0.92)] transition-all duration-500">

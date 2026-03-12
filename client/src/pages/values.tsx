@@ -29,7 +29,7 @@ const values = [
 export default function Values() {
   return (
     <Layout>
-      <section className="relative py-24 px-6 overflow-hidden min-h-screen flex flex-col justify-center">
+      <section className="relative py-24 px-6 overflow-hidden min-h-dvh flex flex-col justify-center">
         <LiquidGradient interactive={false} className="z-0" />
         <div className="absolute inset-0 bg-white/55 dark:bg-slate-950/60 z-[1] pointer-events-none" />
 
