@@ -141,24 +141,6 @@
   .dark #elevate-your-business {
     background-color: rgb(11, 16, 36) !important;
   }
-
-  .dark .service-card,
-  .dark .value-card,
-  .dark .contact-card,
-  .dark .service-card > div:first-child,
-  .dark .value-card > div:first-child,
-  .dark .contact-card > div:first-child {
-    background-color: rgb(11, 16, 36) !important;
-  }
-
-  .dark .service-card > div:nth-child(2),
-  .dark .value-card > div:nth-child(2),
-  .dark .contact-card > div:nth-child(2),
-  .dark .service-card > div:nth-child(3),
-  .dark .value-card > div:nth-child(3),
-  .dark .contact-card > div:nth-child(3) {
-    display: none !important;
-  }
 }
 
 /* Custom Scrollbar for a sleek look */
