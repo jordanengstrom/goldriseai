@@ -14,7 +14,7 @@ export default function Terms() {
           Terms & <span className="text-primary">Conditions</span>
         </h1>
         
-        <div className="glass-panel p-8 md:p-12 rounded-2xl space-y-6 text-muted-foreground leading-relaxed prose prose-invert max-w-none">
+        <div id="terms-conditions-text" className="glass-panel p-8 md:p-12 rounded-2xl space-y-6 text-muted-foreground leading-relaxed prose prose-invert max-w-none">
           <h3 className="text-2xl font-display font-bold text-foreground pt-6">1. Introduction</h3>
           <p>
             These Terms of Service ("Terms") govern your access to and use of our website and services. By accessing or using the service, you agree to be bound by these Terms.
