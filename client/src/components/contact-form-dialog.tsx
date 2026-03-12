@@ -76,7 +76,7 @@ export function ContactFormDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="relative group overflow-hidden rounded-md px-6 py-2.5 font-display font-bold uppercase tracking-wider text-sm bg-primary/10 text-primary border border-primary/30 hover:border-primary/80 transition-all duration-300 glow-gold-hover hover:-translate-y-0.5">
+        <button className="relative group overflow-hidden rounded-md px-6 py-2.5 font-display font-bold uppercase tracking-wider text-sm bg-primary/10 text-primary border border-primary/30 hover:border-primary/80 transition-all duration-300 dark:shadow-[0_12px_30px_-18px_rgba(59,130,246,0.75)] hover:-translate-y-0.5">
           <span className="relative z-10 flex items-center gap-2">
             Get in Touch
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -84,7 +84,7 @@ export function ContactFormDialog() {
           <div className="absolute inset-0 bg-primary/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
         </button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] glass-panel border-primary/50" style={{ backgroundColor: "antiquewhite" }}>
+      <DialogContent id="initiate-contact" className="sm:max-w-[600px] glass-panel border-primary/40 bg-[#fff9ec] dark:bg-slate-950/90">
         <DialogHeader>
           <DialogTitle className="font-display text-2xl tracking-wide text-foreground">
             Initiate <span className="text-primary">Contact</span>
@@ -232,7 +232,7 @@ export function ContactFormDialog() {
 
             <Button 
               type="submit" 
-              className="w-full font-display font-bold uppercase tracking-wider bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/60 hover:border-primary glow-gold transition-all duration-300"
+              className="w-full font-display font-bold uppercase tracking-wider bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/60 hover:border-primary dark:shadow-[0_16px_36px_-18px_rgba(37,99,235,0.85)] transition-all duration-300"
               disabled={createContact.isPending}
             >
               {createContact.isPending ? (

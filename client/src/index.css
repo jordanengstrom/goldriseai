@@ -49,38 +49,38 @@
   .dark {
     color-scheme: dark;
     
-    /* Base dark background - almost black slate */
-    --background: 220 20% 4%;
-    --foreground: 210 40% 98%;
+    /* Base dark background - navy first */
+    --background: 222 44% 7%;
+    --foreground: 210 35% 95%;
 
-    /* Metallic Gold/Amber Primary for GoldRise AI */
-    --primary: 43 96% 56%;
-    --primary-foreground: 220 20% 4%;
+    /* Dark-mode primary shifts to deep azure for restrained branding */
+    --primary: 211 78% 60%;
+    --primary-foreground: 222 44% 9%;
 
-    --secondary: 220 15% 12%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 24% 15%;
+    --secondary-foreground: 210 35% 95%;
 
-    --muted: 220 15% 12%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 220 22% 13%;
+    --muted-foreground: 214 18% 72%;
 
-    --accent: 43 96% 56%;
-    --accent-foreground: 220 20% 4%;
+    --accent: 216 34% 20%;
+    --accent-foreground: 210 35% 95%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    /* Very subtle borders */
-    --border: 220 15% 15%;
-    --input: 220 15% 15%;
-    --ring: 43 96% 56%;
+    /* Subtle navy-slate borders */
+    --border: 218 23% 21%;
+    --input: 218 23% 19%;
+    --ring: 211 78% 64%;
 
-    --card: 220 20% 6%;
-    --card-foreground: 210 40% 98%;
-    --card-border: 220 15% 12%;
+    --card: 222 38% 9%;
+    --card-foreground: 210 35% 95%;
+    --card-border: 219 24% 16%;
 
-    --popover: 220 20% 6%;
-    --popover-foreground: 210 40% 98%;
-    --popover-border: 220 15% 15%;
+    --popover: 222 38% 10%;
+    --popover-foreground: 210 35% 95%;
+    --popover-border: 218 23% 20%;
   }
 
   body {
@@ -90,6 +90,13 @@
       radial-gradient(circle at 15% 50%, rgba(234, 179, 8, 0.05), transparent 25%),
       radial-gradient(circle at 85% 30%, rgba(234, 179, 8, 0.03), transparent 25%);
     background-attachment: fixed;
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(circle at 18% 48%, rgba(30, 58, 138, 0.26), transparent 30%),
+      radial-gradient(circle at 82% 30%, rgba(30, 64, 175, 0.18), transparent 30%),
+      radial-gradient(circle at 50% 96%, rgba(15, 23, 42, 0.45), transparent 36%);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -104,11 +111,28 @@
   }
   
   .text-gradient-gold {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 via-amber-500 to-yellow-700 dark:from-yellow-500 dark:via-amber-400 dark:to-yellow-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 via-amber-500 to-yellow-700 dark:from-slate-100 dark:via-blue-200 dark:to-sky-300;
   }
 
   .glass-panel {
-    @apply bg-[rgb(255_255_255_/_0.8)] dark:bg-white/[0.02] backdrop-blur-xl border border-black/[0.05] dark:border-white/[0.05] shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.36)];
+    @apply bg-[rgb(255_255_255_/_0.8)] dark:bg-slate-950/45 backdrop-blur-xl border border-black/[0.05] dark:border-slate-300/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(2,6,23,0.55)];
+  }
+
+  .logo-mark {
+    @apply flex items-center justify-center rounded border border-amber-200/60 bg-gradient-to-br from-yellow-400 via-amber-500 to-amber-600 text-background shadow-[0_10px_24px_-12px_rgba(234,179,8,0.75),inset_0_1px_0_rgba(255,255,255,0.45)] transition-all duration-300;
+    backdrop-filter: blur(16px);
+  }
+
+  .dark .logo-mark {
+    @apply border-[rgba(120,184,255,0.45)] bg-[linear-gradient(145deg,rgba(78,128,214,0.95)_0%,rgba(33,59,118,0.92)_52%,rgba(17,33,70,0.96)_100%)] text-slate-50 shadow-[0_18px_36px_-18px_rgba(2,6,23,0.96),0_0_24px_-10px_rgba(88,140,255,0.55),inset_0_3px_4px_rgba(210,230,255,0.32),inset_0_-4px_6px_rgba(7,12,28,0.9)];
+  }
+
+  .group:hover .logo-mark {
+    @apply shadow-[0_14px_30px_-14px_rgba(234,179,8,0.82),inset_0_1px_0_rgba(255,255,255,0.52)] -translate-y-0.5;
+  }
+
+  .dark .group:hover .logo-mark {
+    @apply shadow-[0_24px_44px_-18px_rgba(2,6,23,0.98),0_0_32px_-8px_rgba(96,165,250,0.65),inset_0_3px_4px_rgba(225,240,255,0.38),inset_0_-5px_7px_rgba(5,10,24,0.94)];
   }
 
   /* Glow effects */
@@ -117,6 +141,22 @@
   }
   .glow-gold-hover:hover {
     box-shadow: 0 0 30px -5px rgba(234, 179, 8, 0.5);
+  }
+
+  .glow-ocean {
+    box-shadow: 0 14px 36px -18px rgba(37, 99, 235, 0.7);
+  }
+
+  #initiate-contact {
+    background-color: antiquewhite !important;
+  }
+
+  .dark #initiate-contact {
+    background-color: rgb(2 6 23 / 0.9) !important;
+  }
+
+  .dark #elevate-your-business {
+    background-color: rgb(11, 16, 36) !important;
   }
 }
 

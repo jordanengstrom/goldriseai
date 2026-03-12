@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { useTheme } from "./theme-provider";
 
 // TouchTexture class mapped from the vanilla JS code
 class TouchTexture {
@@ -117,17 +118,48 @@ type LiquidGradientProps = {
 
 export function LiquidGradient({ interactive = true, className = "" }: LiquidGradientProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    if (theme === "system") {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const updateTheme = () => setResolvedTheme(mediaQuery.matches ? "dark" : "light");
+
+      updateTheme();
+      mediaQuery.addEventListener("change", updateTheme);
+
+      return () => mediaQuery.removeEventListener("change", updateTheme);
+    }
+
+    setResolvedTheme(theme);
+  }, [theme]);
+
+  const palette = useMemo(() => {
+    if (resolvedTheme === "dark") {
+      return {
+        color1: new THREE.Vector3(46 / 255, 66 / 255, 102 / 255),
+        color2: new THREE.Vector3(10 / 255, 18 / 255, 32 / 255),
+        color3: new THREE.Vector3(24 / 255, 42 / 255, 74 / 255),
+        color4: new THREE.Vector3(33 / 255, 57 / 255, 93 / 255),
+        color5: new THREE.Vector3(74 / 255, 85 / 255, 104 / 255),
+        color6: new THREE.Vector3(33 / 255, 57 / 255, 93 / 255),
+      };
+    }
+
+    return {
+      color1: new THREE.Vector3(255 / 255, 255 / 255, 255 / 255),
+      color2: new THREE.Vector3(251 / 255, 245 / 255, 232 / 255),
+      color3: new THREE.Vector3(240 / 255, 185 / 255, 65 / 255),
+      color4: new THREE.Vector3(232 / 255, 161 / 255, 59 / 255),
+      color5: new THREE.Vector3(196 / 255, 143 / 255, 49 / 255),
+      color6: new THREE.Vector3(240 / 255, 185 / 255, 65 / 255),
+    };
+  }, [resolvedTheme]);
 
   useEffect(() => {
     if (!containerRef.current) return;
     const container = containerRef.current;
-
-    // Requested palette
-    const color1 = new THREE.Vector3(255/255, 255/255, 255/255); // 255, 255, 255
-    const color2 = new THREE.Vector3(251/255, 245/255, 232/255); // 251, 245, 232
-    const color3 = new THREE.Vector3(240/255, 185/255, 65/255);  // 240, 185, 65
-    const color4 = new THREE.Vector3(232/255, 161/255, 59/255);  // 232, 161, 59
-    const color5 = new THREE.Vector3(196/255, 143/255, 49/255);  // 196, 143, 49
 
     // Initial Setup
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -143,18 +175,18 @@ export function LiquidGradient({ interactive = true, className = "" }: LiquidGra
     const uniforms = {
       uTime: { value: 0 },
       uResolution: { value: new THREE.Vector2(container.clientWidth, container.clientHeight) },
-      uColor1: { value: color1 },
-      uColor2: { value: color2 },
-      uColor3: { value: color3 },
-      uColor4: { value: color4 },
-      uColor5: { value: color5 },
-      uColor6: { value: color3 },
+      uColor1: { value: palette.color1 },
+      uColor2: { value: palette.color2 },
+      uColor3: { value: palette.color3 },
+      uColor4: { value: palette.color4 },
+      uColor5: { value: palette.color5 },
+      uColor6: { value: palette.color6 },
       uSpeed: { value: 1.2 },
       uIntensity: { value: 1.0 }, // Changed intensity from 1.8 to 1.0 to prevent blowout
       uTouchTexture: { value: touchTexture.texture },
       uGrainIntensity: { value: 0.04 },
       uZoom: { value: 1.0 },
-      uDarkNavy: { value: color2 }, // Using the cream color as the base/vignette background instead of dark bronze
+      uDarkNavy: { value: palette.color2 },
       uGradientSize: { value: 1.0 },
       uGradientCount: { value: 6.0 },
       uColor1Weight: { value: 1.0 },
@@ -294,28 +326,26 @@ export function LiquidGradient({ interactive = true, className = "" }: LiquidGra
           if(totalWeight > 0.0) {
             color = color / totalWeight;
           } else {
-            color = uColor2; // Fallback to cream if weight is somehow zero
+            color = uColor2;
           }
           
           // Subtle contrast enhancement instead of heavy multiplication
           float luminance = dot(color, vec3(0.299, 0.587, 0.114));
-          color = mix(vec3(luminance), color, 1.1); // Reduced saturation boost so it feels elegant
+          color = mix(vec3(luminance), color, 1.1);
           
-          // Base color mixing for empty spaces (should be the darkest color)
-          // Since it's normalized, there are fewer 'empty' spaces, but we can darken edges
+          // Keep edges anchored in the deepest navy tone.
           float distToCenter = length(uv - 0.5);
           float vignette = smoothstep(0.3, 1.2, distToCenter);
-          color = mix(color, uDarkNavy, vignette * 0.3); // Gentle vignette into cream
+          color = mix(color, uDarkNavy, vignette * 0.3);
           
           // Enhanced interaction highlight based on touch force/intensity
           if (touchData.a > 0.0) {
             float interactionGlow = touchData.z * 1.0;
-            // The glow will be a bright mix of white and color3
+            // Keep interaction glow cool-toned.
             vec3 glowColor = mix(uColor1, uColor3, 0.5);
             color = mix(color, glowColor, interactionGlow * 0.5);
             
-            // Edge of touch ripple gets the cream color instead of darkening to grey
-            vec3 edgeHighlight = uColor2; // Changed from uColor5 * touchData.x which caused dark grey
+            vec3 edgeHighlight = uColor2;
             color = mix(color, edgeHighlight, touchData.z * 0.4);
           }
           
@@ -375,7 +405,7 @@ export function LiquidGradient({ interactive = true, className = "" }: LiquidGra
       geometry.dispose();
       touchTexture.texture.dispose();
     };
-  }, []);
+  }, [palette]);
 
   return (
     <div

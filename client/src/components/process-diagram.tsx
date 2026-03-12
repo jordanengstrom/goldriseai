@@ -1,8 +1,9 @@
-import { useRef, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { Search, Cpu, Zap, Flame, Infinity as Eclipse } from "lucide-react";
+import { useTheme } from "./theme-provider";
 
-const steps = [
+const lightSteps = [
   {
     id: 1,
     title: "Inspect",
@@ -17,7 +18,7 @@ const steps = [
     title: "Implement",
     description: "Seamless integration of tailored AI solutions into your daily operations with minimal disruption.",
     icon: Flame,
-    color: "from-yellow-400 to-orange-500", // GoldRise primary
+    color: "from-yellow-400 to-orange-500",
     shadow: "shadow-orange-500/50",
     delay: 0.3,
   },
@@ -30,6 +31,20 @@ const steps = [
     shadow: "shadow-fuchsia-500/50",
     delay: 0.5,
   }
+];
+
+const darkSteps = [
+  lightSteps[0],
+  {
+    ...lightSteps[1],
+    color: "from-sky-400 to-blue-500",
+    shadow: "shadow-blue-500/50",
+  },
+  {
+    ...lightSteps[2],
+    color: "from-indigo-400 to-cyan-400",
+    shadow: "shadow-indigo-500/50",
+  },
 ];
 
 // Generates chaotic orbits and particles like atomic models/collide
@@ -149,7 +164,7 @@ function AtomicOrbit({ delay, color, stepId }: { delay: number, color: string, s
 }
 
 // Celestial/Nebula Background 
-function NebulaGeometry({ progress }: { progress: any }) {
+function NebulaGeometry({ progress, isDark }: { progress: any; isDark: boolean }) {
   const y1 = useTransform(progress, [0, 1], ["0%", "-30%"]);
   const y2 = useTransform(progress, [0, 1], ["0%", "30%"]);
   const rotate1 = useTransform(progress, [0, 1], [0, 90]);
@@ -164,24 +179,28 @@ function NebulaGeometry({ progress }: { progress: any }) {
       {/* Cosmos Stars Layer */}
       <div className="absolute inset-0 opacity-[0.15] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
 
-      {/* Deep Nebula 1 (Cyan/Purple) */}
+      {/* Deep Nebula 1 */}
       <motion.div
         style={{ y: y1, rotate: rotate1, scale: scale1 }}
         className="absolute -top-[20%] -left-[10%] w-[80vw] h-[80vw] rounded-[100%] mix-blend-screen blur-[120px] opacity-40 will-change-transform"
         animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.05, 1] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       >
-         <div className="w-full h-full bg-[radial-gradient(circle,rgba(138,43,226,0.5)_0%,rgba(0,212,255,0.3)_40%,transparent_70%)]" />
+        <div className={isDark
+          ? "w-full h-full bg-[radial-gradient(circle,rgba(56,189,248,0.38)_0%,rgba(99,102,241,0.28)_40%,transparent_72%)]"
+          : "w-full h-full bg-[radial-gradient(circle,rgba(138,43,226,0.5)_0%,rgba(0,212,255,0.3)_40%,transparent_70%)]"} />
       </motion.div>
 
-      {/* Flame/Core Nebula 2 (Gold/Crimson) */}
+      {/* Core Nebula 2 */}
       <motion.div
         style={{ y: y2, rotate: rotate2, scale: scale1 }}
         className="absolute top-[30%] -right-[20%] w-[90vw] h-[90vw] rounded-[100%] mix-blend-screen blur-[140px] opacity-40 will-change-transform"
         animate={{ opacity: [0.2, 0.6, 0.2], scale: [0.95, 1.05, 0.95] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       >
-        <div className="w-full h-full bg-[radial-gradient(circle,rgba(255,140,0,0.6)_0%,rgba(220,20,60,0.3)_30%,transparent_70%)]" />
+        <div className={isDark
+          ? "w-full h-full bg-[radial-gradient(circle,rgba(37,99,235,0.46)_0%,rgba(51,65,85,0.34)_36%,transparent_72%)]"
+          : "w-full h-full bg-[radial-gradient(circle,rgba(255,140,0,0.6)_0%,rgba(220,20,60,0.3)_30%,transparent_70%)]"} />
       </motion.div>
 
       {/* Ethereal Supernova Core Bottom */}
@@ -189,7 +208,9 @@ function NebulaGeometry({ progress }: { progress: any }) {
         style={{ y: y1, scale: scale1 }}
         className="absolute bottom-[-10%] left-[30%] w-[60vw] h-[60vw] rounded-[100%] mix-blend-screen blur-[150px] opacity-50 will-change-transform"
       >
-        <div className="w-full h-full bg-[radial-gradient(circle,rgba(250,204,21,0.4)_0%,rgba(217,70,239,0.2)_40%,transparent_80%)]" />
+        <div className={isDark
+          ? "w-full h-full bg-[radial-gradient(circle,rgba(96,165,250,0.34)_0%,rgba(30,41,59,0.3)_45%,transparent_80%)]"
+          : "w-full h-full bg-[radial-gradient(circle,rgba(250,204,21,0.4)_0%,rgba(217,70,239,0.2)_40%,transparent_80%)]"} />
       </motion.div>
     </div>
   );
@@ -197,6 +218,25 @@ function NebulaGeometry({ progress }: { progress: any }) {
 
 export function ProcessDiagram() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    if (theme === "system") {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const updateTheme = () => setResolvedTheme(mediaQuery.matches ? "dark" : "light");
+
+      updateTheme();
+      mediaQuery.addEventListener("change", updateTheme);
+
+      return () => mediaQuery.removeEventListener("change", updateTheme);
+    }
+
+    setResolvedTheme(theme);
+  }, [theme]);
+
+  const isDark = resolvedTheme === "dark";
+  const steps = useMemo(() => (isDark ? darkSteps : lightSteps), [isDark]);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -213,7 +253,7 @@ export function ProcessDiagram() {
 
   return (
     <div ref={containerRef} className="relative min-h-screen py-40 px-4 overflow-hidden bg-black flex flex-col items-center justify-center">
-      <NebulaGeometry progress={smoothProgress} />
+      <NebulaGeometry progress={smoothProgress} isDark={isDark} />
       
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         {/* Header Section with Nebula Glowing Text */}
@@ -225,7 +265,7 @@ export function ProcessDiagram() {
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2 className="text-5xl md:text-8xl font-display font-bold mb-6 text-gradient tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] dark:drop-shadow-[0_0_20px_rgba(255,255,255,0.05)]">
-              The GoldRise <span className="text-primary italic font-light drop-shadow-[0_0_35px_rgba(255,140,0,0.8)]">Methodology</span>
+              The GoldRise <span className={isDark ? "text-primary italic font-light drop-shadow-[0_0_35px_rgba(37,99,235,0.7)]" : "text-primary italic font-light drop-shadow-[0_0_35px_rgba(255,140,0,0.8)]"}>Methodology</span>
             </h2>
           </motion.div>
           <motion.p 
@@ -248,7 +288,7 @@ export function ProcessDiagram() {
             <div className="absolute inset-0 bg-foreground/5 rounded-full blur-[1px]" />
             {/* Glowing plasma line */}
             <motion.div 
-              className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-400 via-orange-500 to-pink-500 rounded-full blur-[2px] opacity-80"
+              className={isDark ? "absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-400 rounded-full blur-[2px] opacity-80" : "absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-400 via-orange-500 to-pink-500 rounded-full blur-[2px] opacity-80"}
               style={{ scaleX: lineScaleX, transformOrigin: "left center" }}
             />
             <motion.div 
@@ -305,7 +345,7 @@ function StepCard({ step, index, progress }: { step: any, index: number, progres
           className="relative z-10 w-28 h-28 bg-[#050010]/80 backdrop-blur-2xl border-[1.5px] border-foreground/20 rounded-full flex items-center justify-center shadow-[inset_0_0_30px_rgba(255,255,255,0.1),0_0_50px_rgba(0,0,0,0.8)] overflow-hidden pointer-events-auto"
         >
           {/* Internal event horizon wrap */}
-          <div className={`absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,currentColor_120%)] opacity-30 ${step.color.includes('orange') ? 'text-orange-500' : step.color.includes('cyan') ? 'text-cyan-500' : 'text-purple-500'}`} />
+          <div className={`absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,currentColor_120%)] opacity-30 ${step.color.includes('orange') ? 'text-orange-500' : step.color.includes('indigo') ? 'text-indigo-500' : step.color.includes('cyan') ? 'text-cyan-500' : 'text-blue-500'}`} />
           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-foreground/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
           
           <step.icon className={`w-12 h-12 text-foreground drop-shadow-[0_0_15px_rgba(255,255,255,1)] relative z-10 filter-none ${step.id === 2 ? 'group-hover:animate-pulse group-hover:text-primary transition-colors' : ''}`} />

@@ -18,8 +18,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <header className="w-full border-b border-foreground/5 bg-background/50 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group cursor-pointer">
-            <div className="w-8 h-8 rounded bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center glow-gold group-hover:glow-gold-hover transition-all duration-300">
-              <span className="font-display font-bold text-background text-xl leading-none pt-0.5">G</span>
+            <div className="logo-mark w-8 h-8">
+              <span className="font-display font-bold text-xl leading-none pt-0.5">G</span>
             </div>
             <span className={`font-display font-bold text-2xl tracking-widest text-foreground group-hover:text-primary transition-colors duration-300 ${location === "/" ? "border-b-2 border-primary" : ""}`}>
               GOLDRISE<span className="text-primary/70">.AI</span>
@@ -48,6 +48,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             )}
             <ContactFormDialog />
+            {ENABLE_DARK_MODE_TOGGLE && <ModeToggle />}
           </nav>
 
           {/* Mobile Menu */}
@@ -61,6 +62,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <SheetContent side="right" className="glass-panel border-foreground/10 bg-background/95 backdrop-blur-xl">
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                 <div className="flex flex-col gap-6 mt-12">
+                  {ENABLE_DARK_MODE_TOGGLE && (
+                    <div className="flex items-center justify-between pb-4 border-b border-foreground/10">
+                      <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+                        Theme
+                      </span>
+                      <ModeToggle />
+                    </div>
+                  )}
                   <Link 
                     href="/services" 
                     className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
@@ -101,8 +110,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center">
-                <span className="font-display font-bold text-primary text-xs">G</span>
+              <div className="logo-mark w-5 h-5">
+                <span className="font-display font-bold text-xs leading-none pt-px">G</span>
               </div>
               <span className="font-display font-medium text-muted-foreground text-sm tracking-widest">
                 © {new Date().getFullYear()} GOLDRISE AI
@@ -132,10 +141,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   Payments
                 </Link>
               )}
-              <Link href="/contact" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
-                Contact
-              </Link>
-              {ENABLE_DARK_MODE_TOGGLE && <ModeToggle />}
+              <div className="flex items-center gap-8 h-9">
+                <Link href="/contact" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
+                  Contact
+                </Link>
+                {ENABLE_DARK_MODE_TOGGLE && <ModeToggle />}
+              </div>
             </div>
           </div>
         </div>

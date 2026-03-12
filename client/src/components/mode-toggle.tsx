@@ -10,7 +10,7 @@ export function ModeToggle() {
       variant="outline"
       size="icon"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="rounded-full w-9 h-9 bg-background/50 backdrop-blur-sm border-foreground/10 dark:border-foreground/10"
+      className="rounded-full w-9 h-9 bg-background/50 backdrop-blur-sm border-foreground/10 text-muted-foreground hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-colors duration-200 dark:border-foreground/10"
       aria-label="Toggle theme"
     >
       <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
