@@ -31,10 +31,9 @@ function parseBoolean(value: string | undefined): boolean | undefined {
   return undefined;
 }
 
-/** When SMTP_INSECURE is truthy, allow self-signed certs (e.g. Proton Bridge). Use only for local/dev. */
+/** When SMTP_INSECURE is truthy, allow self-signed certs. Use only for local/dev. */
 function getTlsOptions(): { tls?: { rejectUnauthorized: false } } {
-  // const insecure = parseBoolean(process.env.SMTP_INSECURE);
-  const insecure = true;
+  const insecure = parseBoolean(process.env.SMTP_INSECURE);
   return insecure ? { tls: { rejectUnauthorized: false } } : {};
 }
 
