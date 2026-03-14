@@ -31,6 +31,12 @@ function parseBoolean(value: string | undefined): boolean | undefined {
   return undefined;
 }
 
+/** When SMTP_INSECURE is truthy, allow self-signed certs (e.g. Proton Bridge). Use only for local/dev. */
+function getTlsOptions(): { tls?: { rejectUnauthorized: false } } {
+  const insecure = parseBoolean(process.env.SMTP_INSECURE);
+  return insecure ? { tls: { rejectUnauthorized: false } } : {};
+}
+
 function displayValue(value: string | null | undefined): string {
   const trimmedValue = value?.trim();
   return trimmedValue ? trimmedValue : "N/A";
@@ -62,7 +68,8 @@ async function createTransporter(): Promise<Transporter> {
 
   if (smtpUrl) {
     try {
-      const transporter = nodemailer.createTransport(smtpUrl);
+      const options = getTlsOptions();
+      const transporter = nodemailer.createTransport(smtpUrl, options);
       await transporter.verify();
       return transporter;
     } catch (error) {
@@ -108,6 +115,7 @@ async function createTransporter(): Promise<Transporter> {
   }
 
   try {
+    const tlsOptions = getTlsOptions();
     const transporter = nodemailer.createTransport({
       host,
       port,
@@ -116,6 +124,7 @@ async function createTransporter(): Promise<Transporter> {
         user,
         pass,
       },
+      ...tlsOptions,
     });
 
     await transporter.verify();
