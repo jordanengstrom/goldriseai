@@ -14,12 +14,12 @@ function parseWithLogging<T>(schema: z.ZodSchema<T>, data: unknown, label: strin
 export function useCreateContact() {
   return useMutation({
     mutationFn: async (data: ContactInput): Promise<ContactResponse> => {
-      console.log("data:", data);
+      // console.log("data:", data);
 
       // Validate input before sending
       const validatedInput = api.contacts.create.input.parse(data);
 
-      console.log("validatedInput:", validatedInput);
+      // console.log("validatedInput:", validatedInput);
 
       const res = await fetch(api.contacts.create.path, {
         method: api.contacts.create.method,
@@ -28,13 +28,8 @@ export function useCreateContact() {
         credentials: "include",
       });
 
-
-
-
       const responseData = await res.json();
-
-      console.log("responseData:", responseData);
-
+      // console.log("responseData:", responseData);
       if (!res.ok) {
         if (res.status === 400) {
           const error = parseWithLogging(api.contacts.create.responses[400], responseData, "contacts.create.error.400");
@@ -48,6 +43,33 @@ export function useCreateContact() {
       }
 
       return parseWithLogging(api.contacts.create.responses[201], responseData, "contacts.create.success");
+    },
+  });
+}
+
+export function useSendInternalEmail() {
+  return useMutation({
+    mutationFn: async (data: ContactInput): Promise<{ sent: boolean }> => {
+      const validatedInput = api.internalEmail.send.input.parse(data);
+      const res = await fetch(api.internalEmail.send.path, {
+        method: api.internalEmail.send.method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(validatedInput),
+        credentials: "include",
+      });
+      const responseData = await res.json();
+      if (!res.ok) {
+        if (res.status === 503) {
+          const error = parseWithLogging(api.internalEmail.send.responses[503], responseData, "internalEmail.send.error.503");
+          throw new Error(error.message);
+        }
+        if (res.status === 500) {
+          const error = parseWithLogging(api.internalEmail.send.responses[500], responseData, "internalEmail.send.error.500");
+          throw new Error(error.message);
+        }
+        throw new Error("Failed to send notification email");
+      }
+      return parseWithLogging(api.internalEmail.send.responses[200], responseData, "internalEmail.send.success");
     },
   });
 }

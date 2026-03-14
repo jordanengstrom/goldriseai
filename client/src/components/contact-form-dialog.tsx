@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreateContact } from "@/hooks/use-contacts";
+import { useCreateContact, useSendInternalEmail } from "@/hooks/use-contacts";
 import { api, type ContactInput } from "@shared/routes";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, ArrowRight } from "lucide-react";
@@ -36,6 +36,7 @@ export function ContactFormDialog() {
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
   const createContact = useCreateContact();
+  const sendInternalEmail = useSendInternalEmail();
 
   const form = useForm<ContactInput>({
     resolver: zodResolver(api.contacts.create.input),
@@ -55,13 +56,24 @@ export function ContactFormDialog() {
   function onSubmit(data: ContactInput) {
     createContact.mutate(data, {
       onSuccess: () => {
-        toast({
-          title: "Message Sent Successfully",
-          description: "We'll be in touch with you shortly to discuss your AI journey.",
-          variant: "default",
+        sendInternalEmail.mutate(data, {
+          onSuccess: () => {
+            toast({
+              title: "Message Sent Successfully",
+              description: "We'll be in touch with you shortly to discuss your AI journey.",
+              variant: "default",
+            });
+            setOpen(false);
+            form.reset();
+          },
+          onError: (error) => {
+            toast({
+              title: "Notification Email Failed",
+              description: error.message || "Your message was saved but we couldn't send the notification. Please try again or contact us directly.",
+              variant: "destructive",
+            });
+          },
         });
-        setOpen(false);
-        form.reset();
       },
       onError: (error) => {
         toast({

@@ -27,6 +27,18 @@ export const api = {
       },
     },
   },
+  internalEmail: {
+    send: {
+      method: 'POST' as const,
+      path: '/api/internal-email' as const,
+      input: insertContactSchema,
+      responses: {
+        200: z.object({ sent: z.boolean() }),
+        503: errorSchemas.internal,
+        500: errorSchemas.internal,
+      },
+    },
+  },
   invoices: {
     getByNumber: {
       method: 'GET' as const,

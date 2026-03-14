@@ -29,9 +29,6 @@ walkDir('client/src', (filePath) => {
     if (content !== initial) {
       fs.writeFileSync(filePath, content);
       changedFiles++;
-      console.log('Updated', filePath);
     }
   }
 });
-
-console.log('Total files changed:', changedFiles);
