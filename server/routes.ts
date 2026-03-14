@@ -13,11 +13,7 @@ export async function registerRoutes(
   app.post(api.contacts.create.path, async (req, res) => {
     try {
       const input = api.contacts.create.input.parse(req.body);
-
       const newContact = await storage.createContact(input);
-
-      await sendContactSubmissionEmail(input);
-
       res.status(201).json(newContact);
     } catch (err) {
       if (err instanceof z.ZodError) {
@@ -26,8 +22,25 @@ export async function registerRoutes(
           field: err.errors[0].path.join('.'),
         });
       }
+      console.error(err);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.post(api.internalEmail.send.path, async (req, res) => {
+    try {
+      const input = api.internalEmail.send.input.parse(req.body);
+      await sendContactSubmissionEmail(input);
+      res.status(200).json({ sent: true });
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({
+          message: err.errors[0].message,
+          field: err.errors[0].path.join('.'),
+        });
+      }
       if (err instanceof ContactEmailDeliveryError) {
-        console.error("[contacts] Email delivery failed", err);
+        console.error("[internal-email] Email delivery failed", err);
         return res.status(503).json({
           message: "Your message was saved but we couldn't send the notification. Please try again or contact us directly.",
         });

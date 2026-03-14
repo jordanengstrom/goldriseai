@@ -39,14 +39,37 @@ export function useCreateContact() {
           const error = parseWithLogging(api.contacts.create.responses[500], responseData, "contacts.create.error.500");
           throw new Error(error.message);
         }
-        if (res.status === 503) {
-          const error = parseWithLogging(api.contacts.create.responses[503], responseData, "contacts.create.error.503");
-          throw new Error(error.message);
-        }
         throw new Error("Failed to submit contact form");
       }
 
       return parseWithLogging(api.contacts.create.responses[201], responseData, "contacts.create.success");
+    },
+  });
+}
+
+export function useSendInternalEmail() {
+  return useMutation({
+    mutationFn: async (data: ContactInput): Promise<{ sent: boolean }> => {
+      const validatedInput = api.internalEmail.send.input.parse(data);
+      const res = await fetch(api.internalEmail.send.path, {
+        method: api.internalEmail.send.method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(validatedInput),
+        credentials: "include",
+      });
+      const responseData = await res.json();
+      if (!res.ok) {
+        if (res.status === 503) {
+          const error = parseWithLogging(api.internalEmail.send.responses[503], responseData, "internalEmail.send.error.503");
+          throw new Error(error.message);
+        }
+        if (res.status === 500) {
+          const error = parseWithLogging(api.internalEmail.send.responses[500], responseData, "internalEmail.send.error.500");
+          throw new Error(error.message);
+        }
+        throw new Error("Failed to send notification email");
+      }
+      return parseWithLogging(api.internalEmail.send.responses[200], responseData, "internalEmail.send.success");
     },
   });
 }
