@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import type { Server } from "http";
-import { ContactEmailDeliveryError, sendContactSubmissionEmail } from "./mailer";
+import { sendContactSubmissionEmail, ContactEmailDeliveryError } from "./mailer";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
@@ -27,7 +27,10 @@ export async function registerRoutes(
         });
       }
       if (err instanceof ContactEmailDeliveryError) {
-        return res.status(500).json({ message: err.message });
+        console.error("[contacts] Email delivery failed", err);
+        return res.status(503).json({
+          message: "Your message was saved but we couldn't send the notification. Please try again or contact us directly.",
+        });
       }
       console.error(err);
       res.status(500).json({ message: "Internal server error" });

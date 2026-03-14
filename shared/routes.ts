@@ -24,6 +24,7 @@ export const api = {
         201: z.custom<typeof contacts.$inferSelect>(),
         400: errorSchemas.validation,
         500: errorSchemas.internal,
+        503: errorSchemas.internal,
       },
     },
   },
