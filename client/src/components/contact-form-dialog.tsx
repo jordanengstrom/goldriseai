@@ -42,7 +42,8 @@ export function ContactFormDialog() {
   const createContact = useCreateContact();
   const sendInternalEmail = useSendInternalEmail();
   const sendConfirmationEmail = useSendConfirmationEmail();
-  const contactEmail = "info@goldrise.ai";
+  const isSubmitting = createContact.isPending;
+  const directContactEmail = "info@goldrise.ai";
 
   const form = useForm<ContactInput>({
     resolver: zodResolver(api.contacts.create.input),
@@ -68,9 +69,17 @@ export function ContactFormDialog() {
           variant: "default",
         });
 
+        toast({
+          title: "Contact Info Saved",
+          description: "Thanks, we saved your details successfully.",
+          variant: "default",
+        });
+
         sendInternalEmail.mutate(data, {
           onSuccess: () => {
             toast({
+              title: "Team Notified",
+              description: "Our team has been notified directly and will reach out shortly.",
               title: "Team Notified",
               description: "Our team has been notified directly and will reach out shortly.",
               variant: "default",
@@ -104,6 +113,9 @@ export function ContactFormDialog() {
 
         setOpen(false);
         form.reset();
+
+        setOpen(false);
+        form.reset();
       },
       onError: (error) => {
         toast({
@@ -116,7 +128,15 @@ export function ContactFormDialog() {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(nextOpen) => {
+        if (isSubmitting) {
+          return;
+        }
+        setOpen(nextOpen);
+      }}
+    >
       <DialogTrigger asChild>
         <button className="relative group overflow-hidden rounded-md px-6 py-2.5 font-display font-bold uppercase tracking-wider text-sm bg-primary/10 text-primary border border-primary/30 hover:border-primary/80 transition-all duration-300 dark:shadow-[0_12px_30px_-18px_rgba(59,130,246,0.75)] hover:-translate-y-0.5">
           <span className="relative z-10 flex items-center gap-2">
@@ -276,9 +296,9 @@ export function ContactFormDialog() {
             <Button 
               type="submit" 
               className="w-full font-display font-bold uppercase tracking-wider bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/60 hover:border-primary dark:shadow-[0_16px_36px_-18px_rgba(37,99,235,0.85)] transition-all duration-300"
-              disabled={createContact.isPending}
+              disabled={isSubmitting}
             >
-              {createContact.isPending ? (
+              {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Transmitting...
