@@ -39,10 +39,10 @@ export const api = {
       },
     },
   },
-  confirmationEmail: {
+  externalEmail: {
     send: {
       method: 'POST' as const,
-      path: '/api/confirmation-email' as const,
+      path: '/api/external-email' as const,
       input: insertContactSchema,
       responses: {
         200: z.object({ sent: z.boolean() }),

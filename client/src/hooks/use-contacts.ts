@@ -74,12 +74,12 @@ export function useSendInternalEmail() {
   });
 }
 
-export function useSendConfirmationEmail() {
+export function useSendExternalEmail() {
   return useMutation({
     mutationFn: async (data: ContactInput): Promise<{ sent: boolean }> => {
-      const validatedInput = api.confirmationEmail.send.input.parse(data);
-      const res = await fetch(api.confirmationEmail.send.path, {
-        method: api.confirmationEmail.send.method,
+      const validatedInput = api.externalEmail.send.input.parse(data);
+      const res = await fetch(api.externalEmail.send.path, {
+        method: api.externalEmail.send.method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(validatedInput),
         credentials: "include",
@@ -87,16 +87,16 @@ export function useSendConfirmationEmail() {
       const responseData = await res.json();
       if (!res.ok) {
         if (res.status === 503) {
-          const error = parseWithLogging(api.confirmationEmail.send.responses[503], responseData, "confirmationEmail.send.error.503");
+          const error = parseWithLogging(api.externalEmail.send.responses[503], responseData, "externalEmail.send.error.503");
           throw new Error(error.message);
         }
         if (res.status === 500) {
-          const error = parseWithLogging(api.confirmationEmail.send.responses[500], responseData, "confirmationEmail.send.error.500");
+          const error = parseWithLogging(api.externalEmail.send.responses[500], responseData, "externalEmail.send.error.500");
           throw new Error(error.message);
         }
         throw new Error("Failed to send confirmation email");
       }
-      return parseWithLogging(api.confirmationEmail.send.responses[200], responseData, "confirmationEmail.send.success");
+      return parseWithLogging(api.externalEmail.send.responses[200], responseData, "externalEmail.send.success");
     },
   });
 }

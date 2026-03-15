@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   useCreateContact,
   useSendInternalEmail,
-  useSendConfirmationEmail,
+  useSendExternalEmail,
 } from "@/hooks/use-contacts";
 import { api, type ContactInput } from "@shared/routes";
 import { useToast } from "@/hooks/use-toast";
@@ -38,11 +38,17 @@ import { Button } from "@/components/ui/button";
 
 export function ContactFormDialog() {
   const [open, setOpen] = useState(false);
+  const [isFlowSubmitting, setIsFlowSubmitting] = useState(false);
+  const submitLockRef = useRef(false);
   const { toast } = useToast();
   const createContact = useCreateContact();
   const sendInternalEmail = useSendInternalEmail();
-  const sendConfirmationEmail = useSendConfirmationEmail();
-  const isSubmitting = createContact.isPending;
+  const sendExternalEmail = useSendExternalEmail();
+  const isSubmitting =
+    isFlowSubmitting ||
+    createContact.isPending ||
+    sendInternalEmail.isPending ||
+    sendExternalEmail.isPending;
   const directContactEmail = "info@goldrise.ai";
 
   const form = useForm<ContactInput>({
@@ -60,71 +66,83 @@ export function ContactFormDialog() {
     },
   });
 
-  function onSubmit(data: ContactInput) {
-    createContact.mutate(data, {
-      onSuccess: () => {
+  async function onSubmit(data: ContactInput) {
+    if (submitLockRef.current) {
+      return;
+    }
+
+    submitLockRef.current = true;
+    setIsFlowSubmitting(true);
+
+    try {
+      await createContact.mutateAsync(data);
+
+      toast({
+        title: "Contact Info Saved",
+        description: "Thanks, we saved your details successfully.",
+        variant: "default",
+      });
+
+      setOpen(false);
+      form.reset();
+
+      const [internalResult, externalResult] = await Promise.allSettled([
+        sendInternalEmail.mutateAsync(data),
+        sendExternalEmail.mutateAsync(data),
+      ]);
+
+      if (internalResult.status === "fulfilled") {
         toast({
-          title: "Contact Info Saved",
-          description: "Thanks, we saved your details successfully.",
+          title: "Team Notified",
+          description: "Our team has been notified directly and will reach out shortly.",
           variant: "default",
         });
+      } else {
+        const message =
+          internalResult.reason instanceof Error
+            ? internalResult.reason.message
+            : "Your message was saved but we couldn't send the notification. Please try again or contact us directly.";
 
         toast({
-          title: "Contact Info Saved",
-          description: "Thanks, we saved your details successfully.",
-          variant: "default",
-        });
-
-        sendInternalEmail.mutate(data, {
-          onSuccess: () => {
-            toast({
-              title: "Team Notified",
-              description: "Our team has been notified directly and will reach out shortly.",
-              title: "Team Notified",
-              description: "Our team has been notified directly and will reach out shortly.",
-              variant: "default",
-            });
-          },
-          onError: (error) => {
-            toast({
-              title: "Notification Email Failed",
-              description: `${error.message || "Your message was saved but we couldn't send the notification. Please try again or contact us directly."} You can reach us directly at ${contactEmail}.`,
-              variant: "destructive",
-            });
-          },
-        });
-
-        sendConfirmationEmail.mutate(data, {
-          onSuccess: () => {
-            toast({
-              title: "Confirmation Email Sent",
-              description: "Please check your inbox for a confirmation email from us.",
-              variant: "default",
-            });
-          },
-          onError: (error) => {
-            toast({
-              title: "Confirmation Email Failed",
-              description: `${error.message || "Your request was saved but we couldn't send the confirmation email."} You can reach us directly at ${contactEmail}.`,
-              variant: "destructive",
-            });
-          },
-        });
-
-        setOpen(false);
-        form.reset();
-
-        setOpen(false);
-        form.reset();
-      },
-      onError: (error) => {
-        toast({
-          title: "Submission Failed",
-          description: `${error.message || "Please try again later."} You can reach us directly at ${contactEmail}.`,
+          title: "Notification Email Failed",
+          description: `${message} You can reach us directly at ${directContactEmail}.`,
           variant: "destructive",
         });
-      },
-    });
+      }
+
+      if (externalResult.status === "fulfilled") {
+        toast({
+          title: "Confirmation Email Sent",
+          description: "Please check your inbox for a confirmation email from us.",
+          variant: "default",
+        });
+      } else {
+        const message =
+          externalResult.reason instanceof Error
+            ? externalResult.reason.message
+            : "Your request was saved but we couldn't send the confirmation email.";
+
+        toast({
+          title: "Confirmation Email Failed",
+          description: `${message} You can reach us directly at ${directContactEmail}.`,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Please try again later.";
+
+      toast({
+        title: "Submission Failed",
+        description: `${message} You can reach us directly at ${directContactEmail}.`,
+        variant: "destructive",
+      });
+    } finally {
+      submitLockRef.current = false;
+      setIsFlowSubmitting(false);
+    }
   }
 
   return (

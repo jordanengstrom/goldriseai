@@ -60,24 +60,6 @@ function isSelfSignedError(error: unknown): boolean {
   return error.message.toLowerCase().includes("self-signed certificate");
 }
 
-function getSmtpConfigHint(host: string | undefined, portValue: string | undefined): string {
-  const normalizedHost = host?.toLowerCase();
-
-  if ((normalizedHost === "smtp.protonmail.com" || normalizedHost === "smtp.protonmail.ch") && portValue === "587") {
-    return "Proton SMTP on port 587 requires STARTTLS; set SMTP_SECURE=false and use a Proton app password.";
-  }
-
-  return "Set DEV_INFO_SMTP_URL (or SMTP_URL) or SMTP_HOST, SMTP_PORT, SMTP_USER, and SMTP_PASS.";
-}
-
-function isSelfSignedError(error: unknown): boolean {
-  if (!(error instanceof Error)) {
-    return false;
-  }
-
-  return error.message.toLowerCase().includes("self-signed certificate");
-}
-
 function getFromAddress(): string {
   const configuredFrom = process.env.SMTP_FROM?.trim();
   if (configuredFrom) {
@@ -104,22 +86,15 @@ async function createTransporter(): Promise<Transporter> {
   const pass = process.env.SMTP_PASS?.trim();
   const hasCompleteSmtpConfig = Boolean(host && portValue && user && pass);
 
-  const host = process.env.SMTP_HOST?.trim();
-  const portValue = process.env.SMTP_PORT?.trim();
-  const user = process.env.SMTP_USER?.trim();
-  const pass = process.env.SMTP_PASS?.trim();
-  const hasCompleteSmtpConfig = Boolean(host && portValue && user && pass);
-
   // Single URL (e.g. DEV_INFO_SMTP_URL for Proton Bridge). Token goes in the URL.
-  const smtpUrl = process.env.SMTP_URL?.trim() || process.env.DEV_INFO_SMTP_URL?.trim();
-  const smtpUrl = process.env.SMTP_URL?.trim() || process.env.DEV_INFO_SMTP_URL?.trim();
+  // const smtpUrl = process.env.SMTP_URL?.trim() || process.env.DEV_INFO_SMTP_URL?.trim();
   const secureFlag = parseBoolean(process.env.SMTP_SECURE);
 
   // Prefer explicit host/port/user/pass from shell env over SMTP URL mode.
-  if (!hasCompleteSmtpConfig && smtpUrl) {
+  if (!hasCompleteSmtpConfig) {
     try {
       const options = getTlsOptions();
-      const transporter = nodemailer.createTransport(smtpUrl, options);
+      const transporter = nodemailer.createTransport(options);
       await transporter.verify();
       return transporter;
     } catch (error) {
@@ -127,12 +102,7 @@ async function createTransporter(): Promise<Transporter> {
         ? " A self-signed certificate was detected. If this URL points to Proton Bridge or another local relay, set SMTP_INSECURE=true for local/dev. If you intended direct Proton SMTP, remove DEV_INFO_SMTP_URL/SMTP_URL and configure SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS instead."
         : "";
 
-      const certificateHint = isSelfSignedError(error)
-        ? " A self-signed certificate was detected. If this URL points to Proton Bridge or another local relay, set SMTP_INSECURE=true for local/dev. If you intended direct Proton SMTP, remove DEV_INFO_SMTP_URL/SMTP_URL and configure SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS instead."
-        : "";
-
       throw new ContactEmailDeliveryError(
-        `Contact form email delivery is not configured correctly. Check DEV_INFO_SMTP_URL (or SMTP_URL) and mail server access.${certificateHint}`,
         `Contact form email delivery is not configured correctly. Check DEV_INFO_SMTP_URL (or SMTP_URL) and mail server access.${certificateHint}`,
         { cause: error },
       );
@@ -258,7 +228,7 @@ export async function sendContactConfirmationEmail(contact: InsertContact): Prom
 
       "Thank you,",
       "",
-      "Goldrise AI Team",
+      "GoldRise AI Team",
     ].join("\n");
 
     await transporter.sendMail({

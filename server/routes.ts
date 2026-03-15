@@ -54,9 +54,9 @@ export async function registerRoutes(
     }
   });
 
-  app.post(api.confirmationEmail.send.path, async (req, res) => {
+  app.post(api.externalEmail.send.path, async (req, res) => {
     try {
-      const input = api.confirmationEmail.send.input.parse(req.body);
+      const input = api.externalEmail.send.input.parse(req.body);
       await sendContactConfirmationEmail(input);
       res.status(200).json({ sent: true });
     } catch (err) {
@@ -67,7 +67,7 @@ export async function registerRoutes(
         });
       }
       if (err instanceof ContactEmailDeliveryError) {
-        console.error("[confirmation-email] Email delivery failed", err);
+        console.error("[external-email] Email delivery failed", err);
         return res.status(503).json({
           message: "Your message was saved but we couldn't send the confirmation email. Please check your inbox later or contact us directly.",
         });
