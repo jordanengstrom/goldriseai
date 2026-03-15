@@ -73,3 +73,30 @@ export function useSendInternalEmail() {
     },
   });
 }
+
+export function useSendConfirmationEmail() {
+  return useMutation({
+    mutationFn: async (data: ContactInput): Promise<{ sent: boolean }> => {
+      const validatedInput = api.confirmationEmail.send.input.parse(data);
+      const res = await fetch(api.confirmationEmail.send.path, {
+        method: api.confirmationEmail.send.method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(validatedInput),
+        credentials: "include",
+      });
+      const responseData = await res.json();
+      if (!res.ok) {
+        if (res.status === 503) {
+          const error = parseWithLogging(api.confirmationEmail.send.responses[503], responseData, "confirmationEmail.send.error.503");
+          throw new Error(error.message);
+        }
+        if (res.status === 500) {
+          const error = parseWithLogging(api.confirmationEmail.send.responses[500], responseData, "confirmationEmail.send.error.500");
+          throw new Error(error.message);
+        }
+        throw new Error("Failed to send confirmation email");
+      }
+      return parseWithLogging(api.confirmationEmail.send.responses[200], responseData, "confirmationEmail.send.success");
+    },
+  });
+}
