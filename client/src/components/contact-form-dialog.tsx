@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreateContact, useSendInternalEmail } from "@/hooks/use-contacts";
+import {
+  useCreateContact,
+  useSendInternalEmail,
+  useSendConfirmationEmail,
+} from "@/hooks/use-contacts";
 import { api, type ContactInput } from "@shared/routes";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, ArrowRight } from "lucide-react";
@@ -37,6 +41,8 @@ export function ContactFormDialog() {
   const { toast } = useToast();
   const createContact = useCreateContact();
   const sendInternalEmail = useSendInternalEmail();
+  const sendConfirmationEmail = useSendConfirmationEmail();
+  const contactEmail = "info@goldrise.ai";
 
   const form = useForm<ContactInput>({
     resolver: zodResolver(api.contacts.create.input),
@@ -56,29 +62,53 @@ export function ContactFormDialog() {
   function onSubmit(data: ContactInput) {
     createContact.mutate(data, {
       onSuccess: () => {
+        toast({
+          title: "Contact Info Saved",
+          description: "Thanks, we saved your details successfully.",
+          variant: "default",
+        });
+
         sendInternalEmail.mutate(data, {
           onSuccess: () => {
             toast({
-              title: "Message Sent Successfully",
-              description: "We'll be in touch with you shortly to discuss your AI journey.",
+              title: "Team Notified",
+              description: "Our team has been notified directly and will reach out shortly.",
               variant: "default",
             });
-            setOpen(false);
-            form.reset();
           },
           onError: (error) => {
             toast({
               title: "Notification Email Failed",
-              description: error.message || "Your message was saved but we couldn't send the notification. Please try again or contact us directly.",
+              description: `${error.message || "Your message was saved but we couldn't send the notification. Please try again or contact us directly."} You can reach us directly at ${contactEmail}.`,
               variant: "destructive",
             });
           },
         });
+
+        sendConfirmationEmail.mutate(data, {
+          onSuccess: () => {
+            toast({
+              title: "Confirmation Email Sent",
+              description: "Please check your inbox for a confirmation email from us.",
+              variant: "default",
+            });
+          },
+          onError: (error) => {
+            toast({
+              title: "Confirmation Email Failed",
+              description: `${error.message || "Your request was saved but we couldn't send the confirmation email."} You can reach us directly at ${contactEmail}.`,
+              variant: "destructive",
+            });
+          },
+        });
+
+        setOpen(false);
+        form.reset();
       },
       onError: (error) => {
         toast({
           title: "Submission Failed",
-          description: error.message || "Please try again later.",
+          description: `${error.message || "Please try again later."} You can reach us directly at ${contactEmail}.`,
           variant: "destructive",
         });
       },

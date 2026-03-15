@@ -39,6 +39,18 @@ export const api = {
       },
     },
   },
+  confirmationEmail: {
+    send: {
+      method: 'POST' as const,
+      path: '/api/confirmation-email' as const,
+      input: insertContactSchema,
+      responses: {
+        200: z.object({ sent: z.boolean() }),
+        503: errorSchemas.internal,
+        500: errorSchemas.internal,
+      },
+    },
+  },
   invoices: {
     getByNumber: {
       method: 'GET' as const,
