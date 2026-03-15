@@ -362,10 +362,11 @@ export function LiquidGradient({ interactive = true, className = "" }: LiquidGra
 
     let animationFrameId: number;
     let time = 0;
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
 
     const render = () => {
-      const delta = clock.getDelta();
+      timer.update();
+      const delta = timer.getDelta();
       time += delta;
       
       touchTexture.update();
