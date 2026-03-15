@@ -115,7 +115,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="First Name *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
+                      <Input id="firstName" name={field.name} placeholder="First Name *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -127,7 +127,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Last Name *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
+                      <Input id="lastName" name={field.name} placeholder="Last Name *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -142,7 +142,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input type="email" placeholder="Email *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
+                      <Input id="email" name={field.name} type="email" placeholder="Email *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -154,7 +154,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input type="tel" placeholder="Phone Number *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
+                      <Input id="phone" name={field.name} type="tel" placeholder="Phone Number *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -169,7 +169,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Company" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
+                      <Input id="company" name={field.name} placeholder="Company" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -181,7 +181,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Role" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
+                      <Input id="role" name={field.name} placeholder="Role" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -195,7 +195,7 @@ export function ContactFormDialog() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input type="url" placeholder="Company Website" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
+                    <Input id="companyWebsite" name={field.name} type="url" placeholder="Company Website" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -207,9 +207,9 @@ export function ContactFormDialog() {
               name="service"
               render={({ field }) => (
                 <FormItem>
-                  <Select onValueChange={field.onChange} defaultValue={field.value || undefined}>
+                  <Select name={field.name} value={field.value || ""} onValueChange={field.onChange}>
                     <FormControl>
-                      <SelectTrigger className="bg-white dark:bg-zinc-800/55 border-transparent focus:border-primary/60 focus:ring-primary/40 focus:ring-offset-0">
+                      <SelectTrigger id="service" name={field.name} className="bg-white dark:bg-zinc-800/55 border-transparent focus:border-primary/60 focus:ring-primary/40 focus:ring-offset-0">
                         <SelectValue placeholder="What services are you interested in?" />
                       </SelectTrigger>
                     </FormControl>
@@ -231,6 +231,8 @@ export function ContactFormDialog() {
                 <FormItem>
                   <FormControl>
                     <Textarea 
+                      id="additionalInfo"
+                      name={field.name}
                       placeholder="Additional Info (Current challenges...)" 
                       className="resize-none min-h-[100px] bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" 
                       {...field}
