@@ -35,10 +35,6 @@ export function useCreateContact() {
           const error = parseWithLogging(api.contacts.create.responses[400], responseData, "contacts.create.error.400");
           throw new Error(error.message);
         }
-        if (res.status === 503) {
-          const error = parseWithLogging(api.contacts.create.responses[503], responseData, "contacts.create.error.503");
-          throw new Error(error.message);
-        }
         if (res.status === 500) {
           const error = parseWithLogging(api.contacts.create.responses[500], responseData, "contacts.create.error.500");
           throw new Error(error.message);
