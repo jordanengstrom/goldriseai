@@ -14,12 +14,19 @@ export async function registerRoutes(
     try {
       const input = api.contacts.create.input.parse(req.body);
       const newContact = await storage.createContact(input);
+      await sendContactSubmissionEmail(input);
       res.status(201).json(newContact);
     } catch (err) {
       if (err instanceof z.ZodError) {
         return res.status(400).json({
           message: err.errors[0].message,
           field: err.errors[0].path.join('.'),
+        });
+      }
+      if (err instanceof ContactEmailDeliveryError) {
+        console.error("[contacts] Email delivery failed", err);
+        return res.status(503).json({
+          message: "Your message was saved but we couldn't send the notification. Please try again or contact us directly.",
         });
       }
       console.error(err);

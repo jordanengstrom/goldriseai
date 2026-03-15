@@ -23,6 +23,7 @@ export const api = {
       responses: {
         201: z.custom<typeof contacts.$inferSelect>(),
         400: errorSchemas.validation,
+        503: errorSchemas.internal,
         500: errorSchemas.internal,
       },
     },

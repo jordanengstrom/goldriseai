@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreateContact, useSendInternalEmail } from "@/hooks/use-contacts";
+import { useCreateContact } from "@/hooks/use-contacts";
 import { api, type ContactInput } from "@shared/routes";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, ArrowRight } from "lucide-react";
@@ -36,7 +36,7 @@ export function ContactFormDialog() {
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
   const createContact = useCreateContact();
-  const sendInternalEmail = useSendInternalEmail();
+  const isSubmitting = createContact.isPending;
 
   const form = useForm<ContactInput>({
     resolver: zodResolver(api.contacts.create.input),
@@ -56,24 +56,13 @@ export function ContactFormDialog() {
   function onSubmit(data: ContactInput) {
     createContact.mutate(data, {
       onSuccess: () => {
-        sendInternalEmail.mutate(data, {
-          onSuccess: () => {
-            toast({
-              title: "Message Sent Successfully",
-              description: "We'll be in touch with you shortly to discuss your AI journey.",
-              variant: "default",
-            });
-            setOpen(false);
-            form.reset();
-          },
-          onError: (error) => {
-            toast({
-              title: "Notification Email Failed",
-              description: error.message || "Your message was saved but we couldn't send the notification. Please try again or contact us directly.",
-              variant: "destructive",
-            });
-          },
+        toast({
+          title: "Message Sent Successfully",
+          description: "We'll be in touch with you shortly to discuss your AI journey.",
+          variant: "default",
         });
+        setOpen(false);
+        form.reset();
       },
       onError: (error) => {
         toast({
@@ -86,7 +75,15 @@ export function ContactFormDialog() {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(nextOpen) => {
+        if (isSubmitting) {
+          return;
+        }
+        setOpen(nextOpen);
+      }}
+    >
       <DialogTrigger asChild>
         <button className="relative group overflow-hidden rounded-md px-6 py-2.5 font-display font-bold uppercase tracking-wider text-sm bg-primary/10 text-primary border border-primary/30 hover:border-primary/80 transition-all duration-300 dark:shadow-[0_12px_30px_-18px_rgba(59,130,246,0.75)] hover:-translate-y-0.5">
           <span className="relative z-10 flex items-center gap-2">
@@ -246,9 +243,9 @@ export function ContactFormDialog() {
             <Button 
               type="submit" 
               className="w-full font-display font-bold uppercase tracking-wider bg-primary hover:bg-primary/90 text-primary-foreground border border-primary/60 hover:border-primary dark:shadow-[0_16px_36px_-18px_rgba(37,99,235,0.85)] transition-all duration-300"
-              disabled={createContact.isPending}
+              disabled={isSubmitting}
             >
-              {createContact.isPending ? (
+              {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Transmitting...
