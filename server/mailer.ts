@@ -1,11 +1,11 @@
-import nodemailer, { type Transporter } from "nodemailer";
+import { Resend } from "resend";
 import type { InsertContact } from "@shared/schema";
 
 const DEFAULT_CONTACT_RECIPIENT = "info@goldrise.ai";
 const DEFAULT_FROM_NAME = "Goldrise AI";
-const DEFAULT_FROM_ADDRESS = "info@goldrise.ai";
+const DEFAULT_FROM_ADDRESS = "info@mail.goldrise.ai";
 
-let transporterPromise: Promise<Transporter> | null = null;
+let resendClient: Resend | null = null;
 
 export class ContactEmailDeliveryError extends Error {
   constructor(message: string, options?: { cause?: unknown }) {
@@ -14,169 +14,80 @@ export class ContactEmailDeliveryError extends Error {
   }
 }
 
-function parseBoolean(value: string | undefined): boolean | undefined {
-  if (value === undefined) {
-    return undefined;
-  }
-
-  const normalized = value.trim().toLowerCase();
-  if (["true", "1", "yes", "on"].includes(normalized)) {
-    return true;
-  }
-
-  if (["false", "0", "no", "off"].includes(normalized)) {
-    return false;
-  }
-
-  return undefined;
-}
-
-/** When SMTP_INSECURE is truthy, allow self-signed certs. Use only for local/dev. */
-function getTlsOptions(): { tls?: { rejectUnauthorized: false } } {
-  const insecure = parseBoolean(process.env.SMTP_INSECURE);
-  return insecure ? { tls: { rejectUnauthorized: false } } : {};
-}
-
 function displayValue(value: string | null | undefined): string {
   const trimmedValue = value?.trim();
   return trimmedValue ? trimmedValue : "N/A";
 }
 
-function getSmtpConfigHint(host: string | undefined, portValue: string | undefined): string {
-  const normalizedHost = host?.toLowerCase();
-
-  if ((normalizedHost === "smtp.protonmail.com" || normalizedHost === "smtp.protonmail.ch") && portValue === "587") {
-    return "Proton SMTP on port 587 requires STARTTLS; set SMTP_SECURE=false and use a Proton app password.";
-  }
-
-  return "Set DEV_INFO_SMTP_URL (or SMTP_URL) or SMTP_HOST, SMTP_PORT, SMTP_USER, and SMTP_PASS.";
-}
-
-function isSelfSignedError(error: unknown): boolean {
-  if (!(error instanceof Error)) {
-    return false;
-  }
-
-  return error.message.toLowerCase().includes("self-signed certificate");
-}
-
 function getFromAddress(): string {
-  const configuredFrom = process.env.SMTP_FROM?.trim();
+  const configuredFrom = process.env.RESEND_API_FROM?.trim();
   if (configuredFrom) {
     return configuredFrom;
-  }
-
-  const configuredUser = process.env.SMTP_USER?.trim();
-  if (configuredUser) {
-    return `${DEFAULT_FROM_NAME} <${configuredUser}>`;
-  }
-
-  const sendmailFrom = process.env.SENDMAIL_FROM?.trim();
-  if (sendmailFrom) {
-    return sendmailFrom;
   }
 
   return `${DEFAULT_FROM_NAME} <${DEFAULT_FROM_ADDRESS}>`;
 }
 
-async function createTransporter(): Promise<Transporter> {
-  const host = process.env.SMTP_HOST?.trim();
-  const portValue = process.env.SMTP_PORT?.trim();
-  const user = process.env.SMTP_USER?.trim();
-  const pass = process.env.SMTP_PASS?.trim();
-  const hasCompleteSmtpConfig = Boolean(host && portValue && user && pass);
-
-  // Single URL (e.g. DEV_INFO_SMTP_URL for Proton Bridge). Token goes in the URL.
-  // const smtpUrl = process.env.SMTP_URL?.trim() || process.env.DEV_INFO_SMTP_URL?.trim();
-  const secureFlag = parseBoolean(process.env.SMTP_SECURE);
-
-  // Prefer explicit host/port/user/pass from shell env over SMTP URL mode.
-  if (!hasCompleteSmtpConfig) {
-    try {
-      const options = getTlsOptions();
-      const transporter = nodemailer.createTransport(options);
-      await transporter.verify();
-      return transporter;
-    } catch (error) {
-      const certificateHint = isSelfSignedError(error)
-        ? " A self-signed certificate was detected. If this URL points to Proton Bridge or another local relay, set SMTP_INSECURE=true for local/dev. If you intended direct Proton SMTP, remove DEV_INFO_SMTP_URL/SMTP_URL and configure SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS instead."
-        : "";
-
-      throw new ContactEmailDeliveryError(
-        `Contact form email delivery is not configured correctly. Check DEV_INFO_SMTP_URL (or SMTP_URL) and mail server access.${certificateHint}`,
-        { cause: error },
-      );
-    }
+function getReplyToAddress(): string {
+  const configuredReplyTo = process.env.RESEND_API_REPLY_TO?.trim();
+  if (configuredReplyTo) {
+    return configuredReplyTo;
   }
 
-  if (!host && !portValue && !user && !pass) {
-    try {
-      const transporter = nodemailer.createTransport({
-        sendmail: true,
-        newline: "unix",
-        path: process.env.SENDMAIL_PATH?.trim() || "/usr/sbin/sendmail",
-      });
+  return process.env.CONTACT_RECIPIENT_EMAIL?.trim() || DEFAULT_CONTACT_RECIPIENT;
+}
 
-      await transporter.verify();
-      return transporter;
-    } catch (error) {
-      throw new ContactEmailDeliveryError(
-        "No SMTP settings were provided and the local sendmail transport is unavailable.",
-        { cause: error },
-      );
-    }
+function getResendClient(): Resend {
+  if (resendClient) {
+    return resendClient;
   }
 
-  if (!host || !portValue || !user || !pass) {
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  if (!apiKey) {
     throw new ContactEmailDeliveryError(
-      `SMTP is not fully configured. ${getSmtpConfigHint(host, portValue)}`,
+      "RESEND_API_KEY is missing. Configure RESEND_API_KEY and RESEND_API_FROM in your runtime environment before sending email.",
     );
   }
 
-  const port = Number(portValue);
-  if (!Number.isFinite(port)) {
-    throw new ContactEmailDeliveryError("SMTP_PORT must be a valid number.");
-  }
+  resendClient = new Resend(apiKey);
+  return resendClient;
+}
 
-  try {
-    const tlsOptions = getTlsOptions();
-    const transporter = nodemailer.createTransport({
-      host,
-      port,
-      secure: secureFlag ?? port === 465,
-      auth: {
-        user,
-        pass,
-      },
-      ...tlsOptions,
-    });
+type SendEmailInput = {
+  to: string;
+  subject: string;
+  text: string;
+  replyTo: string;
+  logPrefix: "internal" | "external";
+};
 
-    await transporter.verify();
-    return transporter;
-  } catch (error) {
+async function sendEmailWithResend(input: SendEmailInput): Promise<void> {
+  const resend = getResendClient();
+  const from = getFromAddress();
+  const { data, error } = await resend.emails.send({
+    from,
+    to: input.to,
+    subject: input.subject,
+    text: input.text,
+    replyTo: input.replyTo,
+  });
+
+  if (error) {
     throw new ContactEmailDeliveryError(
-      `Contact form email delivery is not configured correctly. Check your SMTP host, credentials, and network access. ${getSmtpConfigHint(host, portValue)}`,
+      `Resend rejected the email request: ${error.message}`,
       { cause: error },
     );
   }
-}
 
-async function getTransporter(): Promise<Transporter> {
-  if (!transporterPromise) {
-    transporterPromise = createTransporter().catch((error) => {
-      transporterPromise = null;
-      throw error;
-    });
-  }
-
-  return transporterPromise;
+  console.info(`[${input.logPrefix}-email] Email sent via Resend`, {
+    messageId: data?.id ?? "unknown",
+    to: input.to,
+  });
 }
 
 export async function sendContactSubmissionEmail(contact: InsertContact): Promise<void> {
   try {
-    const transporter = await getTransporter();
     const recipient = process.env.CONTACT_RECIPIENT_EMAIL?.trim() || DEFAULT_CONTACT_RECIPIENT;
-    const from = getFromAddress();
     const subject = `New Prospect: ${contact.firstName} ${contact.lastName}`;
 
     const details = [
@@ -193,12 +104,12 @@ export async function sendContactSubmissionEmail(contact: InsertContact): Promis
 
     const text = details.map(([label, value]) => `${label}: ${value}`).join("\n");
 
-    await transporter.sendMail({
+    await sendEmailWithResend({
       to: recipient,
-      from,
-      replyTo: contact.email,
       subject,
       text,
+      replyTo: contact.email,
+      logPrefix: "internal",
     });
   } catch (error) {
     if (error instanceof ContactEmailDeliveryError) {
@@ -216,9 +127,7 @@ export async function sendContactSubmissionEmail(contact: InsertContact): Promis
 
 export async function sendContactConfirmationEmail(contact: InsertContact): Promise<void> {
   try {
-    const transporter = await getTransporter();
-    const from = getFromAddress();
-    const subject = "We received your request - Goldrise AI";
+    const subject = "Goldrise AI - Request Received";
 
     const text = [
       `Hi ${contact.firstName},`,
@@ -231,12 +140,12 @@ export async function sendContactConfirmationEmail(contact: InsertContact): Prom
       "GoldRise AI Team",
     ].join("\n");
 
-    await transporter.sendMail({
+    await sendEmailWithResend({
       to: contact.email,
-      from,
-      replyTo: process.env.CONTACT_RECIPIENT_EMAIL?.trim() || DEFAULT_CONTACT_RECIPIENT,
       subject,
       text,
+      replyTo: getReplyToAddress(),
+      logPrefix: "external",
     });
   } catch (error) {
     if (error instanceof ContactEmailDeliveryError) {
