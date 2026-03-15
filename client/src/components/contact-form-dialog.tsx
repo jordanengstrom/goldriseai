@@ -115,7 +115,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input id="firstName" name={field.name} placeholder="First Name *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
+                      <Input id="firstName" autoComplete="given-name" placeholder="First Name *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -127,7 +127,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input id="lastName" name={field.name} placeholder="Last Name *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
+                      <Input id="lastName" autoComplete="family-name" placeholder="Last Name *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -142,7 +142,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input id="email" name={field.name} type="email" placeholder="Email *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
+                      <Input id="email" autoComplete="email" type="email" placeholder="Email *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -154,7 +154,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input id="phone" name={field.name} type="tel" placeholder="Phone Number *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
+                      <Input id="phone" autoComplete="tel" type="tel" placeholder="Phone Number *" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -169,7 +169,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input id="company" name={field.name} placeholder="Company" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
+                      <Input id="company" autoComplete="organization" placeholder="Company" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -181,7 +181,7 @@ export function ContactFormDialog() {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input id="role" name={field.name} placeholder="Role" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
+                      <Input id="role" autoComplete="organization-title" placeholder="Role" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -195,7 +195,7 @@ export function ContactFormDialog() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input id="companyWebsite" name={field.name} type="url" placeholder="Company Website" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
+                    <Input id="companyWebsite" autoComplete="url" type="url" placeholder="Company Website" className="bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" {...field} value={field.value || ''} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -232,7 +232,6 @@ export function ContactFormDialog() {
                   <FormControl>
                     <Textarea 
                       id="additionalInfo"
-                      name={field.name}
                       placeholder="Additional Info (Current challenges...)" 
                       className="resize-none min-h-[100px] bg-white dark:bg-zinc-800/55 border-transparent focus-visible:border-primary/60 focus-visible:ring-primary/40 focus-visible:ring-offset-0" 
                       {...field}
