@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { ContactFormDialog } from "./contact-form-dialog";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import { ENABLE_DARK_MODE_TOGGLE, ENABLE_PAYMENTS_FEATURE } from "@/lib/features";
+import { ENABLE_BANNERS_FEATURE, ENABLE_DARK_MODE_TOGGLE, ENABLE_PAYMENTS_FEATURE } from "@/lib/features";
 import { ModeToggle } from "./mode-toggle";
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -136,6 +136,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <Link href="/values" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                 Values
               </Link>
+              {ENABLE_BANNERS_FEATURE && (
+                <Link href="/banners" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
+                  Banners
+                </Link>
+              )}
               {ENABLE_PAYMENTS_FEATURE && (
                 <Link href="/payments" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                   Payments
