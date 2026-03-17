@@ -34,7 +34,7 @@ const services = [
     description: "From custom LLM integrations to automated agentic workflows, we build the bespoke infrastructure your business needs to operate at the cutting edge of the AI revolution.",
     icon: Code,
     features: [
-      "Custom RAG & LLM fine-tuning",
+      "Custom code fine-tuning",
       "Automated business agents",
       "API & tool integration",
       "Scalable cloud infrastructure"
