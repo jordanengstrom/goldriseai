@@ -176,7 +176,7 @@ export function ContactFormDialog({ trigger }: ContactFormDialogProps) {
             Initiate <span className="text-primary">Contact</span>
           </DialogTitle>
           <DialogDescription className="text-muted-foreground text-sm">
-            Enter your details below. Our team will review your information and reach out.
+            Enter your details below. Our team will review your information and reach out within the next 24 hours.
           </DialogDescription>
         </DialogHeader>
 
