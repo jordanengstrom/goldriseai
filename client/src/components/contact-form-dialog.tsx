@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -36,7 +36,11 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 
-export function ContactFormDialog() {
+type ContactFormDialogProps = {
+  trigger?: ReactNode;
+};
+
+export function ContactFormDialog({ trigger }: ContactFormDialogProps) {
   const [open, setOpen] = useState(false);
   const [isFlowSubmitting, setIsFlowSubmitting] = useState(false);
   const submitLockRef = useRef(false);
@@ -156,13 +160,15 @@ export function ContactFormDialog() {
       }}
     >
       <DialogTrigger asChild>
-        <button className="relative group overflow-hidden rounded-md px-6 py-2.5 font-display font-bold uppercase tracking-wider text-sm bg-primary/10 text-primary border border-primary/30 hover:border-primary/80 transition-all duration-300 dark:shadow-[0_12px_30px_-18px_rgba(59,130,246,0.75)] hover:-translate-y-0.5">
-          <span className="relative z-10 flex items-center gap-2">
-            Get in Touch
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </span>
-          <div className="absolute inset-0 bg-primary/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
-        </button>
+        {trigger ?? (
+          <button className="relative group overflow-hidden rounded-md px-6 py-2.5 font-display font-bold uppercase tracking-wider text-sm bg-primary/10 text-primary border border-primary/30 hover:border-primary/80 transition-all duration-300 dark:shadow-[0_12px_30px_-18px_rgba(59,130,246,0.75)] hover:-translate-y-0.5">
+            <span className="relative z-10 flex items-center gap-2">
+              Get in Touch
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+            <div className="absolute inset-0 bg-primary/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
+          </button>
+        )}
       </DialogTrigger>
       <DialogContent id="initiate-contact" className="sm:max-w-[600px] glass-panel border-primary/40 bg-[#fff9ec] dark:bg-slate-950/90">
         <DialogHeader>
@@ -170,7 +176,7 @@ export function ContactFormDialog() {
             Initiate <span className="text-primary">Contact</span>
           </DialogTitle>
           <DialogDescription className="text-muted-foreground text-sm">
-            Enter your details below. Our team will review your information and reach out.
+            Enter your details below. Our team will review your information and reach out within the next 24 hours.
           </DialogDescription>
         </DialogHeader>
 
