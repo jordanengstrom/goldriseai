@@ -29,12 +29,12 @@ const values = [
 export default function Values() {
   return (
     <Layout>
-      <section className="relative py-24 px-6 overflow-hidden min-h-dvh flex flex-col justify-center">
+      <section className="relative pt-10 pb-16 px-6 overflow-hidden min-h-dvh flex flex-col justify-center">
         <LiquidGradient interactive={false} className="z-0" />
         <div className="absolute inset-0 bg-white/55 dark:bg-slate-950/60 z-[1] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto w-full relative z-10">
-          <div className="text-center mb-20">
+          <div className="text-center mb-10">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
