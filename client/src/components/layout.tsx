@@ -33,6 +33,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
             >
               Services
             </Link>
+            <Link
+              href="/services/ai-audits"
+              className={`text-sm font-medium hover:text-foreground transition-colors duration-200 uppercase tracking-wider ${location === "/services/ai-audits" ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}
+            >
+              Audits
+            </Link>
+            <Link
+              href="/services/ai-education"
+              className={`text-sm font-medium hover:text-foreground transition-colors duration-200 uppercase tracking-wider ${location === "/services/ai-education" ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}
+            >
+              Education
+            </Link>
+            <Link
+              href="/services/ai-implementation"
+              className={`text-sm font-medium hover:text-foreground transition-colors duration-200 uppercase tracking-wider ${location === "/services/ai-implementation" ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}
+            >
+              Implementation
+            </Link>
             <Link 
               href="/values" 
               className={`text-sm font-medium hover:text-foreground transition-colors duration-200 uppercase tracking-wider ${location === "/values" ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}
@@ -75,6 +93,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
                   >
                     Services
+                  </Link>
+                  <Link
+                    href="/services/ai-audits"
+                    className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services/ai-audits" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
+                  >
+                    AI Audits
+                  </Link>
+                  <Link
+                    href="/services/ai-education"
+                    className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services/ai-education" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
+                  >
+                    AI Education
+                  </Link>
+                  <Link
+                    href="/services/ai-implementation"
+                    className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services/ai-implementation" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
+                  >
+                    AI Implementation
                   </Link>
                   <Link 
                     href="/values" 
@@ -132,6 +168,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </a>
               <Link href="/services" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                 Services
+              </Link>
+              <Link href="/services/ai-audits" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
+                AI Audits
+              </Link>
+              <Link href="/services/ai-education" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
+                AI Education
+              </Link>
+              <Link href="/services/ai-implementation" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
+                AI Implementation
               </Link>
               <Link href="/values" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                 Values

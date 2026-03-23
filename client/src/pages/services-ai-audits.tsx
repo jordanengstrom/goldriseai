@@ -137,6 +137,20 @@ export default function ServiceAiAudits() {
             </div>
           </section>
 
+          <section className="mt-12">
+            <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">Related Services</h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              <Link href="/services/ai-education" className="glass-panel rounded-2xl p-5 hover:border-primary/40 border border-transparent transition-colors">
+                <h3 className="text-base font-display font-bold text-foreground mb-1">AI Education</h3>
+                <p className="text-sm text-muted-foreground">Train your team to adopt AI consistently and responsibly.</p>
+              </Link>
+              <Link href="/services/ai-implementation" className="glass-panel rounded-2xl p-5 hover:border-primary/40 border border-transparent transition-colors">
+                <h3 className="text-base font-display font-bold text-foreground mb-1">AI Implementation</h3>
+                <p className="text-sm text-muted-foreground">Deploy high-priority opportunities into production workflows.</p>
+              </Link>
+            </div>
+          </section>
+
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-primary/50 bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 transition-colors">
               Request an AI Audit
