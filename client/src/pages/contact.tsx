@@ -14,13 +14,7 @@ export default function Contact() {
   });
 
   useEffect(() => {
-    // 1. Add 'noindex' meta tag to prevent indexing
-    const meta = document.createElement('meta');
-    meta.name = "robots";
-    meta.content = "noindex, nofollow";
-    document.head.appendChild(meta);
-
-    // 2. Decode contact info client-side (Basic Obfuscation)
+    // Decode contact info client-side (Basic Obfuscation)
     // "info@goldrise.ai" -> aW5mb0Bnb2xkcmlzZS5haQ==
     // "2062036807" -> MjA2MjAzNjgwNw==
     // "(206) 203-6807" -> KDIwNikgMjAzLTY4MDc=
@@ -29,10 +23,6 @@ export default function Contact() {
       phone: atob("MjA2MjAzNjgwNw=="),
       phoneDisplay: atob("KDIwNikgMjAzLTY4MDc=")
     });
-
-    return () => {
-      document.head.removeChild(meta);
-    };
   }, []);
 
   return (

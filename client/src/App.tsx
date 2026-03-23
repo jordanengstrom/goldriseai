@@ -23,6 +23,7 @@ function Router() {
       <Route path="/values" component={Values} />
       {ENABLE_PAYMENTS_FEATURE && <Route path="/payments" component={Payments} />}
       <Route path="/contact" component={Contact} />
+      <Route path="/contacts" component={Contact} />
       <Route path="/terms" component={Terms} />
       <Route component={NotFound} />
     </Switch>
