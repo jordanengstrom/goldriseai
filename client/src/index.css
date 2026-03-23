@@ -106,6 +106,16 @@
 }
 
 @layer utilities {
+  .values-section {
+    padding-top: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .values-section {
+      padding-bottom: 12rem;
+    }
+  }
+
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-black via-black/90 to-black/60 dark:from-white dark:via-white/90 dark:to-white/60;
   }
