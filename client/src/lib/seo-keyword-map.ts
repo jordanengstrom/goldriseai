@@ -140,6 +140,87 @@ export const seoKeywordMap: KeywordMapEntry[] = [
   },
 ];
 
+export const SITE_NAME = "Goldrise AI";
+export const SITE_URL = "https://goldrise.ai";
+
+export type RouteSeoConfig = {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  robots: string;
+  ogType: "website";
+};
+
+const INDEX_ROBOTS = "index, follow, max-image-preview:large";
+const NOINDEX_ROBOTS = "noindex, nofollow";
+
+const descriptionByPath: Partial<Record<string, string>> = {
+  "/": "Goldrise AI delivers enterprise AI consulting services that help teams identify opportunities, train teams, and implement production-ready AI solutions.",
+  "/services": "Explore Goldrise AI services including AI audits, AI education, and AI implementation to accelerate measurable business outcomes.",
+  "/contact": "Contact Goldrise AI to discuss your AI services goals and submit your project details for a fast follow-up from our team.",
+  "/values": "Learn the principles behind Goldrise AI, including practical delivery, responsible AI adoption, and long-term client partnership.",
+  "/terms": "Review terms and conditions for Goldrise AI consulting services, including payment, IP, liability, and service usage terms.",
+};
+
+const keywordEntryByPath = new Map(
+  seoKeywordMap.map((entry) => [entry.path, entry] as const),
+);
+
+function normalizePath(path: string): string {
+  const cleanPath = path.split("?")[0]?.split("#")[0] || "/";
+  if (cleanPath.length > 1 && cleanPath.endsWith("/")) {
+    return cleanPath.slice(0, -1);
+  }
+  return cleanPath || "/";
+}
+
+function buildTitle(entry: KeywordMapEntry): string {
+  return `${entry.titleAngle} | ${SITE_NAME}`;
+}
+
+function buildDescription(entry: KeywordMapEntry): string {
+  const customDescription = descriptionByPath[entry.path];
+  if (customDescription) {
+    return customDescription;
+  }
+
+  const joinedSecondary = entry.secondaryKeywords.slice(0, 3).join(", ");
+  return `${entry.titleAngle}. Focus areas include ${joinedSecondary}. ${entry.conversionCta}.`;
+}
+
+export function getRouteSeoConfig(path: string): RouteSeoConfig {
+  const normalizedPath = normalizePath(path);
+  const entry = keywordEntryByPath.get(normalizedPath);
+
+  if (entry && !entry.planned) {
+    return {
+      title: buildTitle(entry),
+      description: buildDescription(entry),
+      canonicalPath: entry.path,
+      robots: INDEX_ROBOTS,
+      ogType: "website",
+    };
+  }
+
+  if (normalizedPath === "/payments") {
+    return {
+      title: `Payments and Billing | ${SITE_NAME}`,
+      description: "Secure invoice lookup and payment portal for existing Goldrise AI clients.",
+      canonicalPath: "/payments",
+      robots: NOINDEX_ROBOTS,
+      ogType: "website",
+    };
+  }
+
+  return {
+    title: `Page Not Found | ${SITE_NAME}`,
+    description: "The page you requested could not be found.",
+    canonicalPath: normalizedPath,
+    robots: NOINDEX_ROBOTS,
+    ogType: "website",
+  };
+}
+
 export function assertUniquePrimaryKeywords(entries: KeywordMapEntry[]): void {
   const seen = new Map<string, string>();
 
