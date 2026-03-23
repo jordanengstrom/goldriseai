@@ -2,6 +2,39 @@ import { Layout } from "@/components/layout";
 import { LiquidGradient } from "@/components/liquid-gradient";
 import { Link } from "wouter";
 
+const proofPoints = [
+  "Role-specific training tracks for executives, managers, and operators",
+  "Hands-on prompt workflows tailored to your real internal tasks",
+  "Practical AI governance guidance for safe and responsible usage",
+  "Post-training playbooks teams can use immediately",
+];
+
+const outcomes = [
+  "Higher daily AI adoption across priority workflows",
+  "Faster task execution with repeatable prompting patterns",
+  "Clear internal standards for tool use and data handling",
+  "Stronger confidence in selecting and using AI tools",
+];
+
+const faqs = [
+  {
+    question: "Who should attend AI education sessions?",
+    answer: "We usually train a cross-functional mix of leadership, operations, and technical stakeholders so adoption is consistent across teams.",
+  },
+  {
+    question: "Can training be customized to our workflows?",
+    answer: "Yes. We tailor sessions around your existing workflows, tools, and business goals so examples are directly applicable.",
+  },
+  {
+    question: "How quickly can teams apply what they learn?",
+    answer: "Most teams can apply core prompting and workflow techniques immediately after the first workshop.",
+  },
+  {
+    question: "Do you include policy and governance guidance?",
+    answer: "Yes. We provide practical standards for responsible usage, including review practices and role-based guardrails.",
+  },
+];
+
 export default function ServiceAiEducation() {
   return (
     <Layout>
@@ -18,20 +51,43 @@ export default function ServiceAiEducation() {
             We help leadership and operators build practical AI capability through workshops, internal playbooks, and responsible adoption practices.
           </p>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <article className="glass-panel rounded-2xl p-6">
-              <h2 className="text-lg font-display font-bold mb-2">1. Assess</h2>
-              <p className="text-sm text-muted-foreground">Baseline team skill levels and role-specific AI needs.</p>
-            </article>
-            <article className="glass-panel rounded-2xl p-6">
-              <h2 className="text-lg font-display font-bold mb-2">2. Train</h2>
-              <p className="text-sm text-muted-foreground">Deliver hands-on sessions for prompting and workflow use.</p>
-            </article>
-            <article className="glass-panel rounded-2xl p-6">
-              <h2 className="text-lg font-display font-bold mb-2">3. Adopt</h2>
-              <p className="text-sm text-muted-foreground">Roll out team standards, docs, and governance for consistency.</p>
-            </article>
+          <div className="mt-6 rounded-2xl border border-primary/25 bg-primary/10 px-5 py-4 text-sm text-foreground/90">
+            Core focus: practical enablement that helps your team apply AI confidently in everyday work.
           </div>
+
+          <section className="mt-12">
+            <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">Proof Points</h2>
+            <div className="grid gap-4">
+              {proofPoints.map((point) => (
+                <article key={point} className="glass-panel rounded-2xl p-5">
+                  <p className="text-sm text-muted-foreground">{point}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-12">
+            <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">Training Outcomes</h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              {outcomes.map((outcome) => (
+                <article key={outcome} className="glass-panel rounded-2xl p-5">
+                  <p className="text-sm text-muted-foreground">{outcome}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-12">
+            <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">Frequently Asked Questions</h2>
+            <div className="grid gap-4">
+              {faqs.map((faq) => (
+                <article key={faq.question} className="glass-panel rounded-2xl p-6">
+                  <h3 className="text-base font-display font-bold text-foreground mb-2">{faq.question}</h3>
+                  <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+          </section>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-primary/50 bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 transition-colors">

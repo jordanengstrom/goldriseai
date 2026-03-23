@@ -129,6 +129,67 @@ function upsertRouteSpecificSchemas(path: string): void {
     return;
   }
 
+  if (path === "/services/ai-education") {
+    upsertJsonLd("seo-schema-service", {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "AI Education Services",
+      serviceType: "Corporate AI Training and Enablement",
+      provider: {
+        "@type": "Organization",
+        name: SITE_NAME,
+        url: SITE_URL,
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "United States",
+      },
+      url: toAbsoluteUrl("/services/ai-education"),
+      description:
+        "AI education services for teams, including practical workshops, role-specific enablement, and responsible adoption guidance.",
+    });
+
+    upsertJsonLd("seo-schema-faq", {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Who should attend AI education sessions?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "We usually train a cross-functional mix of leadership, operations, and technical stakeholders so adoption is consistent across teams.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can training be customized to our workflows?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. We tailor sessions around your existing workflows, tools, and business goals so examples are directly applicable.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How quickly can teams apply what they learn?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Most teams can apply core prompting and workflow techniques immediately after the first workshop.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Do you include policy and governance guidance?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. We provide practical standards for responsible usage, including review practices and role-based guardrails.",
+          },
+        },
+      ],
+    });
+    return;
+  }
+
   removeJsonLd("seo-schema-service");
   removeJsonLd("seo-schema-faq");
 }
