@@ -190,6 +190,67 @@ function upsertRouteSpecificSchemas(path: string): void {
     return;
   }
 
+  if (path === "/services/ai-implementation") {
+    upsertJsonLd("seo-schema-service", {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "AI Implementation Services",
+      serviceType: "AI Systems Implementation and Integration",
+      provider: {
+        "@type": "Organization",
+        name: SITE_NAME,
+        url: SITE_URL,
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "United States",
+      },
+      url: toAbsoluteUrl("/services/ai-implementation"),
+      description:
+        "AI implementation services to design, integrate, and deploy production-ready AI workflows with measurable business outcomes.",
+    });
+
+    upsertJsonLd("seo-schema-faq", {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "How do you choose what to implement first?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "We start with use cases that combine high business impact with practical implementation feasibility, then expand from proven wins.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can you integrate with our current tools and systems?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. We design around your existing stack and connect AI workflows to your internal systems through secure integrations.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How do you handle reliability and quality control?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "We implement testing, fallback handling, and monitoring so outputs are reviewable, measurable, and production-safe.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Do you provide support after launch?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. We offer post-launch optimization, monitoring guidance, and iterative improvements as adoption scales.",
+          },
+        },
+      ],
+    });
+    return;
+  }
+
   removeJsonLd("seo-schema-service");
   removeJsonLd("seo-schema-faq");
 }

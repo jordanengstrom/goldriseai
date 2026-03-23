@@ -2,6 +2,43 @@ import { Layout } from "@/components/layout";
 import { LiquidGradient } from "@/components/liquid-gradient";
 import { Link } from "wouter";
 
+const architectureApproach = [
+  "Define system boundaries, data flow, and integration contracts",
+  "Select model/tool stack based on reliability, cost, and control",
+  "Design guardrails for quality, security, and failure recovery",
+  "Plan observability for usage, latency, and business KPI impact",
+];
+
+const deliveryModel = [
+  "Phase 1: Pilot build for one high-value workflow",
+  "Phase 2: Operational rollout with team handoff and training",
+  "Phase 3: Performance tuning and expansion to adjacent workflows",
+  "Phase 4: Ongoing optimization and governance reviews",
+];
+
+const faqs = [
+  {
+    question: "How do you choose what to implement first?",
+    answer:
+      "We start with use cases that combine high business impact with practical implementation feasibility, then expand from proven wins.",
+  },
+  {
+    question: "Can you integrate with our current tools and systems?",
+    answer:
+      "Yes. We design around your existing stack and connect AI workflows to your internal systems through secure integrations.",
+  },
+  {
+    question: "How do you handle reliability and quality control?",
+    answer:
+      "We implement testing, fallback handling, and monitoring so outputs are reviewable, measurable, and production-safe.",
+  },
+  {
+    question: "Do you provide support after launch?",
+    answer:
+      "Yes. We offer post-launch optimization, monitoring guidance, and iterative improvements as adoption scales.",
+  },
+];
+
 export default function ServiceAiImplementation() {
   return (
     <Layout>
@@ -18,20 +55,49 @@ export default function ServiceAiImplementation() {
             We design and ship production-ready AI workflows, integrations, and automations that align with your systems and business KPIs.
           </p>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <article className="glass-panel rounded-2xl p-6">
-              <h2 className="text-lg font-display font-bold mb-2">1. Architect</h2>
-              <p className="text-sm text-muted-foreground">Define system design, data flow, and governance controls.</p>
-            </article>
-            <article className="glass-panel rounded-2xl p-6">
-              <h2 className="text-lg font-display font-bold mb-2">2. Build</h2>
-              <p className="text-sm text-muted-foreground">Implement integrations, automations, and tested workflows.</p>
-            </article>
-            <article className="glass-panel rounded-2xl p-6">
-              <h2 className="text-lg font-display font-bold mb-2">3. Scale</h2>
-              <p className="text-sm text-muted-foreground">Monitor outcomes, iterate quickly, and expand high-performing use cases.</p>
-            </article>
+          <div className="mt-6 rounded-2xl border border-primary/25 bg-primary/10 px-5 py-4 text-sm text-foreground/90">
+            Delivery focus: practical systems that move from pilot to production with clear ownership and measurable results.
           </div>
+
+          <section className="mt-12">
+            <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">
+              Architecture Approach
+            </h2>
+            <div className="grid gap-4">
+              {architectureApproach.map((item) => (
+                <article key={item} className="glass-panel rounded-2xl p-5">
+                  <p className="text-sm text-muted-foreground">{item}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-12">
+            <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">
+              Delivery Model
+            </h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              {deliveryModel.map((item) => (
+                <article key={item} className="glass-panel rounded-2xl p-5">
+                  <p className="text-sm text-muted-foreground">{item}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-12">
+            <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">
+              Frequently Asked Questions
+            </h2>
+            <div className="grid gap-4">
+              {faqs.map((faq) => (
+                <article key={faq.question} className="glass-panel rounded-2xl p-6">
+                  <h3 className="text-base font-display font-bold text-foreground mb-2">{faq.question}</h3>
+                  <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+          </section>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-primary/50 bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 transition-colors">
