@@ -215,10 +215,73 @@ export function getRouteSeoConfig(path: string): RouteSeoConfig {
   return {
     title: `Page Not Found | ${SITE_NAME}`,
     description: "The page you requested could not be found.",
-    canonicalPath: normalizedPath,
+    canonicalPath: "/",
     robots: NOINDEX_ROBOTS,
     ogType: "website",
   };
+}
+
+export const sitemapPaths = ["/", "/services", "/values", "/contact", "/terms"] as const;
+
+export const moneyPagePaths = ["/", "/services", "/contact"] as const;
+
+function setsEqual(a: Set<string>, b: Set<string>): boolean {
+  if (a.size !== b.size) {
+    return false;
+  }
+
+  for (const value of a) {
+    if (!b.has(value)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+export function assertSeo006Hygiene(liveRoutePaths: string[]): void {
+  const uniqueRoutePaths = Array.from(new Set(liveRoutePaths));
+
+  const indexableSeoPaths = seoKeywordMap
+    .filter((entry) => !entry.planned)
+    .map((entry) => entry.path);
+
+  const indexableRoutePaths = uniqueRoutePaths.filter((path) => {
+    const config = getRouteSeoConfig(path);
+    return config.robots.startsWith("index");
+  });
+
+  const indexableRouteSet = new Set(indexableRoutePaths);
+  const indexableSeoSet = new Set(indexableSeoPaths);
+  const sitemapSet = new Set<string>(sitemapPaths);
+
+  if (!setsEqual(indexableRouteSet, indexableSeoSet)) {
+    throw new Error(
+      "SEO-006 violation: indexable live routes do not match non-planned SEO keyword map paths.",
+    );
+  }
+
+  if (!setsEqual(sitemapSet, indexableSeoSet)) {
+    throw new Error(
+      "SEO-006 violation: sitemap paths do not match indexable non-planned SEO paths.",
+    );
+  }
+
+  for (const path of moneyPagePaths) {
+    const config = getRouteSeoConfig(path);
+
+    if (!config.robots.startsWith("index")) {
+      throw new Error(
+        `SEO-006 violation: money page ${path} must be indexable but is marked ${config.robots}.`,
+      );
+    }
+
+    if (config.canonicalPath !== path) {
+      throw new Error(
+        `SEO-006 violation: canonical mismatch for ${path}; expected ${path}, received ${config.canonicalPath}.`,
+      );
+    }
+  }
 }
 
 export function assertUniquePrimaryKeywords(entries: KeywordMapEntry[]): void {
