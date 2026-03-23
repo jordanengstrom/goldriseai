@@ -40,6 +40,33 @@ function upsertCanonical(href: string): void {
   link.href = href;
 }
 
+function upsertJsonLd(id: string, schema: Record<string, unknown>): void {
+  let script = document.head.querySelector<HTMLScriptElement>(`script#${id}`);
+
+  if (!script) {
+    script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = id;
+    script.setAttribute(MANAGED_ATTR, "true");
+    document.head.appendChild(script);
+  }
+
+  script.textContent = JSON.stringify(schema);
+}
+
+function removeJsonLd(id: string): void {
+  const script = document.head.querySelector<HTMLScriptElement>(`script#${id}`);
+  script?.remove();
+}
+
+function getPageNameFromTitle(title: string): string {
+  return title.split("|")[0]?.trim() || "Page";
+}
+
+function isIndexableRobots(robots: string): boolean {
+  return robots.toLowerCase().startsWith("index");
+}
+
 type SeoHeadProps = {
   path: string;
 };
@@ -49,6 +76,7 @@ export function SeoHead({ path }: SeoHeadProps) {
     const seo = getRouteSeoConfig(path);
     const canonicalUrl = toAbsoluteUrl(seo.canonicalPath);
     const ogImageUrl = toAbsoluteUrl(DEFAULT_OG_IMAGE);
+    const pageName = getPageNameFromTitle(seo.title);
 
     document.title = seo.title;
 
@@ -68,6 +96,54 @@ export function SeoHead({ path }: SeoHeadProps) {
     upsertMeta("name", "twitter:image", ogImageUrl);
 
     upsertCanonical(canonicalUrl);
+
+    upsertJsonLd("seo-schema-organization", {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: ogImageUrl,
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: "info@goldrise.ai",
+          telephone: "+1-206-203-6807",
+          areaServed: "US",
+          availableLanguage: ["en"],
+        },
+      ],
+    });
+
+    upsertJsonLd("seo-schema-website", {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: SITE_URL,
+    });
+
+    if (isIndexableRobots(seo.robots) && seo.canonicalPath !== "/") {
+      upsertJsonLd("seo-schema-breadcrumb", {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: toAbsoluteUrl("/"),
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: pageName,
+            item: canonicalUrl,
+          },
+        ],
+      });
+    } else {
+      removeJsonLd("seo-schema-breadcrumb");
+    }
   }, [path]);
 
   return null;
