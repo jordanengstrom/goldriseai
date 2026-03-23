@@ -66,6 +66,7 @@ export function ContactFormDialog({ trigger }: ContactFormDialogProps) {
       companyWebsite: "",
       role: "",
       service: "",
+      budget: "",
       additionalInfo: "",
     },
   });
@@ -291,6 +292,30 @@ export function ContactFormDialog({ trigger }: ContactFormDialogProps) {
                       <SelectItem value="Identifying AI Opportunities">Identifying AI Opportunities</SelectItem>
                       <SelectItem value="Educating your team on AI">Educating your team on AI</SelectItem>
                       <SelectItem value="Developing custom AI solutions">Developing custom AI solutions</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="budget"
+              render={({ field }) => (
+                <FormItem>
+                  <Select name={field.name} value={field.value || ""} onValueChange={field.onChange}>
+                    <FormControl>
+                      <SelectTrigger id="budget" name={field.name} className="bg-white dark:bg-zinc-800/55 border-transparent focus:border-primary/60 focus:ring-primary/40 focus:ring-offset-0">
+                        <SelectValue placeholder="What is your budget range?" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white dark:bg-zinc-900 border-primary/30">
+                      <SelectItem value="$100s">$100s</SelectItem>
+                      <SelectItem value="$1,000s">$1,000s</SelectItem>
+                      <SelectItem value="$10,000s">$10,000s</SelectItem>
+                      <SelectItem value="$100,000s">$100,000s</SelectItem>
+                      <SelectItem value="$1,000,000s+">$1,000,000s+</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />

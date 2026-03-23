@@ -99,6 +99,7 @@ export async function sendContactSubmissionEmail(contact: InsertContact): Promis
       ["Website", displayValue(contact.companyWebsite)],
       ["Role", displayValue(contact.role)],
       ["Service Interested In", displayValue(contact.service)],
+      ["Budget Range", displayValue(contact.budget)],
       ["Additional Info", displayValue(contact.additionalInfo)],
     ] as const;
 
