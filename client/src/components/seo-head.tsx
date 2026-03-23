@@ -67,6 +67,72 @@ function isIndexableRobots(robots: string): boolean {
   return robots.toLowerCase().startsWith("index");
 }
 
+function upsertRouteSpecificSchemas(path: string): void {
+  if (path === "/services/ai-audits") {
+    upsertJsonLd("seo-schema-service", {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "AI Audit Services",
+      serviceType: "AI Audit and Opportunity Assessment",
+      provider: {
+        "@type": "Organization",
+        name: SITE_NAME,
+        url: SITE_URL,
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "United States",
+      },
+      url: toAbsoluteUrl("/services/ai-audits"),
+      description:
+        "AI audit services to identify high-impact workflow opportunities, prioritize use cases, and deliver an implementation roadmap.",
+    });
+
+    upsertJsonLd("seo-schema-faq", {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "How long does an AI audit usually take?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Most audits are completed in 3 to 4 weeks depending on team availability and process complexity.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Do you require access to sensitive production systems?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No. We can start with stakeholder sessions, process documents, and sampled datasets before requesting deeper technical access.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What size company is this best for?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "AI audits work well for scaling teams that need a focused plan before committing to implementation spend.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What happens after the audit is complete?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "You receive a practical roadmap and can choose to execute internally or engage us for implementation support.",
+          },
+        },
+      ],
+    });
+    return;
+  }
+
+  removeJsonLd("seo-schema-service");
+  removeJsonLd("seo-schema-faq");
+}
+
 type SeoHeadProps = {
   path: string;
 };
@@ -144,6 +210,8 @@ export function SeoHead({ path }: SeoHeadProps) {
     } else {
       removeJsonLd("seo-schema-breadcrumb");
     }
+
+    upsertRouteSpecificSchemas(seo.canonicalPath);
   }, [path]);
 
   return null;
