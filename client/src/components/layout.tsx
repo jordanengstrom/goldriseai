@@ -16,7 +16,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Navigation */}
       <header className="w-full border-b border-foreground/5 bg-background/50 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group cursor-pointer">
             <div className="logo-mark w-8 h-8">
               <span className="font-display font-bold text-xl leading-none pt-0.5">G</span>
