@@ -57,50 +57,76 @@ export default function ServiceAiEducation() {
 
           <section className="mt-12">
             <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">Proof Points</h2>
-            <div className="grid gap-4">
-              {proofPoints.map((point) => (
-                <article key={point} className="glass-panel rounded-2xl p-5">
-                  <p className="text-sm text-muted-foreground">{point}</p>
-                </article>
-              ))}
-            </div>
+            <article className="glass-panel rounded-2xl p-6 md:p-8">
+              <ul className="divide-y divide-foreground/10">
+                {proofPoints.map((point) => (
+                  <li key={point} className="py-4 first:pt-0 last:pb-0 flex items-start gap-3">
+                    <span className="mt-1.5 block h-1.5 w-1.5 rounded-full bg-primary/70" />
+                    <p className="text-sm text-muted-foreground">{point}</p>
+                  </li>
+                ))}
+              </ul>
+            </article>
           </section>
 
           <section className="mt-12">
             <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">Training Outcomes</h2>
-            <div className="grid gap-4 md:grid-cols-2">
-              {outcomes.map((outcome) => (
-                <article key={outcome} className="glass-panel rounded-2xl p-5">
-                  <p className="text-sm text-muted-foreground">{outcome}</p>
-                </article>
-              ))}
-            </div>
+            <article className="glass-panel rounded-2xl p-6 md:p-8">
+              <ul className="divide-y divide-foreground/10">
+                {outcomes.map((outcome) => (
+                  <li key={outcome} className="py-4 first:pt-0 last:pb-0 flex items-start gap-3">
+                    <span className="mt-1.5 block h-1.5 w-1.5 rounded-full bg-primary/70" />
+                    <p className="text-sm text-muted-foreground">{outcome}</p>
+                  </li>
+                ))}
+              </ul>
+            </article>
           </section>
 
           <section className="mt-12">
             <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">Frequently Asked Questions</h2>
-            <div className="grid gap-4">
-              {faqs.map((faq) => (
-                <article key={faq.question} className="glass-panel rounded-2xl p-6">
-                  <h3 className="text-base font-display font-bold text-foreground mb-2">{faq.question}</h3>
-                  <p className="text-sm text-muted-foreground">{faq.answer}</p>
-                </article>
-              ))}
-            </div>
+            <article className="glass-panel rounded-2xl p-6 md:p-8">
+              <div className="divide-y divide-foreground/10">
+                {faqs.map((faq) => (
+                  <div key={faq.question} className="py-5 first:pt-0 last:pb-0">
+                    <h3 className="text-base font-display font-bold text-foreground mb-2">{faq.question}</h3>
+                    <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </article>
           </section>
 
           <section className="mt-12">
             <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">Related Services</h2>
-            <div className="grid gap-4 md:grid-cols-2">
-              <Link href="/services/ai-audits" className="glass-panel rounded-2xl p-5 hover:border-primary/40 border border-transparent transition-colors">
-                <h3 className="text-base font-display font-bold text-foreground mb-1">AI Audits</h3>
-                <p className="text-sm text-muted-foreground">Prioritize the best AI opportunities before implementation.</p>
-              </Link>
-              <Link href="/services/ai-implementation" className="glass-panel rounded-2xl p-5 hover:border-primary/40 border border-transparent transition-colors">
-                <h3 className="text-base font-display font-bold text-foreground mb-1">AI Implementation</h3>
-                <p className="text-sm text-muted-foreground">Turn trained capability into production systems and outcomes.</p>
-              </Link>
-            </div>
+            <article className="glass-panel rounded-2xl p-3 md:p-4">
+              <div className="divide-y divide-foreground/10">
+                <Link
+                  href="/services/ai-audits"
+                  className="group block rounded-xl px-4 py-4 hover:bg-primary/10 transition-colors"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <h3 className="text-base font-display font-bold text-foreground mb-1 group-hover:text-primary transition-colors">AI Audits</h3>
+                      <p className="text-sm text-muted-foreground">Prioritize the best AI opportunities before implementation.</p>
+                    </div>
+                    <span className="text-xs uppercase tracking-wider text-primary/80 group-hover:translate-x-1 transition-transform">View</span>
+                  </div>
+                </Link>
+                <Link
+                  href="/services/ai-implementation"
+                  className="group block rounded-xl px-4 py-4 hover:bg-primary/10 transition-colors"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <h3 className="text-base font-display font-bold text-foreground mb-1 group-hover:text-primary transition-colors">AI Implementation</h3>
+                      <p className="text-sm text-muted-foreground">Turn trained capability into production systems and outcomes.</p>
+                    </div>
+                    <span className="text-xs uppercase tracking-wider text-primary/80 group-hover:translate-x-1 transition-transform">View</span>
+                  </div>
+                </Link>
+              </div>
+            </article>
           </section>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
