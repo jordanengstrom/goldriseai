@@ -51,7 +51,7 @@ export function HomeServicesSection() {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-6xl font-display font-bold mb-6 text-gradient"
           >
-            Enterprise AI <span className="text-primary">Services</span>
+            Elite AI <span className="text-primary">Services</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
