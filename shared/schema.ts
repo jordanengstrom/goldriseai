@@ -12,6 +12,7 @@ export const contacts = pgTable("contacts", {
   companyWebsite: text("company_website"),
   role: text("role"),
   service: text("service"),
+  budget: text("budget"),
   additionalInfo: text("additional_info"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
