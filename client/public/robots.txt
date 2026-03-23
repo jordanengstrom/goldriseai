@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /contact
+Sitemap: https://goldrise.ai/sitemap.xml
