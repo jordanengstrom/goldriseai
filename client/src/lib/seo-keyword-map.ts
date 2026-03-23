@@ -46,7 +46,7 @@ export const seoKeywordMap: KeywordMapEntry[] = [
     ],
     titleAngle: "AI Services Company: Audits, Education, Implementation",
     conversionCta: "Explore services",
-    planned: false,
+    planned: true,
   },
   {
     path: "/contact",
@@ -226,7 +226,6 @@ export function getRouteSeoConfig(path: string): RouteSeoConfig {
 
 export const sitemapPaths = [
   "/",
-  "/services",
   "/services/ai-audits",
   "/services/ai-education",
   "/services/ai-implementation",
@@ -235,7 +234,13 @@ export const sitemapPaths = [
   "/terms",
 ] as const;
 
-export const moneyPagePaths = ["/", "/services", "/contact"] as const;
+export const moneyPagePaths = [
+  "/",
+  "/contact",
+  "/services/ai-audits",
+  "/services/ai-education",
+  "/services/ai-implementation",
+] as const;
 
 function setsEqual(a: Set<string>, b: Set<string>): boolean {
   if (a.size !== b.size) {

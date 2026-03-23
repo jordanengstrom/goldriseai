@@ -12,7 +12,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Home from "@/pages/home";
 import Payments from "@/pages/payments";
 import Terms from "@/pages/terms";
-import Services from "@/pages/services";
 import ServiceAiAudits from "@/pages/services-ai-audits";
 import ServiceAiEducation from "@/pages/services-ai-education";
 import ServiceAiImplementation from "@/pages/services-ai-implementation";
@@ -23,7 +22,6 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/services" component={Services} />
       <Route path="/services/ai-audits" component={ServiceAiAudits} />
       <Route path="/services/ai-education" component={ServiceAiEducation} />
       <Route path="/services/ai-implementation" component={ServiceAiImplementation} />

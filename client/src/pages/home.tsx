@@ -4,6 +4,7 @@ import { ContactFormDialog } from "@/components/contact-form-dialog";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "wouter";
 import { LiquidGradient } from "@/components/liquid-gradient";
+import { HomeServicesSection } from "@/components/home-services-section";
 
 export default function Home() {
   const rotatingPhrases = [
@@ -88,7 +89,7 @@ export default function Home() {
             
             <span className="text-sm font-medium text-muted-foreground uppercase tracking-widest">or</span>
             
-            <Link href="/services" className="text-sm font-medium text-foreground hover:text-primary transition-colors border-b border-foreground/20 hover:border-primary pb-1 uppercase tracking-wider">
+            <Link href="/#services" className="text-sm font-medium text-foreground hover:text-primary transition-colors border-b border-foreground/20 hover:border-primary pb-1 uppercase tracking-wider">
               Explore Services
             </Link>
           </motion.div>
@@ -101,6 +102,8 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/30 via-transparent to-transparent blur-3xl" />
         </div>
       </section>
+
+      <HomeServicesSection />
 
       {/* Final CTA Section */}
       <section className="py-32 px-4 relative overflow-hidden">
