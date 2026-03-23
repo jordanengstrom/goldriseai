@@ -106,7 +106,7 @@ export const seoKeywordMap: KeywordMapEntry[] = [
     ],
     titleAngle: "AI Audit Services: Find High-ROI AI Opportunities",
     conversionCta: "Request an AI audit",
-    planned: true,
+    planned: false,
   },
   {
     path: "/services/ai-education",
@@ -121,7 +121,7 @@ export const seoKeywordMap: KeywordMapEntry[] = [
     ],
     titleAngle: "AI Education Services for Teams: Training and Enablement",
     conversionCta: "Plan team training",
-    planned: true,
+    planned: false,
   },
   {
     path: "/services/ai-implementation",
@@ -136,7 +136,7 @@ export const seoKeywordMap: KeywordMapEntry[] = [
     ],
     titleAngle: "AI Implementation Services: From Strategy to Production",
     conversionCta: "Start implementation planning",
-    planned: true,
+    planned: false,
   },
 ];
 
@@ -157,6 +157,9 @@ const NOINDEX_ROBOTS = "noindex, nofollow";
 const descriptionByPath: Partial<Record<string, string>> = {
   "/": "Goldrise AI delivers enterprise AI consulting services that help teams identify opportunities, train teams, and implement production-ready AI solutions.",
   "/services": "Explore Goldrise AI services including AI audits, AI education, and AI implementation to accelerate measurable business outcomes.",
+  "/services/ai-audits": "Discover AI audit services to identify high-impact automation opportunities, prioritize use cases, and build a practical implementation roadmap.",
+  "/services/ai-education": "Equip your team with practical AI education through workshops, playbooks, and role-specific enablement for responsible AI adoption.",
+  "/services/ai-implementation": "Launch production-ready AI implementation with custom integrations, workflow automation, and measurable delivery milestones.",
   "/contact": "Contact Goldrise AI to discuss your AI services goals and submit your project details for a fast follow-up from our team.",
   "/values": "Learn the principles behind Goldrise AI, including practical delivery, responsible AI adoption, and long-term client partnership.",
   "/terms": "Review terms and conditions for Goldrise AI consulting services, including payment, IP, liability, and service usage terms.",
@@ -221,7 +224,16 @@ export function getRouteSeoConfig(path: string): RouteSeoConfig {
   };
 }
 
-export const sitemapPaths = ["/", "/services", "/values", "/contact", "/terms"] as const;
+export const sitemapPaths = [
+  "/",
+  "/services",
+  "/services/ai-audits",
+  "/services/ai-education",
+  "/services/ai-implementation",
+  "/values",
+  "/contact",
+  "/terms",
+] as const;
 
 export const moneyPagePaths = ["/", "/services", "/contact"] as const;
 
@@ -230,7 +242,7 @@ function setsEqual(a: Set<string>, b: Set<string>): boolean {
     return false;
   }
 
-  for (const value of a) {
+  for (const value of Array.from(a)) {
     if (!b.has(value)) {
       return false;
     }

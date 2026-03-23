@@ -2,43 +2,35 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/layout";
 import { Search, GraduationCap, Code } from "lucide-react";
 import { LiquidGradient } from "@/components/liquid-gradient";
+import { Link } from "wouter";
 
 const services = [
   {
-    title: "Identifying AI Opportunities",
-    subtitle: "AI Audits",
-    description: "We conduct deep-dive technical audits of your current business workflows to identify high-impact areas where AI can reduce manual labor, cut costs, and unlock new revenue streams.",
+    title: "AI Audits",
+    href: "/services/ai-audits",
+    subtitle: "Identify high-ROI opportunities first",
+    description: "Map workflows, prioritize use cases, and build an implementation roadmap before committing budget.",
     icon: Search,
-    features: [
-      "Workflow mapping & analysis",
-      "Cost-benefit projection",
-      "Tool selection & stack recommendation",
-      "Implementation roadmap"
-    ]
+    bullets: ["Workflow mapping", "ROI prioritization", "Roadmap definition"],
+    cta: "View AI Audit Service",
   },
   {
-    title: "Educating your team on AI",
-    subtitle: "AI Education",
-    description: "AI is only as good as the people using it. We provide tailored workshops and ongoing education to ensure your team is proficient in prompting, AI ethics, and tool management.",
+    title: "AI Education",
+    href: "/services/ai-education",
+    subtitle: "Enable adoption across your team",
+    description: "Train leadership and operators with practical workshops, playbooks, and governance aligned to your workflows.",
     icon: GraduationCap,
-    features: [
-      "Executive AI strategy sessions",
-      "Hands-on prompt engineering workshops",
-      "Custom internal documentation",
-      "AI safety & policy training"
-    ]
+    bullets: ["Role-based workshops", "Prompt playbooks", "AI policy guidance"],
+    cta: "View AI Education Service",
   },
   {
-    title: "Developing custom AI solutions",
-    subtitle: "AI Implementation",
-    description: "From custom LLM integrations to automated agentic workflows, we build the bespoke infrastructure your business needs to operate at the cutting edge of the AI revolution.",
+    title: "AI Implementation",
+    href: "/services/ai-implementation",
+    subtitle: "Deploy production-ready AI systems",
+    description: "Integrate AI into real operations with custom automations, tested architecture, and measurable delivery milestones.",
     icon: Code,
-    features: [
-      "Custom code fine-tuning",
-      "Automated business agents",
-      "API & tool integration",
-      "Scalable cloud infrastructure"
-    ]
+    bullets: ["Custom integrations", "Automation delivery", "Production hardening"],
+    cta: "View AI Implementation Service",
   }
 ];
 
@@ -57,7 +49,7 @@ export default function Services() {
               transition={{ duration: 0.6 }}
               className="text-4xl md:text-6xl font-display font-bold mb-6 text-gradient"
             >
-              Elite AI <span className="text-primary">Services</span>
+              Enterprise AI <span className="text-primary">Services</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -65,8 +57,8 @@ export default function Services() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-muted-foreground text-lg max-w-2xl mx-auto"
             >
-              We provide the bridge between legacy workflows and the autonomous future. 
-              Precision-engineered solutions for high-growth enterprises.
+              Our service model follows a clear progression: identify opportunities,
+              enable your team, then implement production-grade AI systems.
             </motion.p>
           </div>
 
@@ -91,26 +83,50 @@ export default function Services() {
                   <h3 className="text-xl font-display font-bold mb-2 text-foreground">
                     {service.title}
                   </h3>
-                <div className="text-primary/80 font-display font-medium text-sm mb-4 uppercase tracking-widest">
-                  {service.subtitle}
-                </div>
-                
-                <p className="text-muted-foreground text-sm leading-relaxed mb-8">
-                  {service.description}
-                </p>
+                  <div className="text-primary/80 font-display font-medium text-sm mb-4 uppercase tracking-widest">
+                    {service.subtitle}
+                  </div>
 
-                <ul className="space-y-3 border-t border-foreground/5 pt-8">
-                  {service.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                    {service.description}
+                  </p>
+
+                  <ul className="space-y-3 border-t border-foreground/5 pt-6 mb-7">
+                    {service.bullets.map((bullet) => (
+                      <li key={bullet} className="flex items-center gap-3 text-sm text-muted-foreground">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary/50" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link
+                    href={service.href}
+                    className="inline-flex items-center justify-center rounded-full border border-primary/35 bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+                  >
+                    {service.cta}
+                  </Link>
                 </div>
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-10 text-center"
+          >
+            <p className="text-sm text-muted-foreground mb-4">
+              Ready to map your priorities? Start with a focused discovery conversation.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-primary/50 bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              Start Your AI Services Plan
+            </Link>
+          </motion.div>
         </div>
       </section>
     </Layout>

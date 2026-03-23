@@ -11,7 +11,16 @@ import { ENABLE_PAYMENTS_FEATURE } from "./lib/features";
 if (import.meta.env.DEV) {
 	assertUniquePrimaryKeywords(seoKeywordMap);
 
-	const liveRoutePaths = ["/", "/services", "/values", "/contact", "/terms"];
+	const liveRoutePaths = [
+		"/",
+		"/services",
+		"/services/ai-audits",
+		"/services/ai-education",
+		"/services/ai-implementation",
+		"/values",
+		"/contact",
+		"/terms",
+	];
 	if (ENABLE_PAYMENTS_FEATURE) {
 		liveRoutePaths.push("/payments");
 	}

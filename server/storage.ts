@@ -48,6 +48,7 @@ async function createFallbackContact(contact: InsertContact): Promise<Contact> {
     companyWebsite: contact.companyWebsite ?? null,
     role: contact.role ?? null,
     service: contact.service ?? null,
+    budget: contact.budget ?? null,
     additionalInfo: contact.additionalInfo ?? null,
     createdAt: now,
     updatedAt: now,
