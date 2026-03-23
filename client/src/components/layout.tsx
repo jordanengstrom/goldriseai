@@ -15,7 +15,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] pointer-events-none -z-10" />
 
       {/* Navigation */}
-      <header className="w-full border-b border-foreground/5 bg-background/50 backdrop-blur-md sticky top-0 z-50">
+      <header className="w-full border-b border-foreground/5 bg-white dark:bg-slate-950 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group cursor-pointer">
             <div className="logo-mark w-8 h-8">
@@ -155,13 +155,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 Privacy Policy
               </a>
               <Link href="/services/ai-audits" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
-                AI Audits
+                Audits
               </Link>
               <Link href="/services/ai-education" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
-                AI Education
+                Education
               </Link>
               <Link href="/services/ai-implementation" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
-                AI Implementation
+                Implementation
               </Link>
               <Link href="/values" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                 Values

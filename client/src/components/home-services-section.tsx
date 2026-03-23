@@ -38,10 +38,8 @@ const services = [
 
 export function HomeServicesSection() {
   return (
-    <section id="services" className="relative pt-10 pb-16 px-6 overflow-hidden min-h-dvh flex flex-col justify-center">
-      <LiquidGradient interactive={false} className="z-0" />
-      <div className="absolute inset-0 bg-white/55 dark:bg-slate-950/60 z-[1] pointer-events-none" />
-
+    <section id="services" className="relative pt-10 pb-8 mb-10 px-6 overflow-hidden min-h-dvh flex flex-col justify-center z-10">
+      {/* LiquidGradient removed; now shared in parent */}
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-10">
           <motion.h2
