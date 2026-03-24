@@ -13,6 +13,8 @@ export type KeywordMapEntry = {
   titleAngle: string;
   conversionCta: string;
   planned: boolean;
+  /** Path to a 1200×630 OG image in /public. Falls back to /og/default.svg. */
+  ogImage?: string;
 };
 
 // SEO-001 source of truth. This map is consumed by later SEO tickets
@@ -32,6 +34,7 @@ export const seoKeywordMap: KeywordMapEntry[] = [
     titleAngle: "Enterprise AI Consulting Services for Growth-Focused Teams",
     conversionCta: "Book an intro call",
     planned: false,
+    ogImage: "/og/home.png",
   },
   {
     path: "/services",
@@ -62,6 +65,7 @@ export const seoKeywordMap: KeywordMapEntry[] = [
     titleAngle: "Contact AI Consultants",
     conversionCta: "Submit contact form",
     planned: false,
+    ogImage: "/og/contact.png",
   },
   {
     path: "/values",
@@ -77,6 +81,7 @@ export const seoKeywordMap: KeywordMapEntry[] = [
     titleAngle: "Our Values: Responsible and Practical AI Services",
     conversionCta: "Start a conversation",
     planned: false,
+    ogImage: "/og/values.png",
   },
   {
     path: "/terms",
@@ -107,6 +112,7 @@ export const seoKeywordMap: KeywordMapEntry[] = [
     titleAngle: "AI Audit Services: Find High-ROI AI Opportunities",
     conversionCta: "Request an AI audit",
     planned: false,
+    ogImage: "/og/ai-audits.png",
   },
   {
     path: "/services/ai-education",
@@ -122,6 +128,7 @@ export const seoKeywordMap: KeywordMapEntry[] = [
     titleAngle: "AI Education Services for Teams: Training and Enablement",
     conversionCta: "Plan team training",
     planned: false,
+    ogImage: "/og/ai-education.png",
   },
   {
     path: "/services/ai-implementation",
@@ -137,6 +144,7 @@ export const seoKeywordMap: KeywordMapEntry[] = [
     titleAngle: "AI Implementation Services: From Strategy to Production",
     conversionCta: "Start implementation planning",
     planned: false,
+    ogImage: "/og/ai-implementation.png",
   },
 ];
 
@@ -149,10 +157,13 @@ export type RouteSeoConfig = {
   canonicalPath: string;
   robots: string;
   ogType: "website";
+  /** Absolute public path to the 1200×630 OG image for this page. */
+  ogImage: string;
 };
 
 const INDEX_ROBOTS = "index, follow, max-image-preview:large";
 const NOINDEX_ROBOTS = "noindex, nofollow";
+const DEFAULT_OG_IMAGE = "/logo_light.svg";
 
 const descriptionByPath: Partial<Record<string, string>> = {
   "/": "Goldrise AI delivers enterprise AI consulting services that help teams identify opportunities, train teams, and implement production-ready AI solutions.",
@@ -202,6 +213,7 @@ export function getRouteSeoConfig(path: string): RouteSeoConfig {
       canonicalPath: entry.path,
       robots: INDEX_ROBOTS,
       ogType: "website",
+      ogImage: entry.ogImage ?? DEFAULT_OG_IMAGE,
     };
   }
 
@@ -212,6 +224,7 @@ export function getRouteSeoConfig(path: string): RouteSeoConfig {
       canonicalPath: "/payments",
       robots: NOINDEX_ROBOTS,
       ogType: "website",
+      ogImage: DEFAULT_OG_IMAGE,
     };
   }
 
@@ -221,6 +234,7 @@ export function getRouteSeoConfig(path: string): RouteSeoConfig {
     canonicalPath: "/",
     robots: NOINDEX_ROBOTS,
     ogType: "website",
+    ogImage: DEFAULT_OG_IMAGE,
   };
 }
 

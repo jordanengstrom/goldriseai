@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { getRouteSeoConfig, SITE_NAME, SITE_URL } from "@/lib/seo-keyword-map";
 
 const MANAGED_ATTR = "data-seo-managed";
-const DEFAULT_OG_IMAGE = "/logo_light.svg";
 
 function toAbsoluteUrl(path: string): string {
   return new URL(path, SITE_URL).toString();
@@ -263,7 +262,7 @@ export function SeoHead({ path }: SeoHeadProps) {
   useEffect(() => {
     const seo = getRouteSeoConfig(path);
     const canonicalUrl = toAbsoluteUrl(seo.canonicalPath);
-    const ogImageUrl = toAbsoluteUrl(DEFAULT_OG_IMAGE);
+    const ogImageUrl = toAbsoluteUrl(seo.ogImage);
     const pageName = getPageNameFromTitle(seo.title);
 
     document.title = seo.title;

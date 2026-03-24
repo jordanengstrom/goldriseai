@@ -19,8 +19,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* Navigation */}
       <header className="w-full border-b border-foreground/5 bg-white dark:bg-slate-950 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group cursor-pointer">
-            <div className="logo-mark w-8 h-8">
+          <Link href="/" aria-label="Goldrise AI — go to homepage" className="flex items-center gap-2 group cursor-pointer">
+            <div aria-hidden="true" className="logo-mark w-8 h-8">
               <span className="font-display font-bold text-xl leading-none pt-0.5">G</span>
             </div>
             <span className={`font-display font-bold text-2xl tracking-widest text-foreground group-hover:text-primary transition-colors duration-300 ${location === "/" ? "border-b-2 border-primary" : ""}`}>
@@ -132,11 +132,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-foreground/5 bg-white dark:bg-white mt-auto py-12" style={{zIndex: 0}}>
+      <footer className="border-t border-foreground/5 bg-white dark:bg-slate-950 mt-auto py-12" style={{zIndex: 0}}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="logo-mark w-5 h-5">
+              <div aria-hidden="true" className="logo-mark w-5 h-5">
                 <span className="font-display font-bold text-xs leading-none pt-px">G</span>
               </div>
               <span className="font-display font-medium text-muted-foreground text-sm tracking-widest">

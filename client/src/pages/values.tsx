@@ -53,6 +53,7 @@ export default function Values() {
             </motion.p>
           </div>
 
+          <h2 className="sr-only">Our Core Principles</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <motion.div
