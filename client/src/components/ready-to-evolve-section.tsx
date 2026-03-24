@@ -2,8 +2,8 @@ import { ContactFormDialog } from "@/components/contact-form-dialog";
 
 export function ReadyToEvolveSection() {
   return (
-    <section id="ready-to-evolve" className="px-4 relative overflow-hidden flex items-center justify-center h-[480px]">
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-transparent to-primary/5 pointer-events-none" />
+    <section id="ready-to-evolve" className="w-full px-4 relative overflow-hidden flex items-center justify-center h-[350px] bg-gradient-to-br from-background via-background to-primary/[0.20] border-y border-primary/20">
+      <div className="absolute inset-0 w-full h-full bg-[radial-gradient(ellipse_70%_50%_at_50%_100%,hsl(var(--primary)/0.10),transparent_70%)] pointer-events-none" />
       <div id="ready-to-evolve-content" className="max-w-3xl mx-auto text-center relative z-10 w-full">
         <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-foreground">
           Ready to <span className="text-primary">Evolve?</span>

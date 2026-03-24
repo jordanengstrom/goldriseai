@@ -125,16 +125,17 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* CTA SECTION: Animate in on scroll with fade/slide up */}
-          <motion.div
-            ref={ctaRef}
-            style={{ opacity: ctaOpacity, y: ctaY, zIndex: 1 }}
-            initial={false}
-            className="mt-24"
-          >
-            <ReadyToEvolveSection />
-          </motion.div>
         </div>
+
+        {/* CTA SECTION: Full-width band, animates in on scroll */}
+        <motion.div
+          ref={ctaRef}
+          style={{ opacity: ctaOpacity, y: ctaY, zIndex: 1 }}
+          initial={false}
+          className="mt-24 w-full"
+        >
+          <ReadyToEvolveSection />
+        </motion.div>
       </div>
     </Layout>
   );
