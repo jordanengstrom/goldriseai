@@ -88,19 +88,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     href="/services/ai-audits"
                     className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services/ai-audits" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
                   >
-                    AI Audits
+                    Audits
                   </Link>
                   <Link
                     href="/services/ai-education"
                     className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services/ai-education" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
                   >
-                    AI Education
+                    Education
                   </Link>
                   <Link
                     href="/services/ai-implementation"
                     className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services/ai-implementation" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
                   >
-                    AI Implementation
+                    Implementation
                   </Link>
                   <Link 
                     href="/values" 
