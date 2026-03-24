@@ -21,7 +21,6 @@ export default function Home() {
       window.scrollTo({ top, behavior: "smooth" });
     }
   };
-  const ctaRef = useRef<HTMLDivElement>(null);
 
   // Rotating phrases for hero
   const rotatingPhrases = [
@@ -47,15 +46,12 @@ export default function Home() {
   const servicesOpacity = useSpring(useTransform(scrollYProgress, [0.12, 0.38], [0, 1]), { stiffness: 80, damping: 24 });
   const servicesY = useSpring(useTransform(scrollYProgress, [0.12, 0.38], [80, 0]), { stiffness: 80, damping: 24 });
 
-  // CTA section: fade/slide in later
-  const ctaScroll = useScroll({ target: ctaRef, offset: ["start 90%", "start 60%"] });
-  const ctaOpacity = useSpring(useTransform(ctaScroll.scrollYProgress, [0, 1], [0, 1]), { stiffness: 80, damping: 24 });
-  const ctaY = useSpring(useTransform(ctaScroll.scrollYProgress, [0, 1], [80, 0]), { stiffness: 80, damping: 24 });
+  // CTA section: whileInView so opacity always reaches 1 regardless of viewport height
 
   return (
     <Layout>
       <div style={{ position: "relative", overflow: "clip" }}>
-        <div className="absolute top-0 left-0 w-full" style={{ height: "calc(100vh + 1400px)", zIndex: 0, pointerEvents: "none" }}>
+        <div className="absolute inset-0 w-full h-full" style={{ zIndex: 0, pointerEvents: "none" }}>
           <LiquidGradient />
         </div>
         <div className="max-w-4xl mx-auto text-center w-full">
@@ -129,11 +125,12 @@ export default function Home() {
 
         </div>
 
-        {/* CTA SECTION: Full-width band, animates in on scroll */}
+        {/* CTA SECTION: Full-width band, fades in once visible */}
         <motion.div
-          ref={ctaRef}
-          style={{ opacity: ctaOpacity, y: ctaY, zIndex: 1 }}
-          initial={false}
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="mt-24 w-full"
         >
           <ReadyToEvolveSection />
