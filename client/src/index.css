@@ -103,10 +103,6 @@
   }
 }
 
-#services {
-  min-width: max-content;
-}
-
 @layer utilities {
   .values-section {
     padding-top: 1rem;

@@ -21,7 +21,6 @@ export default function Home() {
       window.scrollTo({ top, behavior: "smooth" });
     }
   };
-  const ctaRef = useRef<HTMLDivElement>(null);
 
   // Rotating phrases for hero
   const rotatingPhrases = [
@@ -47,18 +46,18 @@ export default function Home() {
   const servicesOpacity = useSpring(useTransform(scrollYProgress, [0.12, 0.38], [0, 1]), { stiffness: 80, damping: 24 });
   const servicesY = useSpring(useTransform(scrollYProgress, [0.12, 0.38], [80, 0]), { stiffness: 80, damping: 24 });
 
-  // CTA section: fade/slide in later
-  const ctaScroll = useScroll({ target: ctaRef, offset: ["start 90%", "start 60%"] });
-  const ctaOpacity = useSpring(useTransform(ctaScroll.scrollYProgress, [0, 1], [0, 1]), { stiffness: 80, damping: 24 });
-  const ctaY = useSpring(useTransform(ctaScroll.scrollYProgress, [0, 1], [80, 0]), { stiffness: 80, damping: 24 });
+  // CTA section: whileInView so opacity always reaches 1 regardless of viewport height
 
   return (
     <Layout>
-      <div style={{ position: "relative", overflow: "clip" }}>
-        <div className="absolute top-0 left-0 w-full" style={{ height: "calc(100vh + 1400px)", zIndex: 0, pointerEvents: "none" }}>
+      {/* SHARED BACKGROUND: single LiquidGradient spans both hero and services sections */}
+      <div className="w-full" style={{ position: "relative", overflow: "clip" }}>
+        <div className="absolute inset-0 w-full h-full" style={{ zIndex: 0, pointerEvents: "none" }}>
           <LiquidGradient />
         </div>
-        <div className="max-w-4xl mx-auto text-center w-full">
+
+        {/* HERO */}
+        <div className="max-w-4xl mx-auto text-center w-full px-4 md:px-0">
           <div
             ref={heroRef}
             className="relative overflow-hidden p-6 md:p-10 rounded-[2.5rem] bg-white/20 dark:bg-[rgba(18,34,68,0.78)] backdrop-blur-2xl border border-white/55 dark:border-[rgb(106,156,235)] dark:ring-1 dark:ring-[rgba(120,184,255,0.42)] shadow-[0_24px_64px_-20px_rgba(0,0,0,0.24),inset_0_3px_4px_rgba(255,255,255,0.6),inset_0_-3px_4px_rgba(0,0,0,0.3)] dark:shadow-[0_40px_96px_-28px_rgba(2,6,23,0.98),0_0_48px_-10px_rgba(88,140,255,0.5),inset_0_4px_6px_rgba(210,230,255,0.28),inset_0_-5px_8px_rgba(5,8,20,0.92),inset_0_22px_34px_-20px_rgba(118,174,255,0.12)] transition-all duration-500 mt-12 md:mt-20"
@@ -114,31 +113,30 @@ export default function Home() {
             </div>
           </div>
 
-          {/* SERVICES SECTION: Animate in on scroll with parallax and stagger */}
-          <div className="w-full flex justify-center">
-            <motion.div
-              ref={servicesRef}
-              style={{ opacity: servicesOpacity, y: servicesY, zIndex: 1 }}
-              initial={false}
-              className="mt-24"
-              id="services-container"
-            >
-              <HomeServicesSection />
-            </motion.div>
-          </div>
-
         </div>
 
-        {/* CTA SECTION: Full-width band, animates in on scroll */}
+        {/* SERVICES SECTION: inside shared gradient wrapper */}
         <motion.div
-          ref={ctaRef}
-          style={{ opacity: ctaOpacity, y: ctaY, zIndex: 1 }}
+          ref={servicesRef}
+          style={{ opacity: servicesOpacity, y: servicesY, zIndex: 1 }}
           initial={false}
-          className="mt-24 w-full"
+          className="w-full mt-24"
+          id="services-container"
         >
-          <ReadyToEvolveSection />
+          <HomeServicesSection />
         </motion.div>
       </div>
+
+      {/* CTA SECTION: Direct Layout child */}
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="w-full"
+      >
+        <ReadyToEvolveSection />
+      </motion.div>
     </Layout>
   );
 }
