@@ -113,15 +113,17 @@ export default function Home() {
           </div>
 
           {/* SERVICES SECTION: Animate in on scroll with parallax and stagger */}
-          <motion.div
-            ref={servicesRef}
-            style={{ opacity: servicesOpacity, y: servicesY, zIndex: 1 }}
-            initial={false}
-            className="mt-24"
-            id="services"
-          >
-            <HomeServicesSection />
-          </motion.div>
+          <div className="w-full flex justify-center">
+            <motion.div
+              ref={servicesRef}
+              style={{ opacity: servicesOpacity, y: servicesY, zIndex: 1 }}
+              initial={false}
+              className="mt-24"
+              id="services-container"
+            >
+              <HomeServicesSection />
+            </motion.div>
+          </div>
 
           {/* CTA SECTION: Animate in on scroll with fade/slide up */}
           <motion.div
