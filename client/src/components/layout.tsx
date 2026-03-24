@@ -9,10 +9,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* Abstract Background Elements */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px] pointer-events-none -z-10" />
+    <div className="min-h-screen flex flex-col relative">
+      {/* Abstract Background Elements — overflow clipped to this wrapper only, not the root */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px]" />
+      </div>
 
       {/* Navigation */}
       <header className="w-full border-b border-foreground/5 bg-white dark:bg-slate-950 sticky top-0 z-50">

@@ -16,7 +16,9 @@ export default function Home() {
   const handleExploreServices = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     if (servicesRef.current) {
-      servicesRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      const headerHeight = 80; // matches h-20 on the sticky nav
+      const top = servicesRef.current.getBoundingClientRect().top + window.scrollY - headerHeight;
+      window.scrollTo({ top, behavior: "smooth" });
     }
   };
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -52,7 +54,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative", overflow: "clip" }}>
         <div className="absolute top-0 left-0 w-full" style={{ height: "calc(100vh + 1400px)", zIndex: 0, pointerEvents: "none" }}>
           <LiquidGradient />
         </div>
