@@ -130,7 +130,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-foreground/5 bg-background/80 backdrop-blur-sm mt-auto py-12">
+      <footer className="border-t border-foreground/5 bg-white dark:bg-white mt-auto py-12" style={{zIndex: 0}}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">

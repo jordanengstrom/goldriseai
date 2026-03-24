@@ -38,7 +38,7 @@ const services = [
 
 export function HomeServicesSection() {
   return (
-    <section id="services" className="relative pt-10 pb-8 mb-10 px-6 overflow-hidden min-h-dvh flex flex-col justify-center z-10">
+    <section id="services" className="relative pb-8 mb-10 px-6 overflow-hidden min-h-dvh flex flex-col justify-center z-10">
       {/* LiquidGradient removed; now shared in parent */}
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-10">
