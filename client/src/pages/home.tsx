@@ -50,7 +50,8 @@ export default function Home() {
 
   return (
     <Layout>
-      <div style={{ position: "relative", overflow: "clip" }}>
+      {/* HERO: overflow:clip scoped to just the hero card + its LiquidGradient */}
+      <div className="w-full" style={{ position: "relative", overflow: "clip" }}>
         <div className="absolute inset-0 w-full h-full" style={{ zIndex: 0, pointerEvents: "none" }}>
           <LiquidGradient />
         </div>
@@ -111,29 +112,29 @@ export default function Home() {
           </div>
 
         </div>
-
-        {/* SERVICES SECTION: Full-width, self-centering via its own max-w-7xl inner wrapper */}
-        <motion.div
-          ref={servicesRef}
-          style={{ opacity: servicesOpacity, y: servicesY, zIndex: 1 }}
-          initial={false}
-          className="mt-24 w-full"
-          id="services-container"
-        >
-          <HomeServicesSection />
-        </motion.div>
-
-        {/* CTA SECTION: Full-width band, fades in once visible */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mt-24 w-full"
-        >
-          <ReadyToEvolveSection />
-        </motion.div>
       </div>
+
+      {/* SERVICES SECTION: Direct Layout child — same pattern as Contact page */}
+      <motion.div
+        ref={servicesRef}
+        style={{ opacity: servicesOpacity, y: servicesY, zIndex: 1 }}
+        initial={false}
+        className="w-full mt-24"
+        id="services-container"
+      >
+        <HomeServicesSection />
+      </motion.div>
+
+      {/* CTA SECTION: Direct Layout child */}
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="w-full"
+      >
+        <ReadyToEvolveSection />
+      </motion.div>
     </Layout>
   );
 }
