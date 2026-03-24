@@ -11,6 +11,14 @@ export default function Home() {
   // Animation state and scroll refs
   const heroRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
+
+  // Handler for smooth scroll to services
+  const handleExploreServices = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (servicesRef.current) {
+      servicesRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
   const ctaRef = useRef<HTMLDivElement>(null);
 
   // Rotating phrases for hero
@@ -93,9 +101,13 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mt-2">
                 <ContactFormDialog />
                 <span className="text-sm font-medium text-muted-foreground uppercase tracking-widest mx-2">or</span>
-                <Link href="/#services" className="text-sm font-medium text-foreground hover:text-primary transition-colors border-b border-foreground/20 hover:border-primary pb-1 uppercase tracking-wider ml-1">
+                <a
+                  href="#services"
+                  onClick={handleExploreServices}
+                  className="text-sm font-medium text-foreground hover:text-primary transition-colors border-b border-foreground/20 hover:border-primary pb-1 uppercase tracking-wider ml-1"
+                >
                   Explore Services
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -106,6 +118,7 @@ export default function Home() {
             style={{ opacity: servicesOpacity, y: servicesY, zIndex: 1 }}
             initial={false}
             className="mt-24"
+            id="services"
           >
             <HomeServicesSection />
           </motion.div>
