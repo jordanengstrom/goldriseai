@@ -66,7 +66,7 @@ export function HomeServicesSection() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
           {services.map((service, index) => (
             <motion.article
               key={service.title}
@@ -120,12 +120,12 @@ export function HomeServicesSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-10 text-center"
         >
-          <p className="text-sm text-muted-foreground mb-4">
+          <p className="text-sm text-muted-foreground mb-2">
             Ready to map your priorities? Start with a focused discovery conversation.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center rounded-full border border-primary/50 bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center justify-center rounded-full border border-primary/50 bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 transition-colors mt-4"
           >
             Start Your AI Services Plan
           </Link>
