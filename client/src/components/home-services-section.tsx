@@ -41,7 +41,7 @@ export function HomeServicesSection() {
       id="services"
       className="relative pb-8 px-4 overflow-hidden min-h-dvh flex flex-col items-center justify-center z-10"
     >
-      <div className="w-full max-w-6xl mx-auto text-center z-10 px-1 sm:px-0">
+      <div className="w-full max-w-6xl mx-auto text-center z-10">
         <div className="mb-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -58,13 +58,13 @@ export function HomeServicesSection() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             id="our-service-model"
-            className="text-muted-foreground text-xs xs:text-sm sm:text-base md:text-lg w-[400px] sm:w-auto max-w-full sm:max-w-xl md:max-w-2xl mx-auto px-2 sm:px-0 leading-normal break-words whitespace-normal"
+            className="text-muted-foreground text-sm sm:text-base md:text-lg w-full max-w-xl md:max-w-2xl mx-auto px-2 sm:px-0 leading-relaxed"
           >
             Our service model follows a clear progression: identify opportunities, enable your team, then implement production-grade AI systems.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-md sm:max-w-2xl md:max-w-6xl mx-auto my-8 md:my-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto my-8 md:my-12">
           {services.map((service, index) => (
             <motion.article
               key={service.title}
