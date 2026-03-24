@@ -107,6 +107,16 @@
   min-width: max-content;
 }
 
+@media (max-width: 639px) {
+  #our-service-model {
+    width: 400px;
+  }
+
+  #ready-to-map {
+    width: 400px;
+  }
+}
+
 @layer utilities {
   .values-section {
     padding-top: 1rem;

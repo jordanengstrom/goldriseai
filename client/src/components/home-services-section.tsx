@@ -59,6 +59,7 @@ export function HomeServicesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.1 }}
+            id="our-service-model"
             className="text-muted-foreground text-xs xs:text-sm sm:text-base md:text-lg w-[400px] sm:w-auto max-w-full sm:max-w-xl md:max-w-2xl mx-auto px-2 sm:px-0 leading-normal break-words whitespace-normal"
           >
             Our service model follows a clear progression: identify opportunities, enable your team, then implement production-grade AI systems.
@@ -117,6 +118,7 @@ export function HomeServicesSection() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-10"
+          id="ready-to-map"
         >
           <p className="text-sm text-muted-foreground mb-2">
             Ready to map your priorities? Start with a focused discovery conversation.
