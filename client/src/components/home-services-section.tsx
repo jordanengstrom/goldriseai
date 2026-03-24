@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Search, GraduationCap, Code } from "lucide-react";
 import { Link } from "wouter";
-import { LiquidGradient } from "@/components/liquid-gradient";
 
 const services = [
   {
@@ -40,9 +39,8 @@ export function HomeServicesSection() {
   return (
     <section
       id="services"
-      className="relative pb-8 mb-10 px-4 overflow-hidden min-h-dvh flex flex-col items-center justify-center z-10"
+      className="relative pb-8 px-4 overflow-hidden min-h-dvh flex flex-col items-center justify-center z-10"
     >
-      <LiquidGradient />
       <div className="w-full max-w-6xl mx-auto text-center z-10 px-1 sm:px-0">
         <div className="mb-10">
           <motion.h2

@@ -50,11 +50,13 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* HERO: overflow:clip scoped to just the hero card + its LiquidGradient */}
+      {/* SHARED BACKGROUND: single LiquidGradient spans both hero and services sections */}
       <div className="w-full" style={{ position: "relative", overflow: "clip" }}>
         <div className="absolute inset-0 w-full h-full" style={{ zIndex: 0, pointerEvents: "none" }}>
           <LiquidGradient />
         </div>
+
+        {/* HERO */}
         <div className="max-w-4xl mx-auto text-center w-full px-4 md:px-0">
           <div
             ref={heroRef}
@@ -112,18 +114,18 @@ export default function Home() {
           </div>
 
         </div>
-      </div>
 
-      {/* SERVICES SECTION: Direct Layout child — same pattern as Contact page */}
-      <motion.div
-        ref={servicesRef}
-        style={{ opacity: servicesOpacity, y: servicesY, zIndex: 1 }}
-        initial={false}
-        className="w-full mt-24"
-        id="services-container"
-      >
-        <HomeServicesSection />
-      </motion.div>
+        {/* SERVICES SECTION: inside shared gradient wrapper */}
+        <motion.div
+          ref={servicesRef}
+          style={{ opacity: servicesOpacity, y: servicesY, zIndex: 1 }}
+          initial={false}
+          className="w-full mt-24"
+          id="services-container"
+        >
+          <HomeServicesSection />
+        </motion.div>
+      </div>
 
       {/* CTA SECTION: Direct Layout child */}
       <motion.div
