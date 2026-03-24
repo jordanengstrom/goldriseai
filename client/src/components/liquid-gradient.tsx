@@ -120,6 +120,7 @@ export function LiquidGradient({ interactive = true, className = "" }: LiquidGra
   const containerRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
   const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
+  const [isAnimationReady, setIsAnimationReady] = useState(false);
 
   useEffect(() => {
     if (theme === "system") {
@@ -158,12 +159,49 @@ export function LiquidGradient({ interactive = true, className = "" }: LiquidGra
   }, [resolvedTheme]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const supportsReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const supportsReducedData =
+      "connection" in navigator &&
+      Boolean((navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData);
+
+    if (supportsReducedMotion || supportsReducedData) {
+      setIsAnimationReady(false);
+      return;
+    }
+
+    const w = window as Window & {
+      requestIdleCallback?: (callback: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+
+    let timeoutId: number | undefined;
+    let idleId: number | undefined;
+
+    const markReady = () => setIsAnimationReady(true);
+
+    if (typeof w.requestIdleCallback === "function") {
+      idleId = w.requestIdleCallback(markReady, { timeout: 800 });
+    } else {
+      timeoutId = window.setTimeout(markReady, 220);
+    }
+
+    return () => {
+      if (typeof idleId === "number" && typeof w.cancelIdleCallback === "function") {
+        w.cancelIdleCallback(idleId);
+      }
+      if (typeof timeoutId === "number") {
+        window.clearTimeout(timeoutId);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current || !isAnimationReady) return;
     const container = containerRef.current;
 
     // Initial Setup
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
 
@@ -394,11 +432,15 @@ export function LiquidGradient({ interactive = true, className = "" }: LiquidGra
     };
 
     window.addEventListener("resize", handleResize);
-    container.addEventListener("pointermove", handlePointerMove);
+    if (interactive) {
+      container.addEventListener("pointermove", handlePointerMove);
+    }
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      container.removeEventListener("pointermove", handlePointerMove);
+      if (interactive) {
+        container.removeEventListener("pointermove", handlePointerMove);
+      }
       cancelAnimationFrame(animationFrameId);
       container.removeChild(renderer.domElement);
       renderer.dispose();
@@ -406,7 +448,7 @@ export function LiquidGradient({ interactive = true, className = "" }: LiquidGra
       geometry.dispose();
       touchTexture.texture.dispose();
     };
-  }, [palette]);
+  }, [isAnimationReady, interactive, palette]);
 
   return (
     <div

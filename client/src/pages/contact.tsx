@@ -46,6 +46,8 @@ export default function Contact() {
 
           {/* Only render the grid if we have data (avoids broken links during hydration) */}
           {contactInfo.email && (
+            <>
+            <h2 className="sr-only">Contact Options</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {/* Intro Call Box */}
               <motion.a
@@ -135,6 +137,7 @@ export default function Contact() {
               </motion.div>
 
             </div>
+            </>
           )}
         </div>
 
