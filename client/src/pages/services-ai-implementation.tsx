@@ -112,12 +112,12 @@ export default function ServiceAiImplementation() {
             <article className="glass-panel rounded-2xl p-3 md:p-4">
               <div className="divide-y divide-foreground/10">
                 <Link
-                  href="/services/ai-audits"
+                  href="/services/ai-opportunity-assessment"
                   className="group block rounded-xl px-4 py-4 hover:bg-primary/10 transition-colors"
                 >
                   <div className="flex items-center justify-between gap-4">
                     <div>
-                      <h3 className="text-base font-display font-bold text-foreground mb-1 group-hover:text-primary transition-colors">AI Audits</h3>
+                      <h3 className="text-base font-display font-bold text-foreground mb-1 group-hover:text-primary transition-colors">AI Assessment</h3>
                       <p className="text-sm text-muted-foreground">Identify and rank use cases before scaling build effort.</p>
                     </div>
                     <span className="text-xs uppercase tracking-wider text-primary/80 group-hover:translate-x-1 transition-transform">View</span>

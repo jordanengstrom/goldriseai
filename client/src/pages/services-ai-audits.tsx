@@ -38,8 +38,8 @@ const timeline = [
 
 const faqs = [
   {
-    question: "How long does an AI audit usually take?",
-    answer: "Most audits are completed in 3 to 4 weeks depending on team availability and process complexity.",
+    question: "How long does an AI Assessment usually take?",
+    answer: "Most assessments are completed in 3 to 4 weeks depending on team availability and process complexity.",
   },
   {
     question: "Do you require access to sensitive production systems?",
@@ -47,10 +47,10 @@ const faqs = [
   },
   {
     question: "What size company is this best for?",
-    answer: "AI audits work well for scaling teams that need a focused plan before committing to implementation spend.",
+    answer: "AI Assessments work well for scaling teams that need a focused plan before committing to implementation spend.",
   },
   {
-    question: "What happens after the audit is complete?",
+    question: "What happens after the assessment is complete?",
     answer: "You receive a practical roadmap and can choose to execute internally or engage us for implementation support.",
   },
 ];
@@ -65,7 +65,7 @@ export default function ServiceAiAudits() {
         <div className="max-w-4xl mx-auto relative z-10">
           <p className="text-xs uppercase tracking-[0.2em] text-primary/80 mb-4">Service</p>
           <h1 className="text-4xl md:text-6xl font-display font-bold text-gradient mb-5">
-            AI Audit Services
+            AI Assessment Services
           </h1>
           <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl">
             We assess your current workflows, rank opportunities by ROI, and provide a clear implementation roadmap so your team can invest with confidence.
@@ -81,13 +81,13 @@ export default function ServiceAiAudits() {
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               Most organizations know AI can create leverage, but they lack a clear execution sequence.
-              Without an audit, teams often buy tools before validating workflow fit, leading to fragmented pilots,
+              Without a structured opportunity assessment, teams often buy tools before validating workflow fit, leading to fragmented pilots,
               low adoption, and unclear ROI.
             </p>
           </section>
 
           <section className="mt-12">
-            <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">Our Audit Process</h2>
+            <h2 className="text-2xl md:text-3xl font-display font-bold mb-5 text-foreground">Our Assessment Process</h2>
             <article className="glass-panel rounded-2xl p-6 md:p-8">
               <div className="divide-y divide-foreground/10">
                 {processSteps.map((step, index) => (
@@ -175,7 +175,7 @@ export default function ServiceAiAudits() {
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link href="/contact" className="inline-flex items-center justify-center rounded-full border border-primary/50 bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90 transition-colors">
-              Request an AI Audit
+              Request an AI Assessment
             </Link>
             <Link href="/#services" className="inline-flex items-center justify-center rounded-full border border-foreground/20 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-foreground hover:border-primary hover:text-primary transition-colors">
               Back to Services
