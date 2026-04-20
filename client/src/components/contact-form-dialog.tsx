@@ -1,6 +1,7 @@
 import { useRef, useState, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "wouter";
 import {
   useCreateContact,
   useSendInternalEmail,
@@ -150,6 +151,21 @@ export function ContactFormDialog({ trigger }: ContactFormDialogProps) {
     }
   }
 
+  if (!trigger) {
+    return (
+      <Link
+        href="/contact"
+        className="relative group overflow-hidden rounded-md px-6 py-2.5 font-display font-bold uppercase tracking-wider text-sm bg-primary/10 text-primary border border-primary/30 hover:border-primary/80 transition-all duration-300 dark:shadow-[0_12px_30px_-18px_rgba(59,130,246,0.75)] hover:-translate-y-0.5"
+      >
+        <span className="relative z-10 flex items-center gap-2">
+          Get in Touch
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </span>
+        <div className="absolute inset-0 bg-primary/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
+      </Link>
+    );
+  }
+
   return (
     <Dialog
       open={open}
@@ -161,15 +177,7 @@ export function ContactFormDialog({ trigger }: ContactFormDialogProps) {
       }}
     >
       <DialogTrigger asChild>
-        {trigger ?? (
-          <button className="relative group overflow-hidden rounded-md px-6 py-2.5 font-display font-bold uppercase tracking-wider text-sm bg-primary/10 text-primary border border-primary/30 hover:border-primary/80 transition-all duration-300 dark:shadow-[0_12px_30px_-18px_rgba(59,130,246,0.75)] hover:-translate-y-0.5">
-            <span className="relative z-10 flex items-center gap-2">
-              Get in Touch
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </span>
-            <div className="absolute inset-0 bg-primary/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
-          </button>
-        )}
+        {trigger}
       </DialogTrigger>
       <DialogContent id="initiate-contact" className="sm:max-w-[600px] glass-panel border-primary/40 bg-[#fff9ec] dark:bg-slate-950/90">
         <DialogHeader>
