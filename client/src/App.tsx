@@ -11,10 +11,11 @@ import { ThemeProvider } from "@/components/theme-provider";
 // Pages
 import Home from "@/pages/home";
 import Payments from "@/pages/payments";
+import ServiceAiAssessment from "@/pages/services-ai-assessment";
 import Terms from "@/pages/terms";
-import ServiceAiAudits from "@/pages/services-ai-audits";
 import ServiceAiEducation from "@/pages/services-ai-education";
 import ServiceAiImplementation from "@/pages/services-ai-implementation";
+import Services from "@/pages/services";
 import Values from "@/pages/values";
 import Contact from "@/pages/contact";
 
@@ -22,7 +23,10 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/services/ai-audits" component={ServiceAiAudits} />
+      <Route path="/services" component={Services} />
+      <Route path="/services/ai-assessment" component={ServiceAiAssessment} />
+      <Route path="/services/ai-opportunity-assessment" component={ServiceAiAssessment} />
+      <Route path="/services/ai-audits" component={ServiceAiAssessment} />
       <Route path="/services/ai-education" component={ServiceAiEducation} />
       <Route path="/services/ai-implementation" component={ServiceAiImplementation} />
       <Route path="/values" component={Values} />

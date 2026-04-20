@@ -67,12 +67,16 @@ function isIndexableRobots(robots: string): boolean {
 }
 
 function upsertRouteSpecificSchemas(path: string): void {
-  if (path === "/services/ai-audits") {
+  if (
+    path === "/services/ai-assessment" ||
+    path === "/services/ai-opportunity-assessment" ||
+    path === "/services/ai-audits"
+  ) {
     upsertJsonLd("seo-schema-service", {
       "@context": "https://schema.org",
       "@type": "Service",
-      name: "AI Audit Services",
-      serviceType: "AI Audit and Opportunity Assessment",
+      name: "AI Assessment Services",
+      serviceType: "AI Assessment and Roadmapping",
       provider: {
         "@type": "Organization",
         name: SITE_NAME,
@@ -82,9 +86,9 @@ function upsertRouteSpecificSchemas(path: string): void {
         "@type": "Country",
         name: "United States",
       },
-      url: toAbsoluteUrl("/services/ai-audits"),
+      url: toAbsoluteUrl("/services/ai-assessment"),
       description:
-        "AI audit services to identify high-impact workflow opportunities, prioritize use cases, and deliver an implementation roadmap.",
+        "AI assessment services to identify high-impact workflow opportunities, prioritize use cases, and deliver an implementation roadmap.",
     });
 
     upsertJsonLd("seo-schema-faq", {
@@ -93,10 +97,10 @@ function upsertRouteSpecificSchemas(path: string): void {
       mainEntity: [
         {
           "@type": "Question",
-          name: "How long does an AI audit usually take?",
+          name: "How long does an AI assessment usually take?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Most audits are completed in 3 to 4 weeks depending on team availability and process complexity.",
+            text: "Most assessments are completed in 3 to 4 weeks depending on team availability and process complexity.",
           },
         },
         {
@@ -112,12 +116,12 @@ function upsertRouteSpecificSchemas(path: string): void {
           name: "What size company is this best for?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "AI audits work well for scaling teams that need a focused plan before committing to implementation spend.",
+            text: "AI assessments work well for scaling teams that need a focused plan before committing to implementation spend.",
           },
         },
         {
           "@type": "Question",
-          name: "What happens after the audit is complete?",
+          name: "What happens after the assessment is complete?",
           acceptedAnswer: {
             "@type": "Answer",
             text: "You receive a practical roadmap and can choose to execute internally or engage us for implementation support.",
