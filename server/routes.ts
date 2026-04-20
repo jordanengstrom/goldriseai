@@ -12,7 +12,7 @@ import { z } from "zod";
 // Keep in sync with sitemapPaths in client/src/lib/seo-keyword-map.ts
 const SITEMAP_URLS: { path: string; changefreq: string; priority: string }[] = [
   { path: "/",                          changefreq: "weekly",  priority: "1.0"  },
-  { path: "/services/ai-audits",        changefreq: "weekly",  priority: "0.85" },
+  { path: "/services/ai-assessment",    changefreq: "weekly",  priority: "0.85" },
   { path: "/services/ai-education",     changefreq: "weekly",  priority: "0.85" },
   { path: "/services/ai-implementation",changefreq: "weekly",  priority: "0.85" },
   { path: "/values",                    changefreq: "monthly", priority: "0.8"  },
