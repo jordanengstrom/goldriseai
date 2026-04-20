@@ -30,6 +30,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
           <nav className="hidden md:flex items-center gap-8">
             <Link
+              href="/services"
+              className={`text-sm font-medium hover:text-foreground transition-colors duration-200 uppercase tracking-wider ${location === "/services" ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}
+            >
+              Services
+            </Link>
+            <Link
               href="/services/ai-audits"
               className={`text-sm font-medium hover:text-foreground transition-colors duration-200 uppercase tracking-wider ${location === "/services/ai-audits" ? "text-primary border-b-2 border-primary" : "text-muted-foreground"}`}
             >
@@ -84,6 +90,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       <ModeToggle />
                     </div>
                   )}
+                  <Link
+                    href="/services"
+                    className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
+                  >
+                    Services
+                  </Link>
                   <Link
                     href="/services/ai-audits"
                     className={`text-lg font-medium hover:text-primary transition-colors duration-200 uppercase tracking-widest ${location === "/services/ai-audits" ? "text-primary border-b-2 border-primary inline-block w-fit" : "text-foreground"}`}
@@ -155,6 +167,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               >
                 Privacy Policy
               </a>
+              <Link href="/services" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
+                Services
+              </Link>
               <Link href="/services/ai-audits" className="hover:text-primary transition-colors duration-200 flex items-center h-9">
                 Audits
               </Link>
