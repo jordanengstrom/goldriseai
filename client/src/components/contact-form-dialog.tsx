@@ -311,11 +311,9 @@ export function ContactFormDialog({ trigger }: ContactFormDialogProps) {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className="bg-white dark:bg-zinc-900 border-primary/30">
-                      <SelectItem value="$100s">$100s</SelectItem>
                       <SelectItem value="$1,000s">$1,000s</SelectItem>
                       <SelectItem value="$10,000s">$10,000s</SelectItem>
                       <SelectItem value="$100,000s">$100,000s</SelectItem>
-                      <SelectItem value="$1,000,000s+">$1,000,000s+</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
