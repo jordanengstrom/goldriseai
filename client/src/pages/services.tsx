@@ -10,7 +10,7 @@ export default function Services() {
           <LiquidGradient />
         </div>
 
-        <div className="relative z-10 w-full lg:pt-8 md:pt-8 pt-20">
+        <div className="relative z-10 w-full lg:pt-8 md:pt-8 pt-20 lg:pb-8 md:pb-8 pb-20">
           <HomeServicesSection />
         </div>
       </section>
