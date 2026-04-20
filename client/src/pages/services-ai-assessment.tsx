@@ -38,7 +38,7 @@ const timeline = [
 
 const faqs = [
   {
-    question: "How long does an AI Assessment usually take?",
+    question: "How long does an AI assessment usually take?",
     answer: "Most assessments are completed in 3 to 4 weeks depending on team availability and process complexity.",
   },
   {
@@ -47,7 +47,7 @@ const faqs = [
   },
   {
     question: "What size company is this best for?",
-    answer: "AI Assessments work well for scaling teams that need a focused plan before committing to implementation spend.",
+    answer: "AI assessments work well for scaling teams that need a focused plan before committing to implementation spend.",
   },
   {
     question: "What happens after the assessment is complete?",
@@ -55,7 +55,7 @@ const faqs = [
   },
 ];
 
-export default function ServiceAiAudits() {
+export default function ServiceAiAssessment() {
   return (
     <Layout>
       <section className="relative pt-14 pb-16 px-6 overflow-hidden min-h-dvh">
@@ -81,7 +81,7 @@ export default function ServiceAiAudits() {
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               Most organizations know AI can create leverage, but they lack a clear execution sequence.
-              Without a structured opportunity assessment, teams often buy tools before validating workflow fit, leading to fragmented pilots,
+              Without a structured AI assessment, teams often buy tools before validating workflow fit, leading to fragmented pilots,
               low adoption, and unclear ROI.
             </p>
           </section>

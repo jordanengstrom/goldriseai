@@ -67,7 +67,11 @@ function isIndexableRobots(robots: string): boolean {
 }
 
 function upsertRouteSpecificSchemas(path: string): void {
-  if (path === "/services/ai-opportunity-assessment" || path === "/services/ai-audits") {
+  if (
+    path === "/services/ai-assessment" ||
+    path === "/services/ai-opportunity-assessment" ||
+    path === "/services/ai-audits"
+  ) {
     upsertJsonLd("seo-schema-service", {
       "@context": "https://schema.org",
       "@type": "Service",
@@ -82,9 +86,9 @@ function upsertRouteSpecificSchemas(path: string): void {
         "@type": "Country",
         name: "United States",
       },
-      url: toAbsoluteUrl("/services/ai-opportunity-assessment"),
+      url: toAbsoluteUrl("/services/ai-assessment"),
       description:
-        "AI Assessment services to identify high-impact workflow opportunities, prioritize use cases, and deliver an implementation roadmap.",
+        "AI assessment services to identify high-impact workflow opportunities, prioritize use cases, and deliver an implementation roadmap.",
     });
 
     upsertJsonLd("seo-schema-faq", {
@@ -93,7 +97,7 @@ function upsertRouteSpecificSchemas(path: string): void {
       mainEntity: [
         {
           "@type": "Question",
-          name: "How long does an AI Assessment usually take?",
+          name: "How long does an AI assessment usually take?",
           acceptedAnswer: {
             "@type": "Answer",
             text: "Most assessments are completed in 3 to 4 weeks depending on team availability and process complexity.",
@@ -112,7 +116,7 @@ function upsertRouteSpecificSchemas(path: string): void {
           name: "What size company is this best for?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "AI Assessments work well for scaling teams that need a focused plan before committing to implementation spend.",
+            text: "AI assessments work well for scaling teams that need a focused plan before committing to implementation spend.",
           },
         },
         {

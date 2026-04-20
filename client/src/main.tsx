@@ -13,7 +13,7 @@ if (import.meta.env.DEV) {
 
 	const liveRoutePaths = [
 		"/",
-		"/services/ai-opportunity-assessment",
+		"/services/ai-assessment",
 		"/services/ai-education",
 		"/services/ai-implementation",
 		"/values",

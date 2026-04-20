@@ -47,7 +47,7 @@ export const seoKeywordMap: KeywordMapEntry[] = [
       "ai services provider us",
       "enterprise ai services",
     ],
-    titleAngle: "AI Services Company: Opportunity Assessments, Education, Implementation",
+    titleAngle: "AI Services Company: AI Assessment, Education, Implementation",
     conversionCta: "Explore services",
     planned: true,
   },
@@ -99,15 +99,15 @@ export const seoKeywordMap: KeywordMapEntry[] = [
     planned: false,
   },
   {
-    path: "/services/ai-opportunity-assessment",
-    primaryKeyword: "AI Assessment services",
+    path: "/services/ai-assessment",
+    primaryKeyword: "ai assessment services",
     intent: "commercial-high-intent",
     secondaryKeywords: [
       "ai readiness assessment",
-      "AI Assessment",
-      "enterprise AI Assessment",
+      "ai assessment",
+      "enterprise ai assessment",
       "ai maturity assessment",
-      "AI Assessment consulting",
+      "ai assessment consulting",
     ],
     titleAngle: "AI Assessment Services: Find High-ROI AI Opportunities",
     conversionCta: "Request an AI Assessment",
@@ -167,8 +167,8 @@ const DEFAULT_OG_IMAGE = "/logo_light.svg";
 
 const descriptionByPath: Partial<Record<string, string>> = {
   "/": "Goldrise AI delivers enterprise AI consulting services that help teams identify opportunities, train teams, and implement production-ready AI solutions.",
-  "/services": "Explore Goldrise AI services including AI Assessment, AI education, and AI implementation to accelerate measurable business outcomes.",
-  "/services/ai-opportunity-assessment": "Discover AI Assessment services to identify high-impact automation opportunities, prioritize use cases, and build a practical implementation roadmap.",
+  "/services": "Explore Goldrise AI services including AI assessment, AI education, and AI implementation to accelerate measurable business outcomes.",
+  "/services/ai-assessment": "Discover AI assessment services to identify high-impact automation opportunities, prioritize use cases, and build a practical implementation roadmap.",
   "/services/ai-education": "Equip your team with practical AI education through workshops, playbooks, and role-specific enablement for responsible AI adoption.",
   "/services/ai-implementation": "Launch production-ready AI implementation with custom integrations, workflow automation, and measurable delivery milestones.",
   "/contact": "Contact Goldrise AI to discuss your AI services goals and submit your project details for a fast follow-up from our team.",
@@ -240,7 +240,7 @@ export function getRouteSeoConfig(path: string): RouteSeoConfig {
 
 export const sitemapPaths = [
   "/",
-  "/services/ai-opportunity-assessment",
+  "/services/ai-assessment",
   "/services/ai-education",
   "/services/ai-implementation",
   "/values",
@@ -251,7 +251,7 @@ export const sitemapPaths = [
 export const moneyPagePaths = [
   "/",
   "/contact",
-  "/services/ai-opportunity-assessment",
+  "/services/ai-assessment",
   "/services/ai-education",
   "/services/ai-implementation",
 ] as const;

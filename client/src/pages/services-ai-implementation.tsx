@@ -112,7 +112,7 @@ export default function ServiceAiImplementation() {
             <article className="glass-panel rounded-2xl p-3 md:p-4">
               <div className="divide-y divide-foreground/10">
                 <Link
-                  href="/services/ai-opportunity-assessment"
+                  href="/services/ai-assessment"
                   className="group block rounded-xl px-4 py-4 hover:bg-primary/10 transition-colors"
                 >
                   <div className="flex items-center justify-between gap-4">

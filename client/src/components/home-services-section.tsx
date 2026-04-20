@@ -5,7 +5,7 @@ import { Link } from "wouter";
 const services = [
   {
     title: "AI Assessment",
-    href: "/services/ai-opportunity-assessment",
+    href: "/services/ai-assessment",
     subtitle: "Identify high-ROI opportunities first",
     description:
       "Map workflows, prioritize use cases, and build an implementation roadmap before committing budget.",
