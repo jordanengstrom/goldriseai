@@ -155,7 +155,7 @@ export function ContactFormDialog({ trigger }: ContactFormDialogProps) {
     return (
       <Link
         href="/contact"
-        className="relative group overflow-hidden rounded-md px-6 py-2.5 font-display font-bold uppercase tracking-wider text-sm bg-primary/10 text-primary border border-primary/30 hover:border-primary/80 transition-all duration-300 dark:shadow-[0_12px_30px_-18px_rgba(59,130,246,0.75)] hover:-translate-y-0.5"
+        className="relative inline-flex items-center justify-center whitespace-nowrap align-middle group overflow-hidden rounded-md px-6 py-2.5 font-display font-bold uppercase tracking-wider text-sm bg-primary/10 text-primary border border-primary/30 hover:border-primary/80 transition-all duration-300 dark:shadow-[0_12px_30px_-18px_rgba(59,130,246,0.75)] hover:-translate-y-0.5"
       >
         <span className="relative z-10 flex items-center gap-2">
           Get in Touch
