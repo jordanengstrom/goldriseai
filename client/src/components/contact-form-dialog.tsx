@@ -359,7 +359,7 @@ export function ContactFormDialog({ trigger }: ContactFormDialogProps) {
                   Transmitting...
                 </>
               ) : (
-                "Submit Request"
+                "Submit Inquiry"
               )}
             </Button>
           </form>
