@@ -297,7 +297,7 @@ export function ContactFormDialog({ trigger }: ContactFormDialogProps) {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className="bg-white dark:bg-zinc-900 border-primary/30">
-                      <SelectItem value="AI Assessment">AI Assessment</SelectItem>
+                      <SelectItem value="AI opportunity assessment">AI opportunity assessment</SelectItem>
                       <SelectItem value="Educating your team on AI">Educating your team on AI</SelectItem>
                       <SelectItem value="Developing custom AI solutions">Developing custom AI solutions</SelectItem>
                     </SelectContent>

@@ -29,11 +29,11 @@ const values = [
 export default function Values() {
   return (
     <Layout>
-      <section className="values-section relative overflow-hidden min-h-dvh flex flex-col justify-center">
+      <section className="values-section relative flex min-h-dvh flex-1 flex-col items-center justify-center overflow-hidden px-4">
         <LiquidGradient interactive={false} className="z-0" />
         <div className="absolute inset-0 bg-white/55 dark:bg-slate-950/60 z-[1] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto w-full relative z-10">
+        <div className="max-w-7xl mx-auto w-full relative z-10 lg:pt-8 md:pt-8 pt-20 lg:pb-8 md:pb-8 pb-20">
           <div className="text-center mb-10">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
